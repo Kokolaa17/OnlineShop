@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./images/shopLogo.png">
+    <title>Online shop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+IT+Moderna:wght@100..400&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo" id="home">
+                <img src="./images/shopLogo.png" alt="shopLogo">
+                <h1>Online shop</h1>
+            </div>
+
+            <ul>
+                <li class="not-loggedin" onclick="openCreation()">Create Account <i _ngcontent-ng-c1149255415="" class="fa-regular fa-id-card"></i></li>
+                <li class="not-loggedin" onclick="openLog()">Sign in <i _ngcontent-ng-c1149255415="" class="fa-solid fa-person-walking-dashed-line-arrow-right"></i></li>
+                <li class="loged-in display-none">User</li>
+                <li class="loged-in display-none">Cart <i class="fa-solid fa-cart-shopping"></i></li>
+                <li onclick="logOutLogic()" class="loged-in display-none">Log Out <i class="fa-solid fa-right-to-bracket"></i></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="welcome-section">
+        <div class="welcome-left">
+            <article class="welcome-article">
+                <h2>Unbeatable Discount Opportunities!</h2>
+                <p>Why pay more when you can save big? Take advantage of our exclusive discounts and get top-quality products at unbeatable prices. Shop now and enjoy the savings!</p>
+                <button><span>Shop now <i class="fa-solid fa-cart-shopping"></i></span></button>
+            </article>
+        </div>
+        <div class="video">
+            <video src="./images/shoping.mp4" autoplay loop muted></video>
+        </div>
+    </section>
+    <section class="shoping-info">
+        <div class="figures figure-animation">
+            <div>
+                <i class="fa-solid fa-box-open hoverSvg"></i>
+                <i class="fa-solid fa-truck mainSvg"></i>
+            </div>
+            <h3>Fast Delivery</h3>
+            <p>Speed in delivery, excellence in service</p>
+        </div>
+        <div class="figures figure-animation"> 
+            <div>
+                <i class="fa-solid fa-boxes-stacked hoverSvg"></i>
+                <i class="fa-solid fa-ship mainSvg"></i>
+            </div>
+            <h3>Free Shiping</h3>
+            <p>Fast shipping, because your time matters</p>
+        </div>
+        <div class="figures figure-animation">
+            <div>
+                <i class="fa-solid fa-ranking-star hoverSvg"></i>
+                <i class="fa-solid fa-medal mainSvg"></i>
+            </div>
+            <h3>Best Quality</h3>
+            <p>Quality that speaks for itself</p>
+        </div>
+    </section>
+    <div class="best-sellers" id="best-sellers"> 
+        <h3>Best Sellers</h3>
+    </div>
+    <section class="best-products"  id="bestSeller">
+
+        </div>
+    </section>
+    <!-- Hidden Elements -->
+    <div class="details-area hidden" id="detailsArea">
+        <div class="details">
+            
+        </div>
+    </div>
+
+    <div class="create-account hidden">
+        <div class="account-creation" id="accountForm">
+            <button onclick="closeCreation()" class="closeButton">X</button>
+            <h2>Create Account</h2>
+            <form id="accountCreation" onsubmit="registerAccount(event)">
+                <div class="flexi">
+                    <div class="left">
+                        <div class="inputs">
+                            <input id="firstName" type="text" name="firstName"  placeholder="+" required>
+                            <label for="FirstName"><i class="fa-solid fa-user-tie"></i> First Name</label>
+                        </div>
+                        
+                        <div class="inputs">
+                            <input id="email" type="email" name="email"  placeholder="+" required>
+                            <label for="email"><i class="fa-solid fa-envelope"></i> Email</label>
+                        </div>
+    
+                        <div class="inputs">
+                            <input id="phone" type="tel" name="phone"  placeholder="+" required>
+                            <label for="phone"><i class="fa-solid fa-phone"></i> Phone</label>
+                        </div>
+                        
+                        <div class="inputs">
+                            <input id="address" type="tel" name="address"  placeholder="+" required>
+                            <label for="address"><i class="fa-solid fa-map"></i> Address</label>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="inputs">    
+                            <input id="lastName" type="text" name="lastName"  placeholder="+" required>
+                            <label for="lastName"><i class="fa-solid fa-user-tie"></i> Last Name</label>
+                        </div>
+                        
+                        <div class="inputs">
+                            <input id="password" type="password" name="password"  placeholder="+" required>
+                            <label for="password"><i class="fa-solid fa-lock"></i> Password</label>
+                        </div>
+    
+                        <div class="inputs">
+                            <input id="zipcode" type="text" name="zipcode"  placeholder="+" required>
+                            <label for="zipcode"><i class="fa-solid fa-file-zipper"></i></i> ZIP Code</label>
+                        </div>
+                        
+                        <div class="inputs">
+                            <input id="age" type="number" name="age"  placeholder="+" required>
+                            <label for="age"><i class="fa-solid fa-cake-candles"></i> Age</label>
+                        </div>
+    
+                    </div>
+                </div>
+                <div class="center-bottom">
+                    <div class="image">
+                        <input id="avatar" type="text" name="avatar" placeholder="+" required> 
+                        <label for="avatar"><i class="fa-solid fa-image"></i> Image</label>
+                    </div>
+                    <div class="Gender">
+                        <div class="gender-content">
+                            <h4><i class="fa-solid fa-venus-mars"></i> Gender:</h4>
+                            <div class="Male">
+                                <input id="MALE" type="radio" name="gender" value="MALE" required>
+                                <label for="MALE"><i class="fa-solid fa-mars"></i> Male</label>
+                            </div>
+                            <div class="Female">
+                                <input id="FEMALE" type="radio" name="gender" value="FEMALE" required>
+                                <label for="FEMALE"><i class="fa-solid fa-venus" style="color: #ff00ae;"></i> Female</label>
+                            </div>
+                        </div>
+                        <p id="errorText"></p>       
+                    </div>
+                </div>
+                <button class="submitButton" type="submit">Register</button>
+                <ul id="errorDetails">
+
+                </ul>
+            </form>
+        </div>
+    </div>
+
+    <div class="sign-in">
+        <div class="signing-in">
+
+        </div>
+    </div>
+    <div class="log-in hidden" id="LogIn">
+        <div class="login-form" id="loginForm">
+            <button onclick="closeLog()" class="closeButton">X</button>
+
+            <div class="left">
+                <h2>Sign in</h2>
+                <form onsubmit="logInLogic(event)">
+                    <div class="inputs">
+                        <input id="email2" type="email" name="email"  placeholder="+" required>
+                        <label for="email2"><i class="fa-solid fa-envelope"></i> Email</label>
+                    </div>
+
+                    <div class="inputs">
+                        <input id="password2" type="password" name="password"  placeholder="+" required>
+                        <label for="password2"><i class="fa-solid fa-lock"></i> Password</label>
+                    </div>
+
+                    <div>
+                        <button type="submit">Sign in</button>
+                        <p>Don`t have an account?<span onclick="notHaveAccount()"> Signup now</span></p>
+                    </div>
+                    <h3 id="displayText"></h3>
+                </form>
+            </div>
+            <div class="right">
+                <img src="./images/69ce878b-49ff-41ea-b3d2-7219d0c18fe7.webp" alt="Ecomerce">
+            </div>
+        </div>
+    </div>
+    <section class="commerical-section">
+        <div class="left">
+            <img src="./images/commericalsec1.avif" alt="commericalImage">
+            <article>
+                <p>Holiday Deals</p>
+                <h3>Up to 30% off</h3>
+                <h5>Selected Smartphone Brands </h5>
+                <button>Shop now</button>
+            </article>
+        </div>
+        <div class="right">
+            <img src="./images/commericalsec2.avif" alt="commericalImage">
+            <article>
+                <p>Just in</p>
+                <h3>Take Your Sound Anywhere</h3>
+                <h5>Top Headphone Brands</h5>
+                <button>Shop now</button>
+            </article>
+        </div>
+    </section>
+    <footer>
+        <p><a href="https://github.com/Kokolaa17" target="_blank">&copy; Kokolaa17, All rights reserved.</a></p>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#best-sellers">Best Sellers</a></li>
+            <li><a href="./shop/shop.html">Shop now</a></li>
+        </ul>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+    <script src="./app.js"></script>
+</body>
+</html>

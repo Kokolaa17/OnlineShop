@@ -1,0 +1,1542 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.notFound {
+  border-radius: 25%;
+  opacity: 90%;
+  width: 100%;
+}
+
+.stayON {
+  padding-left: 15px;
+  color: #FF7E3E;
+}
+.stayON i {
+  color: #FF7E3E;
+}
+
+.display-none {
+  display: none;
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes movingBorder {
+  from {
+    width: 35%;
+  }
+  to {
+    width: 100%;
+  }
+}
+@keyframes fromBack {
+  from {
+    opacity: 0;
+    scale: 0;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+@keyframes fromTop {
+  from {
+    transform: translateY(-670px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+}
+@keyframes fromBackRotate {
+  from {
+    transform: rotate(120deg);
+    opacity: 0;
+    scale: 0;
+  }
+  to {
+    transform: rotate(0);
+    opacity: 1;
+    scale: 1;
+  }
+}
+html {
+  scroll-behavior: smooth;
+}
+
+.fromTop {
+  animation: fromTop 0.5s ease-out;
+}
+
+.fromBackRotate {
+  animation: fromBackRotate 0.5s ease-in-out;
+}
+
+nav {
+  font-family: "Playwrite IT Moderna", cursive;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 30px;
+  background-color: #010101;
+  z-index: 1;
+  position: relative;
+  border-bottom: 1px solid #475DE1;
+}
+nav .logo {
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+nav .logo::before {
+  content: "";
+  position: absolute;
+  left: 140px;
+  bottom: 10px;
+  height: 3px;
+  width: 0%;
+  background-color: #475DE1;
+}
+nav .logo::after {
+  content: "";
+  position: absolute;
+  right: 206px;
+  bottom: 10px;
+  height: 3px;
+  width: 0%;
+  background-color: #475DE1;
+}
+nav .logo:hover h1 {
+  transition: 0.3s;
+  text-shadow: 0px 0px 30px;
+}
+nav .logo:hover::before {
+  transition: 0.3s;
+  width: 30%;
+}
+nav .logo:hover::after {
+  transition: 0.3s;
+  width: 30%;
+}
+nav .logo img {
+  width: 20%;
+  height: auto;
+  padding: 10px 0px;
+}
+nav .logo h1 {
+  position: absolute;
+  left: 26px;
+  color: #fff;
+  font-size: 35px;
+  text-shadow: 0px 0px 15px;
+}
+nav ul {
+  display: flex;
+  gap: 40px;
+  color: #fff;
+  list-style: none;
+  align-items: center;
+}
+nav ul li {
+  text-shadow: 0px 0px 25px #475DE1;
+}
+nav ul li:hover {
+  transition: 0.3s;
+  transform: translateY(-3px);
+  cursor: pointer;
+}
+nav ul li:hover i {
+  transition: 0.3s;
+  text-shadow: 0px 0px 25px #475DE1;
+}
+nav ul li:active {
+  transform: translateY(-5px);
+}
+nav ul li i {
+  padding-left: 5px;
+  font-size: 20px;
+}
+
+.welcome-section {
+  height: 80vh;
+  background: rgb(59, 62, 146);
+  background: linear-gradient(0deg, rgb(59, 62, 146) 25%, rgb(48, 36, 120) 63%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.welcome-section .welcome-left .welcome-article {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  justify-self: center;
+  width: 80%;
+}
+.welcome-section .welcome-left .welcome-article h2 {
+  font-size: 42px;
+  color: #FF7E3E;
+  font-weight: bold;
+  animation: floating 3s infinite;
+}
+.welcome-section .welcome-left .welcome-article p {
+  color: #fff;
+  font-size: 20px;
+  font-family: "Playwrite IT Moderna", cursive;
+  text-shadow: 0px 0px 15px #6691F5;
+}
+.welcome-section .welcome-left .welcome-article button {
+  padding: 10px 50px;
+  border-radius: 13px;
+  border: none;
+  background-color: #E1016B;
+  color: #fff;
+  font-family: "Playwrite IT Moderna", cursive;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.welcome-section .welcome-left .welcome-article button span {
+  position: relative;
+  z-index: 1;
+}
+.welcome-section .welcome-left .welcome-article button span i {
+  transform: translateY(50px);
+}
+.welcome-section .welcome-left .welcome-article button::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 0%;
+  width: 100%;
+  background-color: hsl(332, 99%, 50%);
+  border-radius: 5px;
+}
+.welcome-section .welcome-left .welcome-article button:hover {
+  transition: 0.3s;
+  box-shadow: 0px 0px 30px #E1016B;
+  text-shadow: 0px 0px 15px #fff;
+}
+.welcome-section .welcome-left .welcome-article button:hover i {
+  transition: 0.3s;
+  transform: translateY(0px);
+  font-size: 17px;
+}
+.welcome-section .welcome-left .welcome-article button:hover::before {
+  transition: 0.3s;
+  height: 100%;
+}
+.welcome-section .welcome-left .welcome-article button:active::before {
+  transition: 0.3s;
+  background-color: #7f003b;
+}
+.welcome-section .welcome-left .welcome-article button:active i {
+  transform: translateY(-10px);
+}
+
+.shoping-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  padding: 80px 0px;
+  flex-wrap: wrap;
+  font-family: "Roboto", sans-serif;
+  background-color: #010101;
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid #475DE1;
+}
+.shoping-info .figures {
+  background-color: #475DE1;
+  width: 300px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  color: #fff;
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.shoping-info .figures:hover {
+  transition: 0.3s;
+  box-shadow: 0px 10px 25px #6CA0F5;
+  scale: 1.1;
+}
+.shoping-info .figures i {
+  font-size: 50px;
+}
+.shoping-info .figures h3 {
+  font-weight: bold;
+  font-size: 25px;
+}
+.shoping-info .figure-animation {
+  position: relative;
+}
+.shoping-info .figure-animation .hoverSvg {
+  position: absolute;
+  opacity: 0;
+}
+.shoping-info .figure-animation:hover .hoverSvg {
+  transition: 0.5s;
+  transition-delay: 0.7s;
+  opacity: 1;
+}
+.shoping-info .figure-animation:hover .mainSvg {
+  transition: 0.5s;
+  transition-delay: 0.5s;
+  transform: translateX(200px);
+}
+
+.best-sellers {
+  font-size: 40px;
+  text-align: center;
+  color: #475DE1;
+  background-color: #010101;
+  padding: 25px;
+  font-family: "Playwrite IT Moderna", cursive;
+  position: relative;
+}
+.best-sellers::after {
+  content: "";
+  position: absolute;
+  top: 65px;
+  left: 5%;
+  height: 5px;
+  width: 90%;
+  background-color: #3C3F93;
+  border-radius: 15px;
+}
+.best-sellers h3 {
+  position: relative;
+  z-index: 1;
+  background-color: #010101;
+  display: inline-block;
+  padding: 0 15px;
+  animation: floating 2s infinite;
+}
+
+.best-products {
+  background-color: #010101;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding-inline: 5%;
+  gap: 30px;
+  padding-bottom: 50px;
+  border-bottom: 2px solid #3A3B8F;
+}
+.best-products .card {
+  width: 300px;
+  height: 400px;
+  background-color: #fff;
+  border-radius: 12px;
+  border: 4px solid #3A3B8F;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  animation: fromBack 3s ease-in-out;
+  box-shadow: 0px 0px 10px #302478;
+}
+.best-products .card img {
+  width: 225px;
+  height: 225px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.best-products .card h3 {
+  font-size: 15px;
+  font-family: "Playwrite IT Moderna", cursive;
+  position: absolute;
+  right: -3px;
+  top: -1px;
+  background-color: #3A3B8F;
+  padding: 5px;
+  border-top-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+  box-shadow: 0px 5px 5px #6CA0F5;
+  color: #fff;
+  cursor: pointer;
+}
+.best-products .card h3:hover {
+  transition: 0.3s;
+  scale: 1.2;
+  right: 6px;
+  top: 1px;
+}
+.best-products .card h3 span {
+  font-size: 12px;
+  padding-left: 3px;
+  text-decoration: line-through;
+  color: #E1016B;
+}
+.best-products .card h2 {
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #3A3B8F;
+}
+.best-products .card p {
+  font-family: "Roboto", sans-serif;
+}
+.best-products .card .stars {
+  display: flex;
+  gap: 3px;
+  font-size: 20px;
+  position: absolute;
+  bottom: 75px;
+}
+.best-products .card .action-buttons {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  position: absolute;
+  bottom: 20px;
+}
+.best-products .card .action-buttons button {
+  padding: 5px 20px;
+  background-color: #3C3F93;
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 17px;
+  margin-top: 30px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.best-products .card .action-buttons button::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background-color: #3A3B8F;
+}
+.best-products .card .action-buttons button i {
+  position: absolute;
+  right: 55px;
+  transform: translateY(50px);
+  font-size: 17px;
+}
+.best-products .card .action-buttons button:hover {
+  background-color: #3A3B8F;
+  box-shadow: 0px 0px 15px #6CA0F5;
+}
+.best-products .card .action-buttons button:hover i {
+  transition: 0.3s;
+  transform: translate(0px);
+}
+.best-products .card .action-buttons button:hover::before {
+  transition: 0.3s;
+  height: 100%;
+}
+.best-products .card .action-buttons button:active {
+  transition: 0.3s;
+  opacity: 0.8;
+}
+.best-products .card .action-buttons button:active i {
+  transition: 0.3s;
+  transform: translateY(-5px);
+}
+
+.commerical-section {
+  height: 80vh;
+  overflow: hidden;
+  background-color: #010101;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.commerical-section .left, .commerical-section .right {
+  position: relative;
+  width: 700px;
+  height: 468px;
+}
+.commerical-section .left img, .commerical-section .right img {
+  width: 700px;
+  height: 468px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: 0% 50%;
+     object-position: 0% 50%;
+}
+.commerical-section .left article, .commerical-section .right article {
+  position: absolute;
+  z-index: 1;
+  left: 85px;
+  top: 80px;
+}
+.commerical-section .left article p, .commerical-section .right article p {
+  font-family: "Playwrite IT Moderna", cursive;
+  color: #FF7E3E;
+  font-size: 20px;
+  font-weight: 200;
+}
+.commerical-section .left article h3, .commerical-section .right article h3 {
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 50px;
+  width: 224px;
+  padding-top: 5px;
+}
+.commerical-section .left article h5, .commerical-section .right article h5 {
+  font-family: "Playwrite IT Moderna", cursive;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 100;
+}
+.commerical-section .left article button, .commerical-section .right article button {
+  border: none;
+  background-color: #3A3B8F;
+  color: #fff;
+  font-family: "Playwrite IT Moderna", cursive;
+  outline: none;
+  padding: 5px 20px;
+  font-size: 17px;
+  border-radius: 20px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.commerical-section .left article button:hover, .commerical-section .right article button:hover {
+  transition: 0.3s;
+  background-color: transparent;
+  border: 1px solid #fff;
+  text-shadow: 0px 0px 15px #fff;
+}
+
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.create-account {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-backdrop-filter: blur(10px) brightness(50%);
+          backdrop-filter: blur(10px) brightness(50%);
+  transition: 0.3s;
+  z-index: 3;
+}
+.create-account .account-creation {
+  width: 60%;
+  height: 80%;
+  background-color: white;
+  position: relative;
+  border-radius: 15px;
+  border: 3px solid #3A3B8F;
+  padding: 10px 30px;
+  display: flex;
+  flex-direction: column;
+}
+.create-account .account-creation .closeButton {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  border: none;
+  background-color: #F70000;
+  color: #fff;
+  padding: 10px 15px;
+  font-size: 20px;
+  border-radius: 50px;
+  text-shadow: 0px 0px 15px #fff;
+  cursor: pointer;
+}
+.create-account .account-creation .closeButton:hover {
+  transition: 0.3s;
+  transform: translateY(-3px);
+  box-shadow: 0px 5px 10px #FF7E3E;
+}
+.create-account .account-creation h2 {
+  font-family: "Playwrite IT Moderna", cursive;
+  font-size: 35px;
+  padding-bottom: 2px;
+  width: 100%;
+  text-align: center;
+  color: #3A3B8F;
+  text-shadow: 0px 5px 15px #fff;
+}
+.create-account .account-creation .submitButton {
+  font-family: "Playwrite IT Moderna", cursive;
+  letter-spacing: 2px;
+  text-shadow: 0px 0px 15px #fff;
+  margin-top: 20px;
+  width: 100%;
+  height: 11%;
+  border-radius: 10px;
+  border: 1px solid #010101;
+  outline: none;
+  font-size: 18px;
+  color: #fff;
+  background-color: #3A3B8F;
+  cursor: pointer;
+  box-shadow: 0px 0px 5px #3A3B8F;
+}
+.create-account .account-creation .submitButton:hover {
+  transition: 0.3s;
+  background-color: #302478;
+  letter-spacing: 4px;
+  box-shadow: 0px 5px 10px #3A3B8F;
+}
+.create-account .account-creation .submitButton:active {
+  transition: 0.3s;
+  transform: translateY(-5px);
+}
+.create-account .account-creation #errorDetails {
+  display: flex;
+  color: red;
+  gap: 30px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+.create-account .account-creation .flexi {
+  padding-top: 30px;
+  border-top: 3px solid #3A3B8F;
+  display: flex;
+  justify-content: space-around;
+}
+.create-account .account-creation .flexi .left, .create-account .account-creation .flexi .right {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.create-account .account-creation .flexi .inputs {
+  position: relative;
+}
+.create-account .account-creation .flexi .inputs label {
+  position: absolute;
+  font-family: "Playwrite IT Moderna", cursive;
+  left: 10px;
+  top: 5px;
+  pointer-events: none;
+}
+.create-account .account-creation .flexi .inputs label i {
+  color: #3A3B8F;
+}
+.create-account .account-creation .flexi .inputs input {
+  height: 40px;
+  width: 380px;
+  border: 1px solid #3A3B8F;
+  border-radius: 8px;
+  padding-left: 10px;
+  font-size: 17px;
+  font-family: "Roboto", sans-serif;
+  box-shadow: 0px 0px 5px #3A3B8F;
+}
+.create-account .account-creation .flexi .inputs input::-moz-placeholder {
+  color: transparent;
+}
+.create-account .account-creation .flexi .inputs input::placeholder {
+  color: transparent;
+}
+.create-account .account-creation .flexi .inputs input:not(:-moz-placeholder-shown) + label {
+  top: -25px;
+  background-color: #fff;
+  padding: 0px 5px;
+}
+.create-account .account-creation .flexi .inputs input:not(:placeholder-shown) + label {
+  top: -25px;
+  background-color: #fff;
+  padding: 0px 5px;
+}
+.create-account .account-creation .flexi .inputs input:focus {
+  box-shadow: 0px 0px 15px #3A3B8F;
+  outline: none;
+}
+.create-account .account-creation .flexi .inputs input:focus + label {
+  transition: 0.3s;
+  top: -25px;
+  background-color: #fff;
+  padding: 0px 5px;
+  border-radius: 5px;
+}
+.create-account .center-bottom {
+  padding: 0px 20px;
+  margin-top: 30px;
+}
+.create-account .center-bottom .image {
+  position: relative;
+}
+.create-account .center-bottom .image label {
+  position: absolute;
+  font-family: "Playwrite IT Moderna", cursive;
+  left: 10px;
+  top: 5px;
+  pointer-events: none;
+}
+.create-account .center-bottom .image label i {
+  color: #3A3B8F;
+}
+.create-account .center-bottom .image input {
+  height: 40px;
+  width: 100%;
+  border: 1px solid #3A3B8F;
+  border-radius: 8px;
+  padding-left: 10px;
+  font-size: 17px;
+  font-family: "Roboto", sans-serif;
+  box-shadow: 0px 0px 5px #3A3B8F;
+}
+.create-account .center-bottom .image input::-moz-placeholder {
+  color: transparent;
+}
+.create-account .center-bottom .image input::placeholder {
+  color: transparent;
+}
+.create-account .center-bottom .image input:not(:-moz-placeholder-shown) + label {
+  top: -25px;
+  background-color: #fff;
+  padding: 0px 5px;
+}
+.create-account .center-bottom .image input:not(:placeholder-shown) + label {
+  top: -25px;
+  background-color: #fff;
+  padding: 0px 5px;
+}
+.create-account .center-bottom .image input:focus {
+  box-shadow: 0px 0px 15px #3A3B8F;
+  outline: none;
+}
+.create-account .center-bottom .image input:focus + label {
+  transition: 0.3s;
+  top: -25px;
+  background-color: #fff;
+  padding: 0px 5px;
+  border-radius: 5px;
+}
+.create-account .center-bottom .Gender {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: space-between;
+}
+.create-account .center-bottom .Gender p {
+  color: red;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  padding-top: 10px;
+}
+.create-account .center-bottom .Gender .gender-content {
+  display: flex;
+}
+.create-account .center-bottom .Gender h4 {
+  font-family: "Playwrite IT Moderna", cursive;
+  padding-left: 5px;
+  font-size: 18px;
+}
+.create-account .center-bottom .Gender h4 i {
+  color: #3A3B8F;
+}
+.create-account .center-bottom .Gender .Male, .create-account .center-bottom .Gender .Female {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+}
+.create-account .center-bottom .Gender .Male input, .create-account .center-bottom .Gender .Female input {
+  width: 20px;
+  height: 15px;
+  align-items: center;
+}
+.create-account .center-bottom .Gender .Male label, .create-account .center-bottom .Gender .Female label {
+  font-size: 16px;
+  font-family: "Playwrite IT Moderna", cursive;
+}
+.create-account .center-bottom .Gender .Male label i, .create-account .center-bottom .Gender .Female label i {
+  font-size: 16px;
+  color: #3A3B8F;
+}
+
+.log-in {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-backdrop-filter: blur(10px) brightness(50%);
+          backdrop-filter: blur(10px) brightness(50%);
+  transition: 0.3s;
+  z-index: 3;
+}
+.log-in .login-form {
+  width: 60%;
+  background-color: white;
+  position: relative;
+  border-radius: 15px;
+  border: 3px solid #3A3B8F;
+  display: flex;
+}
+.log-in .login-form .closeButton {
+  z-index: 3;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  border: none;
+  background-color: #F70000;
+  color: #fff;
+  padding: 10px 15px;
+  font-size: 20px;
+  border-radius: 50px;
+  text-shadow: 0px 0px 15px #fff;
+  cursor: pointer;
+}
+.log-in .login-form .closeButton:hover {
+  transition: 0.3s;
+  transform: translateY(-3px);
+  box-shadow: 0px 5px 10px #FF7E3E;
+}
+.log-in .login-form .right, .log-in .login-form .left {
+  width: 50%;
+  overflow: hidden;
+}
+.log-in .login-form .left {
+  padding: 20px 30px;
+}
+.log-in .login-form .left h2 {
+  text-align: center;
+  font-family: "Playwrite IT Moderna", cursive;
+  font-size: 35px;
+  padding-bottom: 15px;
+  width: 100%;
+  color: #3A3B8F;
+  text-shadow: 0px 5px 15px #fff;
+  margin-top: 10px;
+}
+.log-in .login-form .left form {
+  display: flex;
+  flex-direction: column;
+  border-top: 3px solid #3A3B8F;
+  padding-top: 30px;
+  gap: 35px;
+}
+.log-in .login-form .left form .inputs {
+  position: relative;
+}
+.log-in .login-form .left form .inputs label {
+  position: absolute;
+  font-family: "Playwrite IT Moderna", cursive;
+  left: 10px;
+  top: 5px;
+  pointer-events: none;
+}
+.log-in .login-form .left form .inputs label i {
+  color: #3A3B8F;
+}
+.log-in .login-form .left form .inputs input {
+  height: 40px;
+  width: 380px;
+  border: 1px solid #3A3B8F;
+  border-radius: 8px;
+  padding-left: 10px;
+  font-size: 17px;
+  font-family: "Roboto", sans-serif;
+  box-shadow: 0px 0px 5px #3A3B8F;
+}
+.log-in .login-form .left form .inputs input::-moz-placeholder {
+  color: transparent;
+}
+.log-in .login-form .left form .inputs input::placeholder {
+  color: transparent;
+}
+.log-in .login-form .left form .inputs input:not(:-moz-placeholder-shown) + label {
+  top: -25px;
+  background-color: #fff;
+  padding: 0px 5px;
+}
+.log-in .login-form .left form .inputs input:not(:placeholder-shown) + label {
+  top: -25px;
+  background-color: #fff;
+  padding: 0px 5px;
+}
+.log-in .login-form .left form .inputs input:focus {
+  box-shadow: 0px 0px 15px #3A3B8F;
+  outline: none;
+}
+.log-in .login-form .left form .inputs input:focus + label {
+  transition: 0.3s;
+  top: -25px;
+  background-color: #fff;
+  padding: 0px 5px;
+  border-radius: 5px;
+}
+.log-in .login-form .left form button {
+  font-family: "Playwrite IT Moderna", cursive;
+  letter-spacing: 2px;
+  text-shadow: 0px 0px 15px #fff;
+  width: 100%;
+  height: 11%;
+  border-radius: 10px;
+  border: 1px solid #010101;
+  outline: none;
+  font-size: 18px;
+  color: #fff;
+  background-color: #3A3B8F;
+  cursor: pointer;
+  box-shadow: 0px 0px 5px #3A3B8F;
+  padding: 5px;
+}
+.log-in .login-form .left form button:hover {
+  transition: 0.3s;
+  background-color: #302478;
+  letter-spacing: 4px;
+  box-shadow: 0px 5px 10px #3A3B8F;
+}
+.log-in .login-form .left form button:active {
+  transition: 0.3s;
+  transform: translateY(-5px);
+}
+.log-in .login-form .left p {
+  font-family: "Roboto", sans-serif;
+  color: #3A3B8F;
+  font-size: 17px;
+  margin-top: 15px;
+  text-align: center;
+}
+.log-in .login-form .left p span {
+  color: rgb(202, 7, 202);
+  cursor: pointer;
+}
+.log-in .login-form .left p span:hover {
+  transition: 0.3s;
+  font-weight: bold;
+  letter-spacing: 0.1px;
+}
+.log-in .login-form .left h3 {
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+}
+.log-in .login-form .right {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  position: relative;
+}
+.log-in .login-form .right img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.details-area {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-backdrop-filter: blur(10px) brightness(50%);
+          backdrop-filter: blur(10px) brightness(50%);
+  transition: 0.3s;
+  z-index: 3;
+}
+.details-area .details {
+  width: 80%;
+  height: 80%;
+  background-color: white;
+  position: relative;
+  border-radius: 15px;
+  border: 3px solid #3A3B8F;
+  padding: 20px 30px 20px 30px;
+  display: flex;
+}
+.details-area .details .closeButton {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  border: none;
+  background-color: #F70000;
+  color: #fff;
+  padding: 10px 15px;
+  font-size: 20px;
+  border-radius: 50px;
+  text-shadow: 0px 0px 15px #fff;
+  cursor: pointer;
+}
+.details-area .details .closeButton:hover {
+  transition: 0.3s;
+  transform: translateY(-3px);
+  box-shadow: 0px 5px 10px #FF7E3E;
+}
+.details-area .details .image {
+  width: 50%;
+  height: 100%;
+  box-shadow: 0px 0px 5px grey;
+  background-color: #fff;
+  border-radius: 5px;
+  position: relative;
+}
+.details-area .details .image button {
+  all: unset;
+  font-size: 20px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.055);
+  padding: 15px 20px;
+  position: absolute;
+  border-radius: 50px;
+  top: 240px;
+  cursor: pointer;
+}
+.details-area .details .image button:hover {
+  transition: 0.3s;
+  background-color: rgba(0, 0, 0, 0.473);
+}
+.details-area .details .image #pre {
+  left: 10px;
+}
+.details-area .details .image #next {
+  right: 10px;
+}
+.details-area .details .image h3 {
+  position: absolute;
+  right: 0px;
+  color: #fff;
+  font-family: cursive;
+  background-color: red;
+  border-top-right-radius: 5px;
+  font-size: 20px;
+  padding: 5px;
+  border-bottom-left-radius: 12px;
+}
+.details-area .details .image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  -o-object-position: center;
+     object-position: center;
+  border-radius: 5px;
+}
+.details-area .details .description {
+  width: 50%;
+  height: 100%;
+  padding: 20px 30px 0px 30px;
+  position: relative;
+  font-family: "Roboto", sans-serif;
+}
+.details-area .details .description h1 {
+  color: #302478;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+}
+.details-area .details .description .details-stars {
+  display: flex;
+  gap: 5px;
+  font-size: 25px;
+  margin-top: 10px;
+}
+.details-area .details .description h4 {
+  font-size: 18px;
+  margin-top: 10px;
+}
+.details-area .details .description .item-description {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.details-area .details .description .item-description::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: #302478;
+  left: 0;
+  top: 12px;
+}
+.details-area .details .description .item-description h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #302478;
+  position: relative;
+  background-color: #fff;
+  z-index: 1;
+  width: -moz-fit-content;
+  width: fit-content;
+  align-self: center;
+  padding: 0px 5px;
+}
+.details-area .details .description .item-description p {
+  padding-top: 10px;
+  font-size: 17px;
+}
+.details-area .details .description h2 {
+  margin-top: 10px;
+}
+.details-area .details .description h2 span {
+  font-size: 20px;
+  color: red;
+  text-decoration: line-through;
+}
+.details-area .details .description ul {
+  padding-left: 18px;
+  padding-top: 10px;
+  color: #545454;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 10px;
+}
+.details-area .details .description .addToCart {
+  position: absolute;
+  width: 93%;
+  bottom: 30px;
+}
+.details-area .details .description .addToCart #cartAdder {
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px 50px;
+  border-radius: 13px;
+  border: none;
+  background-color: #302478;
+  color: #fff;
+  font-family: "Playwrite IT Moderna", cursive;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.details-area .details .description .addToCart #cartAdder:hover {
+  transition: 0.3s;
+  background-color: #1d1e61;
+  box-shadow: 0px 0px 25px #475DE1;
+}
+.details-area .details .description .addToCart #cartAdder:hover i {
+  transition: 0.3s;
+  transform: translateX(10px);
+}
+.details-area .details .description .comerical {
+  display: flex;
+  font-size: 13px;
+  gap: 5px;
+  font-weight: normal;
+  font-family: "Playwrite IT Moderna", cursive;
+  justify-content: space-between;
+  color: #302478;
+  margin-top: 10px;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #010101;
+  padding: 15px 25px 15px 25px;
+  position: relative;
+  box-shadow: 0px 0px 15px #010101;
+  border-top: 1px solid #1d1e61;
+}
+footer p a {
+  font-size: 18px;
+  font-family: "Roboto", sans-serif;
+  text-decoration: none;
+  color: #6691F5;
+}
+footer ul {
+  display: flex;
+  gap: 30px;
+}
+footer ul li {
+  list-style-type: none;
+}
+footer ul li a {
+  text-decoration: none;
+  font-size: 15px;
+  font-family: "Playwrite IT Moderna", cursive;
+  color: #6691F5;
+}
+footer ul li a:hover {
+  transition: 0.3s;
+  color: #fff;
+}
+
+.background-section {
+  height: 80vh;
+  position: relative;
+}
+.background-section .blur {
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background-color: rgba(1, 1, 1, 0.1882352941);
+  position: absolute;
+}
+.background-section img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  z-index: 1;
+  background-repeat: no-repeat;
+  background-position: top;
+}
+.background-section article {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+  width: 480px;
+  margin-left: 150px;
+  padding-top: 100px;
+}
+.background-section article h3 {
+  font-family: "Playwrite IT Moderna", cursive;
+  color: white;
+  background-color: red;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 5px 10px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  animation: floating 3s infinite;
+  box-shadow: 0px 0px 15px red;
+}
+.background-section article h2 {
+  animation: floating 3s infinite;
+  font-size: 48px;
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 30px;
+  font-family: "Roboto", sans-serif;
+}
+.background-section article p {
+  font-family: "Playwrite IT Moderna", cursive;
+  font-size: 20px;
+  color: #3A3B8F;
+}
+.background-section article button {
+  width: 100%;
+  margin-top: 20px;
+  background-color: #3A3B8F;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 16px 40px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.shoping {
+  display: flex;
+  background-color: #010101;
+  justify-content: space-around;
+  padding-bottom: 50px;
+}
+.shoping .aside-section {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+}
+.shoping .aside-section aside {
+  color: #fff;
+  background-color: #1d1e61;
+  border-radius: 12px;
+  border: 5px solid #fff;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin-top: 55px;
+  position: sticky;
+  top: 30px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  padding-left: 15px;
+  padding-bottom: 30px;
+  border-top-right-radius: 30px;
+  width: 100%;
+  margin-left: 80px;
+}
+.shoping .aside-section aside h3 {
+  font-size: 30px;
+  color: #fff;
+  text-align: center;
+  transform: translateY(-28px);
+  background-color: #1d1e61;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  position: relative;
+  padding-inline: 10px;
+  font-family: "Playwrite IT Moderna", cursive;
+}
+.shoping .aside-section aside h3::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 24px;
+  z-index: -1;
+  background-color: #010101;
+}
+.shoping .aside-section aside ul {
+  list-style-type: none;
+  font-size: 18px;
+  font-family: "Roboto", sans-serif;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.shoping .aside-section aside ul li {
+  font-size: 23px;
+  cursor: pointer;
+  position: relative;
+}
+.shoping .aside-section aside ul li::before {
+  content: "";
+  position: absolute;
+  left: 25px;
+  bottom: -2px;
+  height: 2px;
+  width: 0%;
+  background-color: #FF7E3E;
+  border-radius: 50%;
+}
+.shoping .aside-section aside ul li:hover::before {
+  transition: 0.3s;
+  width: 50%;
+}
+.shoping .aside-section aside ul li:hover i {
+  transition: 0.3s;
+  color: #FF7E3E;
+}
+.shoping .aside-section .search {
+  position: relative;
+  margin-top: 22px;
+}
+.shoping .aside-section .search label {
+  position: absolute;
+  top: 1px;
+  left: 10px;
+  pointer-events: none;
+  background-color: #1d1e61;
+  font-size: 16px;
+  font-family: "Playwrite IT Moderna", cursive;
+}
+.shoping .aside-section .search input {
+  background-color: #1d1e61;
+  border: 1px solid #fff;
+  padding: 5px;
+  border-radius: 12px;
+  color: #fff;
+  outline: none;
+  font-size: 17px;
+  padding-left: 15px;
+  width: 95%;
+}
+.shoping .aside-section .search input::-moz-placeholder {
+  padding-left: 5px;
+}
+.shoping .aside-section .search input::placeholder {
+  padding-left: 5px;
+}
+.shoping .aside-section .search input:focus + label {
+  transition: 0.3s;
+  top: -19.5px;
+  text-shadow: 0px 0px 15px #fff;
+}
+.shoping .shop-products {
+  position: relative;
+  background-color: #010101;
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 50px;
+  gap: 45px;
+  justify-content: center;
+  width: 80%;
+}
+.shoping .shop-products .card {
+  width: 300px;
+  height: 400px;
+  background-color: #fff;
+  border-radius: 12px;
+  border: 4px solid #3A3B8F;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  animation: fromBack 2s ease-in-out;
+  box-shadow: 0px 0px 10px #302478;
+}
+.shoping .shop-products .card img {
+  width: 225px;
+  height: 225px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.shoping .shop-products .card h3 {
+  font-size: 15px;
+  font-family: "Playwrite IT Moderna", cursive;
+  position: absolute;
+  right: -2px;
+  top: -1px;
+  background-color: #3A3B8F;
+  padding: 5px;
+  border-top-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+  box-shadow: 0px 5px 5px #6CA0F5;
+  color: #fff;
+  cursor: pointer;
+}
+.shoping .shop-products .card h3:hover {
+  transition: 0.3s;
+  scale: 1.2;
+  right: 6px;
+  top: 1px;
+}
+.shoping .shop-products .card h3 span {
+  font-size: 12px;
+  padding-left: 3px;
+  text-decoration: line-through;
+  color: #E1016B;
+}
+.shoping .shop-products .card h2 {
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #3A3B8F;
+}
+.shoping .shop-products .card p {
+  font-family: "Roboto", sans-serif;
+}
+.shoping .shop-products .card .stars {
+  display: flex;
+  gap: 3px;
+  font-size: 20px;
+  position: absolute;
+  bottom: 75px;
+}
+.shoping .shop-products .card .action-buttons {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  position: absolute;
+  bottom: 20px;
+}
+.shoping .shop-products .card .action-buttons button {
+  padding: 5px 20px;
+  background-color: #3C3F93;
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 17px;
+  margin-top: 30px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.shoping .shop-products .card .action-buttons button::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background-color: #3A3B8F;
+}
+.shoping .shop-products .card .action-buttons button i {
+  position: absolute;
+  right: 55px;
+  transform: translateY(50px);
+  font-size: 17px;
+}
+.shoping .shop-products .card .action-buttons button:hover {
+  background-color: #3A3B8F;
+  box-shadow: 0px 0px 15px #6CA0F5;
+}
+.shoping .shop-products .card .action-buttons button:hover i {
+  transition: 0.3s;
+  transform: translate(0px);
+}
+.shoping .shop-products .card .action-buttons button:hover::before {
+  transition: 0.3s;
+  height: 100%;
+}
+.shoping .shop-products .card .action-buttons button:active {
+  transition: 0.3s;
+  opacity: 0.8;
+}
+.shoping .shop-products .card .action-buttons button:active i {
+  transition: 0.3s;
+  transform: translateY(-5px);
+}
+
+.categorys {
+  display: flex;
+  padding-left: 75px;
+  background-color: #010101;
+  gap: 20px;
+}
+.categorys button {
+  all: unset;
+  border: 1px solid #fff;
+  padding: 5px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  border-radius: 5px;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  background-color: #1d1e61;
+  cursor: pointer;
+  width: 10%;
+}
+.categorys button img {
+  width: 20%;
+}
+.categorys button:hover {
+  transition: 0.3s;
+  background-color: #fff;
+  color: #1d1e61;
+  border: 1px solid #010101;
+}/*# sourceMappingURL=style.css.map */
