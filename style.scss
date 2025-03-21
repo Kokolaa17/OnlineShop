@@ -18,7 +18,28 @@
 .display-none {
     display: none;
 }
+
 // Animations
+@keyframes fromRight {
+    from {
+        transform: translateX(670px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+@keyframes fromLeft {
+    from {
+        transform: translateX(-670px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
 @keyframes floating {
     0% {
         transform: translateY(0);
@@ -97,6 +118,7 @@ nav {
         align-items: center;
         position: relative;
         cursor: pointer;
+        animation: fromLeft 2s;
         &::before{
             content: "";
             position: absolute;
@@ -148,6 +170,7 @@ nav {
         color: #fff;
         list-style: none;
         align-items: center;
+        animation: fromBack 2s;
         li {
             text-shadow: 0px 0px 25px #475DE1;
             &:hover {
@@ -179,6 +202,12 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    overflow: hidden;
+    .video {
+        video {
+            animation: fromRight 2s;
+        }
+    }
     .welcome-left {
         .welcome-article {
             display: flex;
@@ -186,6 +215,7 @@ nav {
             gap: 35px;
             justify-self: center;
             width: 80%;
+            animation: fromLeft 2s;
             h2 {
                 font-size: 42px;
                 color: #FF7E3E;
@@ -269,6 +299,7 @@ nav {
     z-index: 1;
     border-top: 1px solid #475DE1;
     .figures {
+        animation: fromBack 2s;
         background-color: #475DE1;
         width: 300px;
         height: 200px;
@@ -344,7 +375,8 @@ nav {
         background-color: #010101;
         display: inline-block;
         padding: 0 15px;
-        animation: floating 2s infinite;
+        animation: floating 2s infinite, fromBack 2s;
+        pointer-events: none;
     }
 }
 
@@ -370,7 +402,7 @@ nav {
         flex-direction: column;
         align-items: center;
         padding: 10px;
-        animation: fromBack 3s ease-in-out;
+        animation: fromBack 2s ease-in-out;
         box-shadow: 0px 0px 10px #302478;
         img {
             width: 225px;
@@ -381,13 +413,13 @@ nav {
             font-size: 15px;
             font-family: "Playwrite IT Moderna", cursive;
             position: absolute;
-            right: -3px;
-            top: -1px;
+            right: -2px;
+            top: -4px;
             background-color: #3A3B8F;
             padding: 5px;
             border-top-right-radius: 12px;
             border-bottom-left-radius: 12px;
-            box-shadow: 0px 5px 5px #6CA0F5;
+            box-shadow: -3px 5px 5px 0px #6CA0F5;
             color: #fff;
             cursor: pointer;
             &:hover {
@@ -417,7 +449,7 @@ nav {
             gap: 3px;
             font-size: 20px;
             position: absolute;
-            bottom: 75px;
+            bottom: 70px;
         }
         .action-buttons {
             display: flex;
@@ -485,9 +517,15 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-around;
+    .left {
+        animation: fromLeft 2s;
+    }
+    .right {
+        animation: fromRight 2s;
+    }
     .left, .right {
         position: relative;
-        width: 700px;
+        width: 45vw;
         height: 468px;
         img {
             width: 700px;
@@ -505,6 +543,7 @@ nav {
                 color: #FF7E3E;
                 font-size: 20px;
                 font-weight: 200;
+                animation: floating 3s infinite;
             }
             h3 {
                 color: #fff;
@@ -860,7 +899,7 @@ nav {
                     }
                     input {
                         height: 40px;
-                        width: 380px;
+                        width: 100%;
                         border: 1px solid #3A3B8F;
                         border-radius: 8px;
                         padding-left: 10px;
@@ -1188,6 +1227,78 @@ footer {
         }
     }
 }
+@media (max-width: 1405px) {
+    .commerical-section {
+        height: unset;
+        flex-direction: column;
+        gap: 30px;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        align-items: center;
+        .left, .right {
+           width: 85%;
+           height: auto;
+           article {
+            top: 8%;
+            left: 3%;
+           }
+            img {
+                width: 100%;
+                border-radius: 12px;
+            }
+        }
+    }
+}
+
+@media (max-width: 1080px){
+    .welcome-section {
+        flex-direction: column-reverse;
+        height: unset;
+        position: relative;
+        .video {
+            width: 100%;
+            video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    .welcome-left {
+        z-index: 3;
+        background: rgb(59,62,146);
+        background: linear-gradient(72deg, rgba(59,62,146,1) 35%, rgba(48,36,120,1) 53%);
+        padding-top: 30px;
+        padding-bottom: 30px;
+        position: relative;
+        border-top: 1px solid #3A3B8F;
+        .welcome-article {
+            text-align: center;
+        }
+    }
+    }
+    .commerical-section {
+        .left, .right {
+            img {
+                height: auto;
+            } 
+        }
+    }
+}
+@media  (max-width : 700px) {
+    .commerical-section {
+        .left, .right {
+            width: 90%;
+            article {
+                p {
+                    font-size: 17px;
+                }
+                h3 {
+                    font-size: 38px;
+                }
+            }
+        }
+    }
+}
 
 // Shop Page
 
@@ -1442,7 +1553,7 @@ footer {
                 gap: 3px;
                 font-size: 20px;
                 position: absolute;
-                bottom: 75px;
+                bottom: 70px;
             }
             .action-buttons {
                 display: flex;

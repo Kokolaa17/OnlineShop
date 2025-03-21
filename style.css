@@ -22,6 +22,26 @@
   display: none;
 }
 
+@keyframes fromRight {
+  from {
+    transform: translateX(670px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes fromLeft {
+  from {
+    transform: translateX(-670px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 @keyframes floating {
   0% {
     transform: translateY(0);
@@ -99,6 +119,7 @@ nav .logo {
   align-items: center;
   position: relative;
   cursor: pointer;
+  animation: fromLeft 2s;
 }
 nav .logo::before {
   content: "";
@@ -148,6 +169,7 @@ nav ul {
   color: #fff;
   list-style: none;
   align-items: center;
+  animation: fromBack 2s;
 }
 nav ul li {
   text-shadow: 0px 0px 25px #475DE1;
@@ -176,6 +198,10 @@ nav ul li i {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  overflow: hidden;
+}
+.welcome-section .video video {
+  animation: fromRight 2s;
 }
 .welcome-section .welcome-left .welcome-article {
   display: flex;
@@ -183,6 +209,7 @@ nav ul li i {
   gap: 35px;
   justify-self: center;
   width: 80%;
+  animation: fromLeft 2s;
 }
 .welcome-section .welcome-left .welcome-article h2 {
   font-size: 42px;
@@ -262,6 +289,7 @@ nav ul li i {
   border-top: 1px solid #475DE1;
 }
 .shoping-info .figures {
+  animation: fromBack 2s;
   background-color: #475DE1;
   width: 300px;
   height: 200px;
@@ -333,7 +361,8 @@ nav ul li i {
   background-color: #010101;
   display: inline-block;
   padding: 0 15px;
-  animation: floating 2s infinite;
+  animation: floating 2s infinite, fromBack 2s;
+  pointer-events: none;
 }
 
 .best-products {
@@ -359,7 +388,7 @@ nav ul li i {
   flex-direction: column;
   align-items: center;
   padding: 10px;
-  animation: fromBack 3s ease-in-out;
+  animation: fromBack 2s ease-in-out;
   box-shadow: 0px 0px 10px #302478;
 }
 .best-products .card img {
@@ -372,13 +401,13 @@ nav ul li i {
   font-size: 15px;
   font-family: "Playwrite IT Moderna", cursive;
   position: absolute;
-  right: -3px;
-  top: -1px;
+  right: -2px;
+  top: -4px;
   background-color: #3A3B8F;
   padding: 5px;
   border-top-right-radius: 12px;
   border-bottom-left-radius: 12px;
-  box-shadow: 0px 5px 5px #6CA0F5;
+  box-shadow: -3px 5px 5px 0px #6CA0F5;
   color: #fff;
   cursor: pointer;
 }
@@ -408,7 +437,7 @@ nav ul li i {
   gap: 3px;
   font-size: 20px;
   position: absolute;
-  bottom: 75px;
+  bottom: 70px;
 }
 .best-products .card .action-buttons {
   display: flex;
@@ -475,9 +504,15 @@ nav ul li i {
   align-items: center;
   justify-content: space-around;
 }
+.commerical-section .left {
+  animation: fromLeft 2s;
+}
+.commerical-section .right {
+  animation: fromRight 2s;
+}
 .commerical-section .left, .commerical-section .right {
   position: relative;
-  width: 700px;
+  width: 45vw;
   height: 468px;
 }
 .commerical-section .left img, .commerical-section .right img {
@@ -499,6 +534,7 @@ nav ul li i {
   color: #FF7E3E;
   font-size: 20px;
   font-weight: 200;
+  animation: floating 3s infinite;
 }
 .commerical-section .left article h3, .commerical-section .right article h3 {
   color: #fff;
@@ -863,7 +899,7 @@ nav ul li i {
 }
 .log-in .login-form .left form .inputs input {
   height: 40px;
-  width: 380px;
+  width: 100%;
   border: 1px solid #3A3B8F;
   border-radius: 8px;
   padding-left: 10px;
@@ -1192,6 +1228,70 @@ footer ul li a:hover {
   color: #fff;
 }
 
+@media (max-width: 1405px) {
+  .commerical-section {
+    height: unset;
+    flex-direction: column;
+    gap: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    align-items: center;
+  }
+  .commerical-section .left, .commerical-section .right {
+    width: 85%;
+    height: auto;
+  }
+  .commerical-section .left article, .commerical-section .right article {
+    top: 8%;
+    left: 3%;
+  }
+  .commerical-section .left img, .commerical-section .right img {
+    width: 100%;
+    border-radius: 12px;
+  }
+}
+@media (max-width: 1080px) {
+  .welcome-section {
+    flex-direction: column-reverse;
+    height: unset;
+    position: relative;
+  }
+  .welcome-section .video {
+    width: 100%;
+  }
+  .welcome-section .video video {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+  .welcome-section .welcome-left {
+    z-index: 3;
+    background: rgb(59, 62, 146);
+    background: linear-gradient(72deg, rgb(59, 62, 146) 35%, rgb(48, 36, 120) 53%);
+    padding-top: 30px;
+    padding-bottom: 30px;
+    position: relative;
+    border-top: 1px solid #3A3B8F;
+  }
+  .welcome-section .welcome-left .welcome-article {
+    text-align: center;
+  }
+  .commerical-section .left img, .commerical-section .right img {
+    height: auto;
+  }
+}
+@media (max-width: 700px) {
+  .commerical-section .left, .commerical-section .right {
+    width: 90%;
+  }
+  .commerical-section .left article p, .commerical-section .right article p {
+    font-size: 17px;
+  }
+  .commerical-section .left article h3, .commerical-section .right article h3 {
+    font-size: 38px;
+  }
+}
 .background-section {
   height: 80vh;
   position: relative;
@@ -1451,7 +1551,7 @@ footer ul li a:hover {
   gap: 3px;
   font-size: 20px;
   position: absolute;
-  bottom: 75px;
+  bottom: 70px;
 }
 .shoping .shop-products .card .action-buttons {
   display: flex;

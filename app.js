@@ -14,6 +14,10 @@ let notLogedInMenu = document.querySelectorAll(".not-loggedin")
 let logedInMenu = document.querySelectorAll(".loged-in")
 let accountCreationForm = document.getElementById("accountCreation")
 
+// Basic Functions
+function goShopNow(){
+    document.location.href = "./shop/shop.html"
+}
 
 checkUserStatus();
 
