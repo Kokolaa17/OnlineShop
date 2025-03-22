@@ -19,7 +19,7 @@
 }
 
 .display-none {
-  display: none;
+  display: none !important;
 }
 
 @keyframes fromRight {
@@ -103,6 +103,10 @@ html {
   animation: fromBackRotate 0.5s ease-in-out;
 }
 
+header {
+  position: relative;
+}
+
 nav {
   font-family: "Playwrite IT Moderna", cursive;
   display: flex;
@@ -110,7 +114,7 @@ nav {
   justify-content: space-between;
   padding-inline: 30px;
   background-color: #010101;
-  z-index: 1;
+  z-index: 3;
   position: relative;
   border-bottom: 1px solid #475DE1;
 }
@@ -171,6 +175,15 @@ nav ul {
   align-items: center;
   animation: fromBack 2s;
 }
+nav ul #burgerBar {
+  font-size: 25px;
+  cursor: pointer;
+  display: none;
+}
+nav ul #burgerBar:hover {
+  transition: 0.3s;
+  color: #475DE1;
+}
 nav ul li {
   text-shadow: 0px 0px 25px #475DE1;
 }
@@ -189,6 +202,44 @@ nav ul li:active {
 nav ul li i {
   padding-left: 5px;
   font-size: 20px;
+}
+
+.responsive-nav {
+  background-color: #010101;
+  font-size: 18px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding-bottom: 30px;
+  font-family: "Playwrite IT Moderna", cursive;
+  position: absolute;
+  width: 100%;
+  border-bottom: 2px solid #1d1e61;
+  z-index: 5;
+}
+.responsive-nav ul {
+  margin-top: 20px;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  text-align: center;
+}
+.responsive-nav ul li {
+  cursor: pointer;
+  font-size: 18px;
+}
+.responsive-nav ul li:hover {
+  transition: 0.3s;
+  transform: translateY(-3px);
+  cursor: pointer;
+}
+.responsive-nav ul li:hover i {
+  transition: 0.3s;
+  text-shadow: 0px 0px 25px #475DE1;
 }
 
 .welcome-section {
@@ -589,7 +640,7 @@ nav ul li i {
 }
 .create-account .account-creation {
   width: 60%;
-  height: 80%;
+  padding-bottom: 30px;
   background-color: white;
   position: relative;
   border-radius: 15px;
@@ -631,7 +682,6 @@ nav ul li i {
   text-shadow: 0px 0px 15px #fff;
   margin-top: 20px;
   width: 100%;
-  height: 11%;
   border-radius: 10px;
   border: 1px solid #010101;
   outline: none;
@@ -640,6 +690,7 @@ nav ul li i {
   background-color: #3A3B8F;
   cursor: pointer;
   box-shadow: 0px 0px 5px #3A3B8F;
+  padding: 5px;
 }
 .create-account .account-creation .submitButton:hover {
   transition: 0.3s;
@@ -670,14 +721,16 @@ nav ul li i {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  width: 50%;
 }
 .create-account .account-creation .flexi .inputs {
   position: relative;
+  text-align: center;
 }
 .create-account .account-creation .flexi .inputs label {
   position: absolute;
   font-family: "Playwrite IT Moderna", cursive;
-  left: 10px;
+  left: 35px;
   top: 5px;
   pointer-events: none;
 }
@@ -686,7 +739,7 @@ nav ul li i {
 }
 .create-account .account-creation .flexi .inputs input {
   height: 40px;
-  width: 380px;
+  width: 90%;
   border: 1px solid #3A3B8F;
   border-radius: 8px;
   padding-left: 10px;
@@ -722,8 +775,8 @@ nav ul li i {
   border-radius: 5px;
 }
 .create-account .center-bottom {
-  padding: 0px 20px;
   margin-top: 30px;
+  text-align: center;
 }
 .create-account .center-bottom .image {
   position: relative;
@@ -731,7 +784,7 @@ nav ul li i {
 .create-account .center-bottom .image label {
   position: absolute;
   font-family: "Playwrite IT Moderna", cursive;
-  left: 10px;
+  left: 30px;
   top: 5px;
   pointer-events: none;
 }
@@ -740,7 +793,7 @@ nav ul li i {
 }
 .create-account .center-bottom .image input {
   height: 40px;
-  width: 100%;
+  width: 95%;
   border: 1px solid #3A3B8F;
   border-radius: 8px;
   padding-left: 10px;
@@ -793,7 +846,7 @@ nav ul li i {
 }
 .create-account .center-bottom .Gender h4 {
   font-family: "Playwrite IT Moderna", cursive;
-  padding-left: 5px;
+  padding-left: 20px;
   font-size: 18px;
 }
 .create-account .center-bottom .Gender h4 i {
@@ -1078,8 +1131,8 @@ nav ul li i {
 .details-area .details .image img {
   width: 100%;
   height: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
+  -o-object-fit: cover;
+     object-fit: cover;
   -o-object-position: center;
      object-position: center;
   border-radius: 5px;
@@ -1091,10 +1144,15 @@ nav ul li i {
   position: relative;
   font-family: "Roboto", sans-serif;
 }
+.details-area .details .description .stars-price {
+  display: flex;
+  justify-content: space-between;
+}
 .details-area .details .description h1 {
   color: #302478;
   font-weight: bold;
   font-family: "Roboto", sans-serif;
+  font-size: 35px;
 }
 .details-area .details .description .details-stars {
   display: flex;
@@ -1143,6 +1201,7 @@ nav ul li i {
   font-size: 20px;
   color: red;
   text-decoration: line-through;
+  font-size: 1.3vw;
 }
 .details-area .details .description ul {
   padding-left: 18px;
@@ -1154,12 +1213,10 @@ nav ul li i {
   margin-top: 10px;
 }
 .details-area .details .description .addToCart {
-  position: absolute;
   width: 93%;
-  bottom: 30px;
 }
 .details-area .details .description .addToCart #cartAdder {
-  margin-top: 20px;
+  margin-top: 10px;
   width: 100%;
   padding: 10px 50px;
   border-radius: 13px;
@@ -1251,13 +1308,33 @@ footer ul li a:hover {
   }
 }
 @media (max-width: 1080px) {
+  .details {
+    width: 90% !important;
+  }
+  .login-form {
+    width: 88% !important;
+  }
+  .account-creation {
+    width: 90% !important;
+    height: 80% !important;
+  }
+  .account-creation ul {
+    display: none;
+  }
+  #errorText {
+    position: absolute;
+    bottom: 25px;
+    left: 33%;
+  }
+  #errorDetails {
+    display: none !important;
+  }
   .welcome-section {
     flex-direction: column-reverse;
     height: unset;
     position: relative;
-  }
-  .welcome-section .video {
-    width: 100%;
+    background: rgb(59, 62, 146);
+    background: linear-gradient(84deg, rgb(59, 62, 146) 35%, rgb(38, 11, 99) 56%);
   }
   .welcome-section .video video {
     width: 100%;
@@ -1268,11 +1345,10 @@ footer ul li a:hover {
   .welcome-section .welcome-left {
     z-index: 3;
     background: rgb(59, 62, 146);
-    background: linear-gradient(72deg, rgb(59, 62, 146) 35%, rgb(48, 36, 120) 53%);
+    background: linear-gradient(84deg, rgb(59, 62, 146) 35%, rgb(38, 11, 99) 56%);
     padding-top: 30px;
     padding-bottom: 30px;
     position: relative;
-    border-top: 1px solid #3A3B8F;
   }
   .welcome-section .welcome-left .welcome-article {
     text-align: center;
@@ -1281,7 +1357,54 @@ footer ul li a:hover {
     height: auto;
   }
 }
-@media (max-width: 700px) {
+@media (max-width: 960px) {
+  .images img {
+    -o-object-fit: contain !important;
+       object-fit: contain !important;
+  }
+  .details {
+    align-items: center !important;
+    flex-direction: column;
+    height: 100% !important;
+  }
+  .details .image {
+    height: 50%;
+    width: 80% !important;
+  }
+  .details .description {
+    width: 100% !important;
+    height: 50% !important;
+  }
+  .details .description ul {
+    display: none !important;
+  }
+  .details .description h1 {
+    font-size: 23px !important;
+    text-align: center;
+  }
+  .details .description .comerical {
+    display: none !important;
+  }
+}
+@media (max-width: 710px) {
+  .login-form {
+    width: 90% !important;
+  }
+  .login-form .left {
+    width: 100% !important;
+  }
+  .login-form .right {
+    display: none;
+  }
+  nav {
+    border-bottom: unset;
+  }
+  .mainNav {
+    display: none !important;
+  }
+  #burgerBar {
+    display: unset !important;
+  }
   .commerical-section .left, .commerical-section .right {
     width: 90%;
   }
@@ -1290,6 +1413,14 @@ footer ul li a:hover {
   }
   .commerical-section .left article h3, .commerical-section .right article h3 {
     font-size: 38px;
+  }
+  footer {
+    flex-direction: column-reverse;
+    gap: 20px;
+  }
+  footer p {
+    font-size: 20px;
+    letter-spacing: 2px;
   }
 }
 .background-section {

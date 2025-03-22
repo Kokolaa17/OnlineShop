@@ -16,8 +16,10 @@
    }
 }
 .display-none {
-    display: none;
+    display: none !important;
 }
+
+
 
 // Animations
 @keyframes fromRight {
@@ -103,6 +105,9 @@ html {
 // Index styles
 
 // Navigation
+header {
+    position: relative;
+}
 nav {
     font-family: "Playwrite IT Moderna", cursive;
     display: flex;
@@ -110,7 +115,7 @@ nav {
     justify-content: space-between;
     padding-inline: 30px;
     background-color: #010101;
-    z-index: 1;
+    z-index: 3;
     position: relative;
     border-bottom: 1px solid #475DE1;
     .logo {
@@ -171,6 +176,15 @@ nav {
         list-style: none;
         align-items: center;
         animation: fromBack 2s;
+        #burgerBar {
+            font-size: 25px;
+            cursor: pointer;
+            display: none;
+            &:hover {
+                transition: 0.3s;
+                color: #475DE1;
+            }
+        }
         li {
             text-shadow: 0px 0px 25px #475DE1;
             &:hover {
@@ -189,6 +203,43 @@ nav {
             padding-left: 5px;
             font-size: 20px;
            }
+        }
+    }
+}
+.responsive-nav {
+    background-color: #010101;
+    font-size: 18px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding-bottom: 30px;
+    font-family: "Playwrite IT Moderna", cursive;;
+    position: absolute;
+    width: 100%;
+    border-bottom: 2px solid #1d1e61;
+    z-index: 5;
+    ul {
+        margin-top: 20px;
+        list-style-type: none;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+        li {
+            cursor: pointer;
+            font-size: 18px;
+            &:hover {
+                transition: 0.3s;
+                transform: translateY(-3px);
+                cursor: pointer;
+                i {
+                    transition: 0.3s;
+                    text-shadow: 0px 0px 25px #475DE1;
+                }
+            }
         }
     }
 }
@@ -604,7 +655,7 @@ nav {
     z-index: 3;
     .account-creation {
         width: 60%;
-        height: 80%;
+        padding-bottom: 30px;
         background-color: white;
         position: relative;
         border-radius: 15px;
@@ -645,7 +696,6 @@ nav {
                 text-shadow: 0px 0px 15px #fff;
                 margin-top: 20px;
                 width: 100%;
-                height: 11%;
                 border-radius: 10px;
                 border: 1px solid #010101;
                 outline: none;
@@ -654,6 +704,7 @@ nav {
                 background-color: #3A3B8F;
                 cursor: pointer;
                 box-shadow: 0px 0px 5px #3A3B8F;
+                padding: 5px;
                 &:hover {
                     transition: 0.3s;
                     background-color: #302478;
@@ -683,13 +734,15 @@ nav {
                     display: flex;
                     flex-direction: column;
                     gap: 30px;
+                    width: 50%;
                 }
                 .inputs {
                     position: relative;
+                    text-align: center;
                     label {
                         position: absolute;
                         font-family: "Playwrite IT Moderna", cursive;
-                        left: 10px;
+                        left: 35px;
                         top: 5px;
                         pointer-events: none;
                         i {
@@ -698,7 +751,7 @@ nav {
                     }
                     input {
                         height: 40px;
-                        width: 380px;
+                        width: 90%;
                         border: 1px solid #3A3B8F;
                         border-radius: 8px;
                         padding-left: 10px;
@@ -731,14 +784,14 @@ nav {
             }
         }
         .center-bottom {
-            padding: 0px 20px;
             margin-top: 30px;
+            text-align: center;
             .image {
                 position: relative;
                 label {
                     position: absolute;
                     font-family: "Playwrite IT Moderna", cursive;
-                    left: 10px;
+                    left: 30px;
                     top: 5px;
                     pointer-events: none;
                     i {
@@ -747,7 +800,7 @@ nav {
                 }
                 input {
                     height: 40px;
-                    width: 100%;
+                    width: 95%;
                     border: 1px solid #3A3B8F;
                     border-radius: 8px;
                     padding-left: 10px;
@@ -794,7 +847,7 @@ nav {
                 }
                 h4 {
                     font-family: "Playwrite IT Moderna", cursive;
-                    padding-left: 5px;
+                    padding-left: 20px;
                     font-size: 18px;
                     i {
                         color: #3A3B8F;
@@ -1074,7 +1127,7 @@ nav {
             img {
                 width: 100%;
                 height: 100%;
-                object-fit: contain;
+                object-fit: cover;
                 object-position: center;
                 border-radius: 5px;
             }
@@ -1085,10 +1138,15 @@ nav {
             padding: 20px 30px 0px 30px;
             position: relative;
             font-family: "Roboto", sans-serif;
+            .stars-price {
+                display: flex;
+                justify-content: space-between;
+            }
             h1 {
                 color: #302478;
                 font-weight: bold;
                 font-family: "Roboto", sans-serif;
+                font-size: 35px;
             }
             .details-stars {
                 display: flex;
@@ -1135,6 +1193,7 @@ nav {
                     font-size: 20px;
                     color: red;
                     text-decoration: line-through;
+                    font-size: 1.3vw;
                 }
             }
             ul {
@@ -1147,11 +1206,9 @@ nav {
                 margin-top: 10px;
             }
             .addToCart {
-                position: absolute;
                 width: 93%;
-                bottom: 30px;
                 #cartAdder {
-                    margin-top: 20px;
+                    margin-top: 10px;
                     width: 100%;
                     padding: 10px 50px;
                     border-radius: 13px;
@@ -1251,12 +1308,35 @@ footer {
 }
 
 @media (max-width: 1080px){
+    .details {
+        width: 90% !important;
+    }
+   
+    .login-form {
+        width: 88% !important;
+    }
+    .account-creation {
+        width: 90% !important;
+        height: 80% !important;
+        ul {
+            display: none;
+        }
+    }
+    #errorText{
+        position: absolute;
+        bottom: 25px;
+        left: 33%;
+    }
+    #errorDetails {
+        display: none !important;
+    }
     .welcome-section {
         flex-direction: column-reverse;
         height: unset;
         position: relative;
+        background: rgb(59,62,146);
+        background: linear-gradient(84deg, rgba(59,62,146,1) 35%, rgba(38,11,99,1) 56%);        
         .video {
-            width: 100%;
             video {
                 width: 100%;
                 height: 100%;
@@ -1266,11 +1346,10 @@ footer {
     .welcome-left {
         z-index: 3;
         background: rgb(59,62,146);
-        background: linear-gradient(72deg, rgba(59,62,146,1) 35%, rgba(48,36,120,1) 53%);
+        background: linear-gradient(84deg, rgba(59,62,146,1) 35%, rgba(38,11,99,1) 56%);        
         padding-top: 30px;
         padding-bottom: 30px;
         position: relative;
-        border-top: 1px solid #3A3B8F;
         .welcome-article {
             text-align: center;
         }
@@ -1284,7 +1363,55 @@ footer {
         }
     }
 }
-@media  (max-width : 700px) {
+@media (max-width: 960px) {
+    .images {
+        img {
+            object-fit: contain !important;
+        }
+    }
+    .details {
+        align-items: center !important;
+        flex-direction: column;
+        height: 100% !important;
+        .image {
+            height: 50%;
+            width: 80% !important;
+        }
+        .description {
+            ul {
+                display: none !important;
+            }
+            width: 100% !important;
+            height: 50% !important;
+            h1 {
+                font-size: 23px !important;
+                text-align: center;
+            }
+            .comerical {
+                display: none !important;
+            }
+        }
+    }
+}
+@media  (max-width : 710px) {
+    .login-form {
+        width: 90% !important;
+        .left {
+            width: 100% !important;
+        }
+        .right {
+            display: none;
+        }
+    }
+    nav {
+        border-bottom: unset;
+    }
+    .mainNav {
+        display: none !important;
+    }
+    #burgerBar {
+        display: unset !important;
+    }
     .commerical-section {
         .left, .right {
             width: 90%;
@@ -1296,6 +1423,14 @@ footer {
                     font-size: 38px;
                 }
             }
+        }
+    }
+    footer {
+        flex-direction: column-reverse;
+        gap: 20px;
+        p {
+            font-size: 20px;
+            letter-spacing: 2px;
         }
     }
 }

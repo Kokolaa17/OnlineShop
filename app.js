@@ -13,13 +13,22 @@ let displayText = document.getElementById("displayText");
 let notLogedInMenu = document.querySelectorAll(".not-loggedin")
 let logedInMenu = document.querySelectorAll(".loged-in")
 let accountCreationForm = document.getElementById("accountCreation")
-
+let burgerBar = document.getElementById("burgerBar")
+let responsiveNav = document.getElementById("responsiveNav")
 // Basic Functions
+
+checkUserStatus();
+
+function toggleNavBar(){
+    responsiveNav.classList.toggle("display-none")
+    responsiveNav.classList.toggle("fromTop")
+}
+
 function goShopNow(){
     document.location.href = "./shop/shop.html"
 }
 
-checkUserStatus();
+
 
 
 // API Cards
@@ -78,10 +87,12 @@ function detailsPage(item){
             </div>
             <div class="description">
                 <h1>${item.title}</h1>
+                <div class="stars-price">
+                <h2>Price : ${item.price.current}$ <span>${discountPrice(item.price.current, item.price.beforeDiscount)}</span></h2>
                 <div class="details-stars">
                      ${generateStars(item.rating)}
                 </div>
-                <h2>Price : ${item.price.current}$ <span>${discountPrice(item.price.current, item.price.beforeDiscount)}</span></h2>
+                 </div>
                 <h4>${inStock(item.stock)}</h4>
                 <div class="item-description">
                     <h3>Description</h3>

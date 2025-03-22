@@ -19,10 +19,23 @@
             </div>
 
             <ul>
-                <li onclick="openCreation()">Create Account <i _ngcontent-ng-c1149255415="" class="fa-regular fa-id-card"></i></li>
-                <li>Sign in <i _ngcontent-ng-c1149255415="" class="fa-solid fa-person-walking-dashed-line-arrow-right"></i></li>
+                <li class="not-loggedin mainNav" onclick="openCreation()">Create Account <i _ngcontent-ng-c1149255415="" class="fa-regular fa-id-card"></i></li>
+                <li class="not-loggedin mainNav" onclick="openLog()">Sign in <i _ngcontent-ng-c1149255415="" class="fa-solid fa-person-walking-dashed-line-arrow-right"></i></li>
+                <li class="loged-in display-none mainNav">User</li>
+                <li class="loged-in display-none mainNav">Cart <i class="fa-solid fa-cart-shopping"></i></li>
+                <li onclick="logOutLogic()" class="loged-in display-none mainNav">Log Out <i class="fa-solid fa-right-to-bracket"></i></li>
+                <i onclick="toggleNavBar()" id="burgerBar" class="fa-solid fa-bars"></i>
             </ul>
         </nav>
+        <div class="responsive-nav display-none" id="responsiveNav">
+            <ul>
+                <li class="not-loggedin" onclick="openCreation()">Create Account <i _ngcontent-ng-c1149255415="" class="fa-regular fa-id-card"></i></li>
+                <li class="not-loggedin" onclick="openLog()">Sign in <i _ngcontent-ng-c1149255415="" class="fa-solid fa-person-walking-dashed-line-arrow-right"></i></li>
+                <li class="loged-in display-none">User</li>
+                <li class="loged-in display-none">Cart <i class="fa-solid fa-cart-shopping"></i></li>
+                <li onclick="logOutLogic()" class="loged-in display-none">Log Out <i class="fa-solid fa-right-to-bracket"></i></li>
+            </ul>
+        </div>
     </header>
     <section class="background-section">
         <div class="blur"></div>
@@ -69,11 +82,12 @@
 
         </div>
     </div>
+    
     <div class="create-account hidden">
         <div class="account-creation" id="accountForm">
             <button onclick="closeCreation()" class="closeButton">X</button>
             <h2>Create Account</h2>
-            <form onsubmit="registerAccount(event)">
+            <form id="accountCreation" onsubmit="registerAccount(event)">
                 <div class="flexi">
                     <div class="left">
                         <div class="inputs">
@@ -144,6 +158,41 @@
 
                 </ul>
             </form>
+        </div>
+    </div>
+
+    <div class="sign-in">
+        <div class="signing-in">
+
+        </div>
+    </div>
+    <div class="log-in hidden" id="LogIn">
+        <div class="login-form" id="loginForm">
+            <button onclick="closeLog()" class="closeButton">X</button>
+
+            <div class="left">
+                <h2>Sign in</h2>
+                <form onsubmit="logInLogic(event)">
+                    <div class="inputs">
+                        <input id="email2" type="email" name="email"  placeholder="+" required>
+                        <label for="email2"><i class="fa-solid fa-envelope"></i> Email</label>
+                    </div>
+
+                    <div class="inputs">
+                        <input id="password2" type="password" name="password"  placeholder="+" required>
+                        <label for="password2"><i class="fa-solid fa-lock"></i> Password</label>
+                    </div>
+
+                    <div>
+                        <button type="submit">Sign in</button>
+                        <p>Don`t have an account?<span onclick="notHaveAccount()"> Signup now</span></p>
+                    </div>
+                    <h3 id="displayText"></h3>
+                </form>
+            </div>
+            <div class="right">
+                <img src="../images/69ce878b-49ff-41ea-b3d2-7219d0c18fe7.webp" alt="Ecomerce">
+            </div>
         </div>
     </div>
     <footer>
