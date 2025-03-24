@@ -257,6 +257,94 @@ function logInLogic (e){
 function checkUserStatus() {
     let token = Cookies.get("userToken");
 
+
+    notLogedInMenu.forEach(list => {
+        if (token) {
+            list.classList.add("display-none");
+        } else {
+            list.classList.remove("display-none");
+        }
+    });
+
+    logedInMenu.forEach(list => {
+        if (token) {
+            list.classList.remove("display-none");
+        } else {
+            list.classList.add("display-none");
+        }
+    });
+}
+
+function logOutLogic() {
+    Cookies.remove("userToken");
+    checkUserStatus();
+    displayText.innerHTML = ""
+    accountCreationForm.reset()
+}
+
+// Sign in logic
+
+function openLog() {
+    logIn.classList.remove("hidden")
+    logInForm.classList.add("fromTop")
+}
+
+function closeLog(){
+    logIn.classList.add("hidden")
+    logInForm.classList.remove("fromTop")
+    displayText.innerHTML = ""
+}
+function notHaveAccount(){
+    logIn.classList.add("hidden")
+    logInForm.classList.remove("fromTop")
+
+    setTimeout(() => {
+        openCreation()
+    }, 500);
+}
+
+function logInLogic (e){
+
+    e.preventDefault()
+
+    let formData = new FormData(e.target)
+    let finalForm = Object.fromEntries(formData)
+    console.log(finalForm);
+
+    fetch("https://api.everrest.educata.dev/auth/sign_in",{
+        method: "POST",
+        headers: {
+            'accept' : '*/*',
+            'Content-Type' : 'application/json'
+        },
+        body :  JSON.stringify(finalForm)
+    })
+    .then(response => response.json())
+    .then(data => {
+        displayText.innerHTML = ""
+        if("error" in data){
+            displayText.innerHTML = `<i class="fa-solid fa-circle-exclamation fa-beat" style="color: #ff0000;"></i> ${data.error}`
+            displayText.style.color = "red"
+        }
+        else{
+            displayText.innerHTML = `You have successfully logged in <i class="fa-solid fa-check fa-beat" style="color: #04ff00;"></i>`
+            displayText.style.color = "#04ff00"
+            setTimeout(() => {
+                closeLog()
+            }, 1000);
+            Cookies.set("userToken", `${data.access_token}`)
+            checkUserStatus();
+            e.target.reset()
+        }
+    })
+}
+
+
+
+function checkUserStatus() {
+    let token = Cookies.get("userToken");
+
+
     notLogedInMenu.forEach(list => {
         if (token) {
             list.classList.add("display-none");

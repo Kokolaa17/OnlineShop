@@ -1,11 +1,5 @@
 // Get Elemets
 let bannerBackground = document.getElementById("bannerImage")
-let brands = document.getElementById("brands")
-let shopSection = document.getElementById("shopProdcuts")
-let detailsArea = document.getElementById("detailsArea")
-let details = document.querySelector(".details")
-let searchWord = document.getElementById("search")
-let categorys = document.getElementById("categorys")
 let createAccount = document.getElementById("createAccount")
 let accountArea = document.querySelector(".create-account")
 let accountForm = document.getElementById("accountForm")
@@ -19,8 +13,22 @@ let logedInMenu = document.querySelectorAll(".loged-in")
 let accountCreationForm = document.getElementById("accountCreation")
 let burgerBar = document.getElementById("burgerBar")
 let responsiveNav = document.getElementById("responsiveNav")
+let cardsArea = document.getElementById("cardsArea")
+let categorys = document.querySelector(".categorys")
+let brands = document.querySelector(".brands")
+let priceFilter = document.getElementById("priceFilter")
+let ratings = document.querySelector(".ratings")
+let filterIcon1 = document.getElementById("filterIcon1")
+let filterIcon2 = document.getElementById("filterIcon2")
+let filterIcon3 = document.getElementById("filterIcon3")
+let filterIcon4 = document.getElementById("filterIcon4")
+let brandNames = document.getElementById("brandNames")
+let searchWord = document.getElementById("search")
+
+
 
 // Basic Functions
+
 checkUserStatus();
 
 function toggleNavBar(){
@@ -28,191 +36,44 @@ function toggleNavBar(){
     responsiveNav.classList.toggle("fromTop")
 }
 
-// Banner Switching Photos
-
-let bannerImages = ["https://static.wixstatic.com/media/c837a6_9c1280daaeb0481abc58e6e236efdf59~mv2.png/v1/fill/w_1920,h_734,al_br,q_90,enc_avif,quality_auto/c837a6_9c1280daaeb0481abc58e6e236efdf59~mv2.png", "https://static.wixstatic.com/media/c837a6_f58829a26e594ca3aa72383e19cf39b9~mv2.png/v1/fill/w_1920,h_922,al_r,q_90,enc_avif,quality_auto/c837a6_f58829a26e594ca3aa72383e19cf39b9~mv2.png", "https://online-shopping-weld-nu.vercel.app/arrivals.jpg"] 
-let num = 0
-
-setInterval(() => {
-    num++
-    num > 2 ? num = 0 : false
-    bannerBackground.src= bannerImages[num]
-}, 6000);
-
-
-// Get All Logic
-function getAll(){
-    fetch("https://api.everrest.educata.dev/shop/products/all?page_index=1&page_size=38")
-    .then(response => response.json())
-    .then(items => items.products.forEach(item => shopSection.innerHTML += cardMaker(item)))
-}
-
-getAll()
-
-
-// Display Cards
-function cardMaker(item) {
-    return `<div class="card">
-                <h3>${item.price.current}$ <span>${discountPrice(item.price.current, item.price.beforeDiscount)}</span></h3>
-                <img src="${item.thumbnail}" alt="${item.title}">
-                <h2>${item.title}</h2>
-                <div class="stars">
-                    ${generateStars(item.rating)}
-                </div>
-                <div class="action-buttons">
-                    <button id="cartButton">Add To Cart <i class="fa-solid fa-cart-shopping"></i></button>
-                    <button onclick="showDetails('${item._id}')">Show details <i class="fa-solid fa-eye"></i></button>
-                </div>
-            </div>`;
-}
-
-function discountPrice(current, before) {
-    return before > current ? `${before}$` : "";
-}
-
-function generateStars(rating) {
-    let stars = "";
-    for (let i = 0; i < Math.round(rating); i++) {
-        stars += `<i class="fa-solid fa-star" style="color: #FFD43B;"></i>`;
+function showCategorysFilter(){
+    categorys.classList.toggle("display-none")
+    if(filterIcon1.innerHTML == "+"){
+        filterIcon1.innerHTML = `<i class="fa-solid fa-minus" style="color: #ffffff;"></i>`
     }
-    return stars;
-}
-
-// Display by category
-fetch("https://api.everrest.educata.dev/shop/products/brands")
-.then( response => response.json())
-.then( items => items.forEach( item => brands.innerHTML += `<li onclick="getByCategory('${item}', event)"><i class="fa-solid fa-tag"></i> ${item}</li>`))
-
-
-function getByCategory(item, e){
-    const allItems = document.querySelectorAll('li');
-    allItems.forEach(li => li.classList.remove('stayON'));
-    e.target.classList.add("stayON") 
-    shopSection.innerHTML = ""
-    fetch(`https://api.everrest.educata.dev/shop/products/brand/${item}`)
-    .then(response => response.json())
-    .then(items =>  items.products.forEach(item => shopSection.innerHTML += cardMaker(item)))
-}
-
-function categoryALL(e){
-    const allItems = document.querySelectorAll('li');
-    allItems.forEach(li => li.classList.remove('stayON'));
-    shopSection.innerHTML = ""
-    e.target.classList.add("stayON")
-    fetch("https://api.everrest.educata.dev/shop/products/all?page_index=1&page_size=38")
-    .then(response => response.json())
-    .then(items => items.products.forEach(item => shopSection.innerHTML += cardMaker(item)))
-}
-
-
-// Details logic
-
-function showDetails(id){
-    detailsArea.classList.remove("hidden")
-    fetch(`https://api.everrest.educata.dev/shop/products/id/${id}`)
-    .then((response) => response.json())
-    .then((item) => details.innerHTML = detailsPage(item))
-}
-function detailsPage(item){
-    return `<button class="closeButton" onclick="closeDetails()"><i class="fa-solid fa-xmark"></i></button>
-            <div class="image">
-                <button id="pre"><i class="fa-duotone fa-solid fa-chevron-left"></i></button>
-                <h3>${discountPrecent(item.price.discountPercentage)}</h3>
-                <img id="detailsIMG" src="${sliderForDetails(item.images)}" alt="">
-                <button id="next"><i class="fa-duotone fa-solid fa-chevron-right"></i></button>
-            </div>
-            <div class="description">
-                <h1>${item.title}</h1>
-                <div class="details-stars">
-                     ${generateStars(item.rating)}
-                </div>
-                <h2>Price : ${item.price.current}$ <span>${discountPrice(item.price.current, item.price.beforeDiscount)}</span></h2>
-                <h4>${inStock(item.stock)}</h4>
-                <div class="item-description">
-                    <h3>Description</h3>
-                    <p>${item.description}</p>
-                </div>
-                <div class="comerical">
-                    <p><i class="fa-solid fa-calendar-check"></i> ${item.warranty} years full warranty</p>
-                    <p><i class="fa-solid fa-table-cells-row-lock"></i> Secure payment</p>
-                    <p><i class="fa-solid fa-truck-fast"></i> Worldwide shipping</p>
-                </div>
-                <ul>
-                    <li>Category:</li>
-                    <li>Brand:</li>
-                    <li>Issue Date:</li>
-                </ul>
-                <div class="addToCart">
-                    <button id="cartAdder">Add to cart <i class="fa-solid fa-cart-shopping"></i></button>
-                </div>`
-}
-
-
-
-function sliderForDetails(images){
-    return images[0]
-}
-
-function inStock(stock){
-    if(stock == 0){
-        return `<span style="color: red;">Not in stock <i class="fa-solid fa-x" style="color: #ff0000;"></i></span>`
-    }
-    else {
-        return `<span style="color: green;">${stock} in stock <i class="fa-solid fa-check"></i></span>`;
-    }
-}
-function discountPrecent(precent){
-    if(precent == 0){
-        return ``
-    }
-    else {
-        return `${precent}%`
+    else{
+        filterIcon1.innerHTML = `+`
     }
 }
 
-
-
-function closeDetails(){
-    detailsArea.classList.add("hidden")
-}
-
-
-
-// Search Logic
-
-function search() {
-    shopSection.innerHTML = ""; 
-    const searchFor = searchWord.value.trim();
-
-    fetch(`https://api.everrest.educata.dev/shop/products/search?keywords=${searchFor}`)
-        .then((response) => response.json())
-        .then((data) => data.products.forEach(item => shopSection.innerHTML += cardMaker(item)))
-        .catch((error) => console.error("Error fetching data:", error));
-}
-
-searchWord.addEventListener("keyup", function(event){
-    if (event.key === "Enter") {  
-        search();  
+function showBrandsFilter(){
+    brands.classList.toggle("display-none")
+    if(filterIcon2.innerHTML == "+"){
+        filterIcon2.innerHTML = `<i class="fa-solid fa-minus" style="color: #ffffff;"></i>`
     }
-});
+    else{
+        filterIcon2.innerHTML = `+`
+    }
+}
 
-// Categorys Logic
+function showPriceFilter(){
+    priceFilter.classList.toggle("display-none")
+    if(filterIcon3.innerHTML == "+"){
+        filterIcon3.innerHTML = `<i class="fa-solid fa-minus" style="color: #ffffff;"></i>`
+    }
+    else{
+        filterIcon3.innerHTML = `+`
+    }
+}
 
-fetch("https://api.everrest.educata.dev/shop/products/categories")
-.then(response => response.json())
-.then(data => data.forEach(item => {
-   categorys.innerHTML += ` <button onclick="filterCategory(${item.id})"><img src="${item.image}" alt="${item.name}">${item.name}</button>`
-}))
-
-function filterCategory(id){
-    shopSection.innerHTML = ""
-    const allItems = document.querySelectorAll('li');
-    allItems.forEach(li => li.classList.remove('stayON'));
-   fetch(`https://api.everrest.educata.dev/shop/products/category/${id}?page_size=28`)
-   .then(response => response.json())
-   .then(data => data.products.forEach(item => {
-    shopSection.innerHTML += cardMaker(item)
-   }))
+function showRating(){
+    ratings.classList.toggle("display-none")
+    if(filterIcon4.innerHTML == "+"){
+        filterIcon4.innerHTML = `<i class="fa-solid fa-minus" style="color: #ffffff;"></i>`
+    }
+    else{
+        filterIcon4.innerHTML = `+`
+    }
 }
 
 // Sign up logic
@@ -250,10 +111,12 @@ function registerAccount(e){
        }
        else {
            errorText.innerHTML = `<p style="color: #66ff00;">Your account has been created! <i class="fa-solid fa-check fa-beat" style="color: #66ff00;"></i> </p>`
+           setTimeout(() => {
+                closeCreation()
+           }, 1000);
        }
         data.errorKeys.forEach((error) => errorDetails.innerHTML += `<li>${error}</li>`)
     })
-    
 }
 
 // Sign in logic
@@ -318,6 +181,7 @@ function logInLogic (e){
 function checkUserStatus() {
     let token = Cookies.get("userToken");
 
+
     notLogedInMenu.forEach(list => {
         if (token) {
             list.classList.add("display-none");
@@ -341,3 +205,95 @@ function logOutLogic() {
     displayText.innerHTML = ""
     accountCreationForm.reset()
 }
+// Get All Logic
+getALL()
+
+function getALL(){
+    fetch("https://api.everrest.educata.dev/shop/products/all?page_size=38")
+    .then(response => response.json())
+    .then(data => data.products.forEach(item => cardsArea.innerHTML += cardMaker(item)))
+    .catch(() => cardsArea.innerHTML = `<img class="notFound" src="../images/Errores-Web-404-403-503-502-401.-Significado-y-soluciones-1 (1).png" alt="404">`)
+}
+
+// card Maker Logic
+function cardMaker(item) {
+    return `<div class="card">
+                <h3>${item.price.current}$ <span>${discountPrice(item.price.current, item.price.beforeDiscount)}</span></h3>
+                <img src="${item.thumbnail}" alt="${item.title}">
+                <h2>${item.title}</h2>
+                <div class="stars">
+                    ${generateStars(item.rating)}
+                </div>
+                <div class="action-buttons">
+                    <button id="cartButton">Add To Cart <i class="fa-solid fa-cart-shopping"></i></button>
+                    <button onclick="showDetails('${item._id}')">Show details <i class="fa-solid fa-eye"></i></button>
+                </div>
+            </div>`;
+}
+
+function discountPrice(current, before){
+    if(before == current){
+        return ``
+    }
+    else {
+        return `${before}$`
+    }
+}
+
+
+function generateStars(rating) {
+    let stars = "";
+    for (let i = 0; i < Math.round(rating); i++) {
+        stars += `<i class="fa-solid fa-star" style="color: #FFD43B;"></i>`;
+    }
+    return stars;
+}
+
+// Category Logic
+fetch("https://api.everrest.educata.dev/shop/products/categories")
+.then(response => response.json())
+.then(data => data.forEach(item => categorys.innerHTML += `<button onclick="filterByCategory(${item.id})"><img src="${item.image}" alt="${item.name}"><span>${item.name}</span></button>`))
+
+function filterByCategory(category){
+    cardsArea.innerHTML = ""
+    fetch(`https://api.everrest.educata.dev/shop/products/category/${category}`)
+    .then(respone => respone.json())
+    .then(data => data.products.forEach(item => cardsArea.innerHTML += cardMaker(item)))
+    .catch(() => cardsArea.innerHTML = `<img class="notFound" src="../images/Errores-Web-404-403-503-502-401.-Significado-y-soluciones-1 (1).png" alt="404">`)
+}
+
+// Brands Logic 
+
+fetch("https://api.everrest.educata.dev/shop/products/brands")
+.then(respone => respone.json())
+.then(data => data.forEach(item => brandNames.innerHTML += `<li onclick="filterByBrand('${item}')"><i class="fa-solid fa-tag"></i><p>${item}</p></li>`))
+
+function filterByBrand(brand){
+    cardsArea.innerHTML = ""
+    fetch(`https://api.everrest.educata.dev/shop/products/brand/${brand}`)
+    .then(response => response.json())
+    .then(data => data.products.forEach(item => cardsArea.innerHTML += cardMaker(item)))
+}
+
+// Search Logic 
+
+// Search Logic
+
+function search() {
+    cardsArea.innerHTML = ""; 
+    const searchFor = searchWord.value.trim();
+
+    fetch(`https://api.everrest.educata.dev/shop/products/search?keywords=${searchFor}`)
+        .then((response) => response.json())
+        .then((data) => data.products.forEach(item => cardsArea.innerHTML += cardMaker(item)))
+        .catch((error) => console.error("Error fetching data:", error));
+}
+
+searchWord.addEventListener("keyup", function(event){
+    if (event.key === "Enter") {  
+        search();  
+    }
+});
+
+
+
