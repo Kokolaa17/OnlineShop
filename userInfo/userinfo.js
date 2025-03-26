@@ -1,10 +1,8 @@
-// Get Elements
-const bestSeller = document.getElementById("bestSeller");
-let createAccount = document.getElementById("createAccount");
-let accountArea = document.querySelector(".create-account");
-let accountForm = document.getElementById("accountForm");
-let errorText = document.getElementById("errorText");
-let errorDetails = document.getElementById("errorDetails");
+let createAccount = document.getElementById("createAccount")
+let accountArea = document.querySelector(".create-account")
+let accountForm = document.getElementById("accountForm")
+let errorText = document.getElementById("errorText")
+let errorDetails = document.getElementById("errorDetails")
 let logIn = document.getElementById("LogIn");
 let logInForm = document.getElementById("loginForm");
 let displayText = document.getElementById("displayText");
@@ -13,9 +11,6 @@ let logedInMenu = document.querySelectorAll(".loged-in")
 let accountCreationForm = document.getElementById("accountCreation")
 let burgerBar = document.getElementById("burgerBar")
 let responsiveNav = document.getElementById("responsiveNav")
-let logedInUserName = document.querySelectorAll(".logInUserName")
-let userInfo = document.getElementById("userPage")
-
 
 // Basic Functions
 
@@ -26,55 +21,6 @@ function toggleNavBar(){
     responsiveNav.classList.toggle("fromTop")
 }
 
-function goShopNow(){
-    document.location.href = "./shop/shop.html"
-}
-
-
-
-
-// API Cards
-fetch("https://api.everrest.educata.dev/shop/products/all?page_size=8")
-.then((response) => response.json())
-.then((items) => items.products.forEach((item) => {
-    // console.log(item);
-    bestSeller.innerHTML += cardMaker(item)
-}))
-.catch(() => bestSeller.innerHTML = `<img class="notFound" src="./images/Errores-Web-404-403-503-502-401.-Significado-y-soluciones-1 (1).png" alt="404">`)
-
-// card Maker Logic
-function cardMaker(item) {
-    return `<div class="card">
-                <h3>${item.price.current}$ <span>${discountPrice(item.price.current, item.price.beforeDiscount)}</span></h3>
-                <img src="${item.thumbnail}" alt="${item.title}">
-                <h2>${item.title}</h2>
-                <div class="stars">
-                    ${generateStars(item.rating)}
-                </div>
-                <div class="action-buttons">
-                    <button id="cartButton">Add To Cart <i class="fa-solid fa-cart-shopping"></i></button>
-                    <button onclick="showDetails('${item._id}')">Show details <i class="fa-solid fa-eye"></i></button>
-                </div>
-            </div>`;
-}
-
-function discountPrice(current, before){
-    if(before == current){
-        return ``
-    }
-    else {
-        return `${before}$`
-    }
-}
-
-
-function generateStars(rating) {
-    let stars = "";
-    for (let i = 0; i < Math.round(rating); i++) {
-        stars += `<i class="fa-solid fa-star" style="color: #FFD43B;"></i>`;
-    }
-    return stars;
-}
 // Sign up logic
 function openCreation(){
     accountArea.classList.remove("hidden")
@@ -196,6 +142,22 @@ function checkUserStatus() {
             list.classList.add("display-none");
         }
     });
+
+    if(token) {
+        fetch("https://api.everrest.educata.dev/auth", {
+            method: "GET",
+            headers: {
+              accept: "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          })
+        .then((response) => response.json())
+        .then(data => {
+            console.log(data);
+            logedInUserName.forEach(names => names.innerHTML = `${data.firstName} <img src="${data.avatar}" alt="${data.firstName} Avatar">`)
+            userInfo.innerHTML = userPage(data)
+        })
+    }
 }
 
 function logOutLogic() {
@@ -265,8 +227,8 @@ function logInLogic (e){
 
 
 function checkUserStatus() {
+    let token = Cookies.get("userToken");
 
-    let token = Cookies.get("userToken")
 
     notLogedInMenu.forEach(list => {
         if (token) {
@@ -283,20 +245,6 @@ function checkUserStatus() {
             list.classList.add("display-none");
         }
     });
-
-    if(token) {
-        fetch("https://api.everrest.educata.dev/auth", {
-            method: "GET",
-            headers: {
-              accept: "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          })
-        .then((response) => response.json())
-        .then(data => {
-            logedInUserName.forEach(names => names.innerHTML = `${data.firstName} <img src="${data.avatar}" alt="${data.firstName} Avatar">`)
-        })
-    }
 }
 
 function logOutLogic() {
@@ -304,11 +252,4 @@ function logOutLogic() {
     checkUserStatus();
     displayText.innerHTML = ""
     accountCreationForm.reset()
-}
-
-// Details Logic
-
-function showDetails(id){
-    sessionStorage.setItem("detailsProductID", id);  
-    window.location.href = "../details/details.html"; 
 }

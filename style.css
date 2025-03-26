@@ -130,12 +130,27 @@ nav {
   position: relative;
   border-bottom: 1px solid #475DE1;
 }
+nav .logInUserName {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+nav .logInUserName img {
+  height: 35px;
+  width: 33px;
+  border-radius: 20px;
+  margin-left: 10px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: bottom;
+     object-position: bottom;
+}
 nav .logo {
   display: flex;
   align-items: center;
   position: relative;
   cursor: pointer;
-  animation: fromLeft 2s;
+  animation: fromLeft 1s;
 }
 nav .logo::before {
   content: "";
@@ -185,7 +200,7 @@ nav ul {
   color: #fff;
   list-style: none;
   align-items: center;
-  animation: fromBack 2s;
+  animation: fromBack 1s;
 }
 nav ul #burgerBar {
   font-size: 25px;
@@ -264,7 +279,7 @@ nav ul li i {
   overflow: hidden;
 }
 .welcome-section .video video {
-  animation: fromRight 2s;
+  animation: fromRight 1s;
 }
 .welcome-section .welcome-left .welcome-article {
   display: flex;
@@ -272,7 +287,7 @@ nav ul li i {
   gap: 35px;
   justify-self: center;
   width: 80%;
-  animation: fromLeft 2s;
+  animation: fromLeft 1s;
 }
 .welcome-section .welcome-left .welcome-article h2 {
   font-size: 42px;
@@ -352,7 +367,7 @@ nav ul li i {
   border-top: 1px solid #475DE1;
 }
 .shoping-info .figures {
-  animation: fromBack 2s;
+  animation: fromBack 1s;
   background-color: #475DE1;
   width: 300px;
   height: 200px;
@@ -424,7 +439,7 @@ nav ul li i {
   background-color: #010101;
   display: inline-block;
   padding: 0 15px;
-  animation: floating 2s infinite, fromBack 2s;
+  animation: floating 2s infinite, fromBack 1s;
   pointer-events: none;
 }
 
@@ -451,8 +466,14 @@ nav ul li i {
   flex-direction: column;
   align-items: center;
   padding: 10px;
-  animation: fromBack 2s ease-in-out;
+  animation: fromBack 1s ease-in-out;
   box-shadow: 0px 0px 10px #302478;
+  cursor: pointer;
+}
+.best-products .card:hover {
+  transition: 0.3s;
+  transform: translateY(-10px);
+  box-shadow: 0px 5px 25px #3A3B8F;
 }
 .best-products .card img {
   width: 225px;
@@ -568,10 +589,22 @@ nav ul li i {
   justify-content: space-around;
 }
 .commerical-section .left {
-  animation: fromLeft 2s;
+  animation: fromLeft 1s;
+}
+.commerical-section .left:hover {
+  cursor: pointer;
+  transition: 0.3s;
+  scale: 1.1;
+  box-shadow: 0px 0px 30px #B11E1C;
 }
 .commerical-section .right {
-  animation: fromRight 2s;
+  animation: fromRight 1s;
+}
+.commerical-section .right:hover {
+  cursor: pointer;
+  transition: 0.3s;
+  scale: 1.1;
+  box-shadow: 0px 0px 30px #573197;
 }
 .commerical-section .left, .commerical-section .right {
   position: relative;
@@ -1067,11 +1100,11 @@ footer {
   padding: 15px 25px 15px 25px;
   position: relative;
   box-shadow: 0px 0px 15px #010101;
-  border-top: 1px solid #1d1e61;
+  border-top: 1px solid #475DE1;
   overflow: hidden;
 }
 footer p {
-  animation: fromBottom 2s;
+  animation: fromBottom 1s;
 }
 footer p a {
   font-size: 18px;
@@ -1085,7 +1118,7 @@ footer ul {
 }
 footer ul li {
   list-style-type: none;
-  animation: fromBottom 2s;
+  animation: fromBottom 1s;
 }
 footer ul li a {
   text-decoration: none;
@@ -1115,8 +1148,6 @@ footer ul li a:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
   z-index: 1;
   background-repeat: no-repeat;
   background-position: top;
@@ -1159,13 +1190,23 @@ footer ul li a:hover {
   width: 100%;
   margin-top: 20px;
   background-color: #3A3B8F;
+  font-family: "Playwrite IT Moderna", cursive;
   color: white;
   border: none;
   border-radius: 50px;
-  padding: 16px 40px;
+  padding: 12px 40px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
+}
+.background-section article button:hover {
+  transition: 0.3s;
+  background-color: #1d1e61;
+  box-shadow: 0px 0px 25px #475DE1;
+}
+.background-section article button:hover i {
+  transition: 0.3s;
+  transform: translateX(10px);
 }
 
 .products-filters {
@@ -1186,14 +1227,20 @@ footer ul li a:hover {
   height: 400px;
   background-color: #fff;
   border-radius: 12px;
+  cursor: pointer;
   border: 4px solid #3A3B8F;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 10px;
-  animation: fromBack 2s ease-in-out;
+  animation: fromBack 1s ease-in-out;
   box-shadow: 0px 0px 10px #302478;
+}
+.products-filters .cards-area .card:hover {
+  transition: 0.3s;
+  transform: translateY(-10px);
+  box-shadow: 0px 5px 25px #3A3B8F;
 }
 .products-filters .cards-area .card img {
   width: 225px;
@@ -1310,7 +1357,7 @@ footer ul li a:hover {
   top: 30px;
   height: -moz-fit-content;
   height: fit-content;
-  animation: fromLeft 2s;
+  animation: fromLeft 1s;
 }
 .products-filters aside .sort-options select {
   height: 40px;
@@ -1585,7 +1632,7 @@ footer ul li a:hover {
   border: 2px solid #3A3B8F;
   padding: 10px;
   position: relative;
-  animation: fromBack 2s;
+  animation: fromBack 1s;
 }
 .main-details .left-image .sliderButton {
   color: #fff;
@@ -1648,7 +1695,7 @@ footer ul li a:hover {
 }
 .main-details .right-article {
   width: 50%;
-  animation: fromBack 2s;
+  animation: fromBack 1s;
 }
 .main-details .right-article article {
   display: flex;
@@ -1658,7 +1705,7 @@ footer ul li a:hover {
   font-family: "Roboto", sans-serif;
 }
 .main-details .right-article article h1 {
-  color: #3A3B8F;
+  color: #475DE1;
   font-weight: bold;
   font-size: 35px;
 }
@@ -1709,14 +1756,14 @@ footer ul li a:hover {
   position: absolute;
   width: 100%;
   height: 3px;
-  background-color: #3A3B8F;
+  background-color: #475DE1;
   left: 0;
   top: 12px;
 }
 .main-details .right-article article .item-description h3 {
   font-size: 20px;
   font-weight: bold;
-  color: #3A3B8F;
+  color: #475DE1;
   position: relative;
   background-color: #010101;
   z-index: 1;
@@ -1740,7 +1787,7 @@ footer ul li a:hover {
   font-weight: normal;
   font-family: "Playwrite IT Moderna", cursive;
   justify-content: space-between;
-  color: #3A3B8F;
+  color: #475DE1;
   margin-top: 10px;
 }
 .main-details .right-article article ul {
@@ -1838,6 +1885,9 @@ footer ul li a:hover {
     padding-top: 30px;
     padding-bottom: 30px;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .welcome-section .welcome-left .welcome-article {
     text-align: center;

@@ -130,12 +130,25 @@ nav {
     z-index: 3;
     position: relative;
     border-bottom: 1px solid #475DE1;
+    .logInUserName {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img {
+            height: 35px;
+            width: 33px;
+            border-radius: 20px;
+            margin-left: 10px;
+            object-fit: cover;
+            object-position: bottom;
+        }
+    }
     .logo {
         display: flex;
         align-items: center;
         position: relative;
         cursor: pointer;
-        animation: fromLeft 2s;
+        animation: fromLeft 1s;
         &::before{
             content: "";
             position: absolute;
@@ -187,7 +200,7 @@ nav {
         color: #fff;
         list-style: none;
         align-items: center;
-        animation: fromBack 2s;
+        animation: fromBack 1s;
         #burgerBar {
             font-size: 25px;
             cursor: pointer;
@@ -268,7 +281,7 @@ nav {
     overflow: hidden;
     .video {
         video {
-            animation: fromRight 2s;
+            animation: fromRight 1s;
         }
     }
     .welcome-left {
@@ -278,7 +291,7 @@ nav {
             gap: 35px;
             justify-self: center;
             width: 80%;
-            animation: fromLeft 2s;
+            animation: fromLeft 1s;
             h2 {
                 font-size: 42px;
                 color: #FF7E3E;
@@ -362,7 +375,7 @@ nav {
     z-index: 1;
     border-top: 1px solid #475DE1;
     .figures {
-        animation: fromBack 2s;
+        animation: fromBack 1s;
         background-color: #475DE1;
         width: 300px;
         height: 200px;
@@ -438,7 +451,7 @@ nav {
         background-color: #010101;
         display: inline-block;
         padding: 0 15px;
-        animation: floating 2s infinite, fromBack 2s;
+        animation: floating 2s infinite, fromBack 1s;
         pointer-events: none;
     }
 }
@@ -465,8 +478,14 @@ nav {
         flex-direction: column;
         align-items: center;
         padding: 10px;
-        animation: fromBack 2s ease-in-out;
+        animation: fromBack 1s ease-in-out;
         box-shadow: 0px 0px 10px #302478;
+        cursor: pointer;
+        &:hover {
+            transition: 0.3s;
+            transform: translateY(-10px);
+            box-shadow: 0px 5px 25px #3A3B8F;
+        }
         img {
             width: 225px;
             height: 225px;
@@ -581,10 +600,23 @@ nav {
     align-items: center;
     justify-content: space-around;
     .left {
-        animation: fromLeft 2s;
+        animation: fromLeft 1s;
+        &:hover {
+            cursor: pointer;
+            transition: 0.3s;
+            scale: 1.1;
+            box-shadow: 0px 0px 30px #B11E1C;
+        }
+
     }
     .right {
-        animation: fromRight 2s;
+        animation: fromRight 1s;
+        &:hover {
+            cursor: pointer;
+            transition: 0.3s;
+           scale: 1.1;
+            box-shadow: 0px 0px 30px #573197;
+        }
     }
     .left, .right {
         position: relative;
@@ -650,6 +682,7 @@ nav {
     opacity: 0;
     visibility: hidden;
 }
+
 
 // Create Account
 
@@ -1067,10 +1100,10 @@ footer {
     padding: 15px 25px 15px 25px;
     position: relative;
     box-shadow: 0px 0px 15px #010101;
-    border-top: 1px solid #1d1e61;
+    border-top: 1px solid #475DE1;
     overflow: hidden;
     p {
-        animation: fromBottom 2s;
+        animation: fromBottom 1s;
         a {
             font-size: 18px;
             font-family: "Roboto", sans-serif;
@@ -1083,7 +1116,7 @@ footer {
         gap: 30px;
         li {
             list-style-type: none;
-            animation: fromBottom 2s;
+            animation: fromBottom 1s;
             a {
                 text-decoration: none;
                 font-size: 15px;
@@ -1115,7 +1148,6 @@ footer {
         left: 0;
         width: 100%;
         height: 100%;
-        object-fit: cover;
         z-index: 1;
         background-repeat: no-repeat;
         background-position: top;
@@ -1156,13 +1188,23 @@ footer {
             width: 100%;
             margin-top: 20px;
             background-color: #3A3B8F;
+            font-family: "Playwrite IT Moderna", cursive;
             color: white;
             border: none;
             border-radius: 50px;
-            padding: 16px 40px;
+            padding: 12px 40px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
+            &:hover {
+                transition: 0.3s;
+                background-color: #1d1e61;
+                box-shadow: 0px 0px 25px #475DE1;
+                i {
+                    transition: 0.3s;
+                    transform: translateX(10px);
+                }
+            }
         }
     }   
 }
@@ -1182,14 +1224,20 @@ footer {
             height: 400px;
             background-color: #fff;
             border-radius: 12px;
+            cursor: pointer;
             border: 4px solid #3A3B8F;
             position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 10px;
-            animation: fromBack 2s ease-in-out;
+            animation: fromBack 1s ease-in-out;
             box-shadow: 0px 0px 10px #302478;
+            &:hover {
+                transition: 0.3s;
+                transform: translateY(-10px);
+                box-shadow: 0px 5px 25px #3A3B8F;
+            }
             img {
                 width: 225px;
                 height: 225px;
@@ -1306,7 +1354,7 @@ footer {
         position: sticky;
         top: 30px;
         height: fit-content;
-        animation: fromLeft 2s;
+        animation: fromLeft 1s;
         .sort-options {
             select {
                 height: 40px;
@@ -1575,7 +1623,7 @@ footer {
         border: 2px solid #3A3B8F;
         padding: 10px;
         position: relative;
-        animation: fromBack 2s;
+        animation: fromBack 1s;
         .sliderButton {
             color: #fff;
             font-size: 20px;
@@ -1642,7 +1690,7 @@ footer {
     }
     .right-article {
         width: 50%;
-        animation: fromBack 2s;
+        animation: fromBack 1s;
         article {
             display: flex;
             flex-direction: column;
@@ -1650,7 +1698,7 @@ footer {
             position: relative;
             font-family: "Roboto", sans-serif;
             h1 {
-                color: #3A3B8F;
+                color: #475DE1;
                 font-weight: bold;
                 font-size: 35px;
             }
@@ -1702,14 +1750,14 @@ footer {
                     position: absolute;
                     width: 100%;
                     height: 3px;
-                    background-color: #3A3B8F;
+                    background-color: #475DE1;
                     left: 0;
                     top: 12px;
                 }
                 h3 {
                     font-size: 20px;
                     font-weight: bold;
-                    color: #3A3B8F;
+                    color: #475DE1;
                     position: relative;
                     background-color: #010101;
                     z-index: 1;
@@ -1734,7 +1782,7 @@ footer {
                 font-weight: normal;
                 font-family: "Playwrite IT Moderna", cursive;
                 justify-content: space-between;
-                color: #3A3B8F;
+                color: #475DE1;
                 margin-top: 10px;
             }
             ul {
@@ -1837,6 +1885,9 @@ footer {
         padding-top: 30px;
         padding-bottom: 30px;
         position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         .welcome-article {
             text-align: center;
         }
