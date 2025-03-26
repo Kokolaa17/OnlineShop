@@ -1310,6 +1310,7 @@ footer ul li a:hover {
   top: 30px;
   height: -moz-fit-content;
   height: fit-content;
+  animation: fromLeft 2s;
 }
 .products-filters aside .sort-options select {
   height: 40px;
@@ -1585,6 +1586,49 @@ footer ul li a:hover {
   position: relative;
   animation: fromBack 2s;
 }
+.main-details .left-image .sliderButton {
+  color: #fff;
+  font-size: 20px;
+  padding: 15px;
+  border-radius: 50%;
+  position: absolute;
+  top: 43%;
+  z-index: 2;
+  outline: none;
+  border: none;
+  background-color: rgba(1, 1, 1, 0.2862745098);
+  cursor: pointer;
+}
+.main-details .left-image .sliderButton i {
+  font-size: 25px;
+}
+.main-details .left-image .sliderButton:hover {
+  transition: 0.3s;
+  background-color: rgba(1, 1, 1, 0.6235294118);
+}
+.main-details .left-image .sliderButton:hover i {
+  text-shadow: 0px 0px 15px #fff;
+}
+.main-details .left-image #pre {
+  left: 15px;
+}
+.main-details .left-image #pre:active {
+  transform: translateX(-6px);
+}
+.main-details .left-image #pre:hover i {
+  transition: 0.3s;
+  transform: translateX(-3px);
+}
+.main-details .left-image #next {
+  right: 15px;
+}
+.main-details .left-image #next:active {
+  transform: translateX(6px);
+}
+.main-details .left-image #next:hover i {
+  transition: 0.3s;
+  transform: translateX(3px);
+}
 .main-details .left-image h5 {
   position: absolute;
   right: 0px;
@@ -1634,6 +1678,20 @@ footer ul li a:hover {
   gap: 5px;
   font-size: 25px;
   margin-top: 10px;
+  align-items: center;
+  cursor: pointer;
+}
+.main-details .right-article article .details-stars:hover span {
+  transition: 0.3s;
+  transform: translateX(0px);
+  opacity: 1;
+}
+.main-details .right-article article .details-stars span {
+  pointer-events: none;
+  color: #fff;
+  font-size: 20px;
+  transform: translateX(-60px);
+  opacity: 0;
 }
 .main-details .right-article article h3 {
   font-size: 18px;

@@ -13,7 +13,12 @@ let burgerBar = document.getElementById("burgerBar")
 let responsiveNav = document.getElementById("responsiveNav")
 let detailsArea = document.getElementById("detailsArea")
 
+
+
+
+
 // Basic Functions
+
 
 checkUserStatus();
 
@@ -249,10 +254,13 @@ fetch(`https://api.everrest.educata.dev/shop/products/id/${id}`)
     .catch(() => details.innerHTML = `<img class="notFound" src="./images/Errores-Web-404-403-503-502-401.-Significado-y-soluciones-1 (1).png" alt="404">`)
 
 
+    
 function detailsPage(item){
     return `<div class="left-image">
+            <button class="sliderButton" id="pre" onclick="sliderPreImage(${item.images})"><i class="fa-solid fa-arrow-left"></i></button>
             <h5>${item.price.discountPercentage == 0 ? "" : `${item.price.discountPercentage}%`} </h5>
-            <img src="${item.images[0]}" alt="${item.title}">
+            <img id="sliderMainImage" src="${item.images[0]}" alt="${item.title}">
+            <button class="sliderButton" id="next" onclick="sliderNextImage(${item.images})"><i class="fa-solid fa-arrow-right"></i></button>
         </div>
         <div class="right-article">
             <article>
@@ -260,6 +268,7 @@ function detailsPage(item){
                 <h2>Price : ${item.price.current}$<span>${item.price.current == item.price.beforeDiscount ? "" : `${item.price.beforeDiscount}$`}</span></h2>
                 <div class="details-stars">
                     ${generateStars(item.rating)}
+                    <span>${item.rating}</span>
                 </div>
                 <h3>${item.stock == 0 ? `<span style="color: red;"><i class="fa-solid fa-x" style="color: #ff0000;"></i> Not in stock</span>` : `<span style="color: green;">${item.stock} in stock <i class="fa-solid fa-check"></i></span>`}</h3>
                 <div class="item-description">
@@ -290,3 +299,5 @@ function generateStars(rating) {
     }
     return stars;
 }
+
+// Slider Logic
