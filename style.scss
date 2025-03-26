@@ -1566,8 +1566,9 @@ footer {
     background-color: #010101;
     min-height: 79vh;
     align-items: center;
+    justify-content: center;
     .left-image {
-        width: 50%;
+        width: 40%;
         height: 500px;
         object-fit: contain;
         border-radius: 8px;

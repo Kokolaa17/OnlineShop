@@ -1574,9 +1574,10 @@ footer ul li a:hover {
   background-color: #010101;
   min-height: 79vh;
   align-items: center;
+  justify-content: center;
 }
 .main-details .left-image {
-  width: 50%;
+  width: 40%;
   height: 500px;
   -o-object-fit: contain;
      object-fit: contain;
