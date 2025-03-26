@@ -37,92 +37,16 @@
             </ul>
         </div>
     </header>
-    <section class="background-section">
-        <div class="blur"></div>
-        <div class="banner-content">
-           <article>
-                <h3>Best Prices</h3>
-                <h2>Incredible Prices on All Your Favorite Items</h2>
-                <p>Get more for less on selected brands</p>
-                <a href="#productsSection"><button>Shop Now</button></a>
-            </article>
-            <img id="bannerImage" src="https://static.wixstatic.com/media/c837a6_9c1280daaeb0481abc58e6e236efdf59~mv2.png/v1/fill/w_1920,h_734,al_br,q_90,enc_avif,quality_auto/c837a6_9c1280daaeb0481abc58e6e236efdf59~mv2.png" alt="baner-background">
-        </div>
-    </section>
-    <div class="best-sellers" id="productsSection"> 
-        <h3>Products</h3>
-    </div>
-   <section class="products-filters">
-        <aside>
-            <h3>Filter By</h3>
-            <h4 onclick="getALL()">Get All: <span>+</span></h4>
+    <main class="main-details" id="detailsArea">
+        
+    </main>
 
-            <h4 onclick="showCategorysFilter()" id="category">Category: <span id="filterIcon1">+</span></h4>
-            <div class="categorys display-none">
-               
-            </div>
-            <h4 onclick="showBrandsFilter()" id="category">Brand: <span id="filterIcon2">+</span></h4>
-            <div class="brands display-none">
-               <ul id="brandNames">
-                    
-               </ul>
-            </div>
-            <h4 onclick="showPriceFilter()" id="category">Price: <span id="filterIcon3">+</span></h4>
-            <div class="display-none" id="priceFilter">
-                <div class="price-filter">
-                    <div class="price-inputs">
-                        <div class="min-price">
-                            <input placeholder="Min 50$" id="minRange" type="number" value="50">
-                            <label for="minRange">Min <i class="fa-solid fa-dollar-sign fa-beat"></i></label>
-                        </div>
-                        <div class="max-price">
-                            <input placeholder="Max 8000$" id="maxRange" type="number" value="8000">
-                            <label for="maxRange">Max <i class="fa-solid fa-dollar-sign fa-beat"></i></label>
-                        </div>
-                    </div>
-                    <button onclick="filterByPrice()">Apply Filter</button>
-                    <p id="priceErrorText"></p>
-                </div>
-            </div>
-            <h4 onclick="showRating()" id="category">Rating: <span id="filterIcon4">+</span></h4>
-            <div class="ratings display-none">
-              <div class="star">
-                <p onclick="ratingFilterFive()"><i class="fa-solid fa-star" style="color: #FFD43B;"></i> 5 Only</p>
-              </div>
-              <div class="star">
-                <p onclick="ratingFilterFour()"><i class="fa-solid fa-star" style="color: #FFD43B;"></i> 4 And up</p>
-              </div>
-              <div class="star">
-                <p onclick="ratingFilterThree()"><i class="fa-solid fa-star" style="color: #FFD43B;"></i> 3 And up</p>
-              </div>
-              <div class="star">
-                <p onclick="ratingFilterTwo()"><i class="fa-solid fa-star" style="color: #FFD43B;"></i> 2 And up</p>
-              </div>
-              <div class="star">
-                <p onclick="ratingFilterOne()"><i class="fa-solid fa-star" style="color: #FFD43B;"></i> 1 And up</p>
-              </div>
-            </div>
-            <h4 onclick="showSort()">Sort By: <span id="filterIcon5">+</span></h4>
-            <div class="sort-options display-none" id="sortOptions">
-                <select onchange="sortBy()" name="SortBy" id="SortBy">
-                    <option value="rating">Rating</option>
-                    <option value="price">Price</option>
-                    <option value="issue_date">Issue Date</option>
-                    <option value="title">Title</option>
-                </select>
-            </div>
-            <div class="search-container">
-                <input id="search" type="text" placeholder="Search...">
-                <button><i class="fa-solid fa-magnifying-glass"></i></button>
-            </div>
-        </aside>
-        <main class="cards-area" id="cardsArea">
-            
-        </main>
-   </section>
-    <!-- invisible divs -->
+
+
+
+     <!-- invisible divs -->
     
-    <div class="create-account hidden">
+     <div class="create-account hidden">
         <div class="account-creation" id="accountForm">
             <button onclick="closeCreation()" class="closeButton">X</button>
             <h2>Create Account</h2>
@@ -242,7 +166,8 @@
             <li><a href="#productsSection">Shop now</a></li>
         </ul>
     </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
-    <script src="./shop.js"></script>
+    <script src="./details.js"></script>
 </body>
 </html>

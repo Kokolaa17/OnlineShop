@@ -1,5 +1,3 @@
-// Get Elements
-const bestSeller = document.getElementById("bestSeller");
 let createAccount = document.getElementById("createAccount");
 let accountArea = document.querySelector(".create-account");
 let accountForm = document.getElementById("accountForm");
@@ -13,6 +11,7 @@ let logedInMenu = document.querySelectorAll(".loged-in")
 let accountCreationForm = document.getElementById("accountCreation")
 let burgerBar = document.getElementById("burgerBar")
 let responsiveNav = document.getElementById("responsiveNav")
+let detailsArea = document.getElementById("detailsArea")
 
 // Basic Functions
 
@@ -23,55 +22,6 @@ function toggleNavBar(){
     responsiveNav.classList.toggle("fromTop")
 }
 
-function goShopNow(){
-    document.location.href = "./shop/shop.html"
-}
-
-
-
-
-// API Cards
-fetch("https://api.everrest.educata.dev/shop/products/all?page_size=8")
-.then((response) => response.json())
-.then((items) => items.products.forEach((item) => {
-    // console.log(item);
-    bestSeller.innerHTML += cardMaker(item)
-}))
-.catch(() => bestSeller.innerHTML = `<img class="notFound" src="./images/Errores-Web-404-403-503-502-401.-Significado-y-soluciones-1 (1).png" alt="404">`)
-
-// card Maker Logic
-function cardMaker(item) {
-    return `<div class="card">
-                <h3>${item.price.current}$ <span>${discountPrice(item.price.current, item.price.beforeDiscount)}</span></h3>
-                <img src="${item.thumbnail}" alt="${item.title}">
-                <h2>${item.title}</h2>
-                <div class="stars">
-                    ${generateStars(item.rating)}
-                </div>
-                <div class="action-buttons">
-                    <button id="cartButton">Add To Cart <i class="fa-solid fa-cart-shopping"></i></button>
-                    <button onclick="showDetails('${item._id}')">Show details <i class="fa-solid fa-eye"></i></button>
-                </div>
-            </div>`;
-}
-
-function discountPrice(current, before){
-    if(before == current){
-        return ``
-    }
-    else {
-        return `${before}$`
-    }
-}
-
-
-function generateStars(rating) {
-    let stars = "";
-    for (let i = 0; i < Math.round(rating); i++) {
-        stars += `<i class="fa-solid fa-star" style="color: #FFD43B;"></i>`;
-    }
-    return stars;
-}
 // Sign up logic
 function openCreation(){
     accountArea.classList.remove("hidden")
@@ -289,9 +239,54 @@ function logOutLogic() {
     accountCreationForm.reset()
 }
 
-// Details Logic
+// Details show logic
 
-function showDetails(id){
-    sessionStorage.setItem("detailsProductID", id);  
-    window.location.href = "../details/details.html"; 
+let id = sessionStorage.getItem("detailsProductID")
+
+fetch(`https://api.everrest.educata.dev/shop/products/id/${id}`)
+    .then((response) => response.json())
+    .then((item) => detailsArea.innerHTML = detailsPage(item))
+    .catch(() => details.innerHTML = `<img class="notFound" src="./images/Errores-Web-404-403-503-502-401.-Significado-y-soluciones-1 (1).png" alt="404">`)
+
+
+function detailsPage(item){
+    return `<div class="left-image">
+            <h5>${item.price.discountPercentage == 0 ? "" : `${item.price.discountPercentage}%`} </h5>
+            <img src="${item.images[0]}" alt="${item.title}">
+        </div>
+        <div class="right-article">
+            <article>
+                <h1>${item.title}</h1>
+                <h2>Price : ${item.price.current}$<span>${item.price.current == item.price.beforeDiscount ? "" : `${item.price.beforeDiscount}$`}</span></h2>
+                <div class="details-stars">
+                    ${generateStars(item.rating)}
+                </div>
+                <h3>${item.stock == 0 ? `<span style="color: red;"><i class="fa-solid fa-x" style="color: #ff0000;"></i> Not in stock</span>` : `<span style="color: green;">${item.stock} in stock <i class="fa-solid fa-check"></i></span>`}</h3>
+                <div class="item-description">
+                    <h3>Description</h3>
+                    <p>${item.description}</p>
+                </div>
+                <div class="comerical">
+                    <p><i class="fa-solid fa-calendar-check"></i> ${item.warranty} Year full warranty</p>
+                    <p><i class="fa-solid fa-table-cells-row-lock"></i> Secure payment</p>
+                    <p><i class="fa-solid fa-truck-fast"></i> Worldwide shipping</p>
+                </div>
+                <ul>
+                    <li>Category: phones</li>
+                    <li>Brand: apple</li>
+                    <li>Issue Date: 2020-04-12T00:00:00.000Z</li>
+                </ul>
+                <div class="addToCart">
+                    <button id="cartAdder">Add to cart <i class="fa-solid fa-cart-shopping"></i></button>
+                </div>
+            </article>
+        </div>`
+}
+
+function generateStars(rating) {
+    let stars = "";
+    for (let i = 0; i < Math.round(rating); i++) {
+        stars += `<i class="fa-solid fa-star" style="color: #FFD43B;"></i>`;
+    }
+    return stars;
 }

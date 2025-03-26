@@ -1,5 +1,4 @@
 // Get Elemets
-let bannerBackground = document.getElementById("bannerImage")
 let createAccount = document.getElementById("createAccount")
 let accountArea = document.querySelector(".create-account")
 let accountForm = document.getElementById("accountForm")
@@ -18,12 +17,22 @@ let categorys = document.querySelector(".categorys")
 let brands = document.querySelector(".brands")
 let priceFilter = document.getElementById("priceFilter")
 let ratings = document.querySelector(".ratings")
+let sortOptions = document.getElementById("sortOptions")
 let filterIcon1 = document.getElementById("filterIcon1")
 let filterIcon2 = document.getElementById("filterIcon2")
 let filterIcon3 = document.getElementById("filterIcon3")
 let filterIcon4 = document.getElementById("filterIcon4")
+let filterIcon5 = document.getElementById("filterIcon5")
 let brandNames = document.getElementById("brandNames")
 let searchWord = document.getElementById("search")
+let minPrice = document.getElementById("minRange")
+let maxPrice = document.getElementById("maxRange")
+let priceErrorText = document.getElementById("priceErrorText")
+let starsFilter = document.querySelectorAll(".stars-filter")
+let sort = document.getElementById("SortBy")
+
+
+
 
 
 
@@ -73,6 +82,16 @@ function showRating(){
     }
     else{
         filterIcon4.innerHTML = `+`
+    }
+}
+
+function showSort(){
+    sortOptions.classList.toggle("display-none")
+    if(filterIcon5.innerHTML == "+"){
+        filterIcon5.innerHTML = `<i class="fa-solid fa-minus" style="color: #ffffff;"></i>`
+    }
+    else{
+        filterIcon5.innerHTML = `+`
     }
 }
 
@@ -265,7 +284,7 @@ function filterByCategory(category){
 // Brands Logic 
 
 fetch("https://api.everrest.educata.dev/shop/products/brands")
-.then(respone => respone.json())
+.then(response => response.json())
 .then(data => data.forEach(item => brandNames.innerHTML += `<li onclick="filterByBrand('${item}')"><i class="fa-solid fa-tag"></i><p>${item}</p></li>`))
 
 function filterByBrand(brand){
@@ -295,5 +314,95 @@ searchWord.addEventListener("keyup", function(event){
     }
 });
 
+// Price Filter Logic 
 
+function filterByPrice() {
+    let min = Number(minPrice.value)
+    let max = Number(maxPrice.value) 
 
+    if (min > max) {
+        priceErrorText.innerHTML = `Min price should be less than max <i class="fa-solid fa-circle-exclamation fa-beat" style="color: #ff0000;"></i>`;
+        return; 
+    }
+    else if(min == 0) {
+        priceErrorText.innerHTML = `Min price should be atleast 1 <i class="fa-solid fa-circle-exclamation fa-beat" style="color: #ff0000;"></i>`;
+    }
+     else {
+        priceErrorText.innerHTML = ""; 
+    }
+
+    fetch(`https://api.everrest.educata.dev/shop/products/search?page_size=38&price_min=${min}&price_max=${max}`)
+    .then(response => response.json())
+    .then(data => {
+        cardsArea.innerHTML = ""; 
+
+        if (data.products.length === 0) {
+            cardsArea.innerHTML = `<img src="../images/product-not-found.png" alt="product-not-found">`;
+            return; 
+        }
+
+        data.products.forEach(item => {
+            cardsArea.innerHTML += cardMaker(item);
+        });
+    })
+}
+
+// Rating filter logic
+
+function ratingFilterFive() {
+    cardsArea.innerHTML = ""
+    fetch("https://api.everrest.educata.dev/shop/products/search?page_size=38&rating=4.5")
+    .then(response => response.json())
+    .then(data => data.products.forEach(item => cardsArea.innerHTML += cardMaker(item)))
+}
+
+function ratingFilterFour() {
+    cardsArea.innerHTML = ""
+    fetch("https://api.everrest.educata.dev/shop/products/search?page_size=38&rating=3.5")
+    .then(response => response.json())
+    .then(data => data.products.forEach(item => cardsArea.innerHTML += cardMaker(item)))
+}
+
+function ratingFilterThree() {
+    fetch("https://api.everrest.educata.dev/shop/products/search?page_size=38&rating=2.6")
+    .then(response => response.json())
+    .then(data => data.products.forEach(item => cardsArea.innerHTML += cardMaker(item)))
+}
+
+function ratingFilterTwo() {
+    fetch("https://api.everrest.educata.dev/shop/products/search?page_size=38&rating=1.6")
+    .then(response => response.json())
+    .then(data => data.products.forEach(item => cardsArea.innerHTML += cardMaker(item)))
+}
+
+function ratingFilterOne() {
+    fetch("https://api.everrest.educata.dev/shop/products/search?page_size=38&rating=1")
+    .then(response => response.json())
+    .then(data => data.products.forEach(item => cardsArea.innerHTML += cardMaker(item)))
+}
+
+// Sort by logic 
+
+function sortBy() {
+    const sortValue = document.getElementById('SortBy').value;
+
+    cardsArea.innerHTML = "";
+
+    fetch(`https://api.everrest.educata.dev/shop/products/search?page_size=38&sort_by=${sortValue}`)
+        .then(response => response.json()) 
+        .then(data => {
+            data.products.forEach(item => {
+                cardsArea.innerHTML += cardMaker(item);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error); 
+        });
+}
+
+// Show Details logic
+
+function showDetails(id){
+    sessionStorage.setItem("detailsProductID", id);  
+    window.location.href = "../details/details.html"; 
+}
