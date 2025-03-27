@@ -407,4 +407,18 @@ function decreaseProductQuantity(productID){
     })
 }
 
+// CheckOut logic
+
+function checkOut(){
+    fetch("https://api.everrest.educata.dev/shop/cart/checkout",{
+        method: "POST",
+        headers: {
+            accept: "*/*",
+            Authorization: `Bearer ${Cookies.get("userToken")}`
+        }       
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+}
+
 

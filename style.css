@@ -1900,6 +1900,7 @@ footer ul li a:hover {
   background-color: #3A3B8F;
   padding: 10px;
   border-top-left-radius: 20px;
+  z-index: 2;
 }
 .cart .product {
   display: flex;
@@ -2001,6 +2002,23 @@ footer ul li a:hover {
     border-radius: 12px;
   }
 }
+.cart-actions {
+  background-color: #010101;
+  color: #fff;
+  position: relative;
+}
+.cart-actions h3 {
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  font-size: 20px;
+  color: #fff;
+  background-color: green;
+  padding: 10px;
+  border-top-right-radius: 20px;
+  cursor: pointer;
+}
+
 @media (max-width: 1080px) {
   .login-form {
     width: 88% !important;

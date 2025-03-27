@@ -1896,6 +1896,7 @@ footer {
         background-color: #3A3B8F;
         padding: 10px;
         border-top-left-radius: 20px;
+        z-index: 2;
     }
     .product {
         display: flex;
@@ -1998,6 +1999,22 @@ footer {
                 border-radius: 12px;
             }
         }
+    }
+}
+.cart-actions {
+    background-color: #010101;
+    color: #fff;
+    position: relative;
+    h3 {
+        position: absolute;
+        bottom: 0px;
+        left: 0; 
+        font-size: 20px;
+        color: #fff;
+        background-color: green;
+        padding: 10px;
+        border-top-right-radius: 20px;
+        cursor: pointer;
     }
 }
 
