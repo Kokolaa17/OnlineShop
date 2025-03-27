@@ -1903,6 +1903,68 @@ footer {
         padding-inline: 20px;
         border: 1px solid #475DE1;
         color: #fff;
+        .title-rating-price {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-align: center;
+            width: 250px;
+            h1 {
+                font-size: 25px;
+                color: #475DE1;
+            }
+            h3 {
+                font-size: 20px;
+                display: flex;
+                gap: 5px;
+                justify-content: center;
+            }
+            h4 {
+                font-size: 20px;
+            }
+        }
+        h2 {
+            color: #475DE1;
+            font-size: 22px;
+            span {
+                color: #fff;
+            }
+        }
+        h5 {
+            font-size: 22px;
+            color: #475DE1;
+            span {
+                color: #fff;
+            }
+        }
+        .quantity {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            justify-content: center;
+            button {
+                outline: none;
+                border: none;
+                color: #fff;
+                border-radius: 50%;
+                background-color: #475DE1;
+                padding: 10px 15px;
+                cursor: pointer;
+            }
+            span {
+                font-size: 22px;
+            }
+        }
+        .deleteButton {
+            background-color: red;
+            outline: none;
+            border: none;
+            color: #fff;
+            font-size: 25px;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
         .product-image {
             img {
                 width: 250px;

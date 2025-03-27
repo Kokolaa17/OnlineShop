@@ -12,7 +12,7 @@ let accountCreationForm = document.getElementById("accountCreation")
 let burgerBar = document.getElementById("burgerBar")
 let responsiveNav = document.getElementById("responsiveNav")
 let logedInUserName = document.querySelectorAll(".logInUserName")
-let totalPrice = document.getElementById("TotalPrice")
+let totalPrice = document.getElementById("totalPrice")
 let cartPlace = document.getElementById("cartPlace")
 
 // Basic Functions
@@ -286,7 +286,7 @@ fetch("https://api.everrest.educata.dev/shop/cart",{
 })
 .then(response => response.json())
 .then(data => {
-    console.log(data)
+    console.log(data.total.price.current)
     totalPrice.innerHTML = `${data.total.price.current}$`
     data.products.forEach(item => displayProducts(item.productId))
 })
@@ -302,17 +302,19 @@ function productCardMaker(data){
             <div class="product-image">
                 <img src="${data.thumbnail}" alt="${data.title}-image">
             </div>
-            <h1>${data.title}</h1>
-            <h2>${data.stock}</h2>
-            <h3>${generateStars(data.rating)}</h3>
-            <h4>${data.price.current}$</h4>
-            <h5>Reviews : ${data.ratings.length}</h5>
-            <div class="quantity">
-                <button>Up</button>
-                <span>Raodenoba</span>
-                <button>Down</button>
+            <div class="title-rating-price">
+                <h1>${data.title}</h1>
+                <h3>${generateStars(data.rating)}</h3>
+                <h4><i class="fa-solid fa-money-bill-wave" style="color: #85BB65;"></i>${data.price.current}$</h4>
             </div>
-            <button class="deleteButton"></button>
+            <h2>In stock: <span>${data.stock}</span></h2>
+            <h5>Reviews : <span>${data.ratings.length}</span></h5>
+            <div class="quantity">
+                <button><i class="fa-solid fa-minus"></i></button>
+                <span>1</span>
+                <button><i class="fa-solid fa-plus"></i></button>
+            </div>
+            <button class="deleteButton" onclick="deletItemFromCart('${data._id}')"><i class="fa-solid fa-trash"></i></button>
         </div>`
 }
 
@@ -322,4 +324,22 @@ function generateStars(rating) {
         stars += `<i class="fa-solid fa-star" style="color: #FFD43B;"></i>`;
     }
     return stars;
+}
+
+function deletItemFromCart(productID){
+    fetch("https://api.everrest.educata.dev/shop/cart/product",{
+        method: "DELETE",
+        headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${Cookies.get("userToken")}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: `${productID}`})
+    })
+    .then(response => response.json())
+    .then(data => {
+        cartPlace.innerHTML = `<p>Total price: <span id="totalPrice">${data.total.price.current}$</span></p>`
+        data.products.forEach(item => displayProducts(item.productId))
+        console.log(data); 
+    })
 }

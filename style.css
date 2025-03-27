@@ -1908,6 +1908,68 @@ footer ul li a:hover {
   border: 1px solid #475DE1;
   color: #fff;
 }
+.cart .product .title-rating-price {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: center;
+  width: 250px;
+}
+.cart .product .title-rating-price h1 {
+  font-size: 25px;
+  color: #475DE1;
+}
+.cart .product .title-rating-price h3 {
+  font-size: 20px;
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+.cart .product .title-rating-price h4 {
+  font-size: 20px;
+}
+.cart .product h2 {
+  color: #475DE1;
+  font-size: 22px;
+}
+.cart .product h2 span {
+  color: #fff;
+}
+.cart .product h5 {
+  font-size: 22px;
+  color: #475DE1;
+}
+.cart .product h5 span {
+  color: #fff;
+}
+.cart .product .quantity {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}
+.cart .product .quantity button {
+  outline: none;
+  border: none;
+  color: #fff;
+  border-radius: 50%;
+  background-color: #475DE1;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+.cart .product .quantity span {
+  font-size: 22px;
+}
+.cart .product .deleteButton {
+  background-color: red;
+  outline: none;
+  border: none;
+  color: #fff;
+  font-size: 25px;
+  padding: 10px 15px;
+  border-radius: 50%;
+  cursor: pointer;
+}
 .cart .product .product-image img {
   width: 250px;
   height: 150px;
