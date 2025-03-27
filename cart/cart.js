@@ -15,6 +15,8 @@ let logedInUserName = document.querySelectorAll(".logInUserName")
 let totalPrice = document.getElementById("totalPrice")
 let cartPlace = document.getElementById("cartPlace")
 
+
+
 // Basic Functions
 
 checkUserStatus();
@@ -286,18 +288,17 @@ fetch("https://api.everrest.educata.dev/shop/cart",{
 })
 .then(response => response.json())
 .then(data => {
-    console.log(data.total.price.current)
     totalPrice.innerHTML = `${data.total.price.current}$`
-    data.products.forEach(item => displayProducts(item.productId))
+    data.products.forEach(item => displayProducts(item.productId, item.quantity))
 })
 
-function displayProducts(id){
+function displayProducts(id, quantity){
     fetch(`https://api.everrest.educata.dev/shop/products/id/${id}`)
     .then(response => response.json())
-    .then(data => cartPlace.innerHTML += productCardMaker(data))
+    .then(data => cartPlace.innerHTML += productCardMaker(data, quantity))
 }
 
-function productCardMaker(data){
+function productCardMaker(data, quantity){
     return `<div class="product">
             <div class="product-image">
                 <img src="${data.thumbnail}" alt="${data.title}-image">
@@ -310,9 +311,9 @@ function productCardMaker(data){
             <h2>In stock: <span>${data.stock}</span></h2>
             <h5>Reviews : <span>${data.ratings.length}</span></h5>
             <div class="quantity">
-                <button><i class="fa-solid fa-minus"></i></button>
-                <span>1</span>
-                <button><i class="fa-solid fa-plus"></i></button>
+                <button onclick="decreaseProductQuantity('${data._id}')"><i class="fa-solid fa-minus"></i></button>
+                <span id="${data._id}">${quantity}</span>
+                <button onclick="increaseProductQuantity('${data._id}')"><i class="fa-solid fa-plus"></i></button>
             </div>
             <button class="deleteButton" onclick="deletItemFromCart('${data._id}')"><i class="fa-solid fa-trash"></i></button>
         </div>`
@@ -339,7 +340,71 @@ function deletItemFromCart(productID){
     .then(response => response.json())
     .then(data => {
         cartPlace.innerHTML = `<p>Total price: <span id="totalPrice">${data.total.price.current}$</span></p>`
-        data.products.forEach(item => displayProducts(item.productId))
-        console.log(data); 
+        data.products.forEach(item => displayProducts(item.productId, item.quantity))
     })
 }
+
+// Quantity logic
+
+function increaseProductQuantity(productID) {
+    let productQuantity = document.getElementById(`${productID}`);  
+    let itemQuantity = parseInt(productQuantity.innerHTML);
+    itemQuantity++;  
+
+    productQuantity.innerHTML = itemQuantity;  
+
+    fetch("https://api.everrest.educata.dev/shop/cart/product", {
+        method: "PATCH",
+        headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${Cookies.get("userToken")}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            id: productID,
+            quantity: itemQuantity 
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        cartPlace.innerHTML = `<p>Total price: <span id="totalPrice">${data.total.price.current}$</span></p>`
+        data.products.forEach(item => displayProducts(item.productId, item.quantity))
+    })
+}
+
+
+function decreaseProductQuantity(productID){
+    let productQuantity = document.getElementById(`${productID}`)
+
+    let itemQuantity = parseInt(productQuantity.innerHTML);
+    
+    if(itemQuantity == "1"){
+        itemQuantity = 1
+    }
+    else {
+        itemQuantity--
+    }
+
+    productQuantity.innerHTML = itemQuantity
+    
+
+    fetch("https://api.everrest.educata.dev/shop/cart/product",{
+        method: "PATCH",
+        headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${Cookies.get("userToken")}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({  
+            id: productID,  
+            quantity: itemQuantity  
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        cartPlace.innerHTML = `<p>Total price: <span id="totalPrice">${data.total.price.current}$</span></p>`
+        data.products.forEach(item => displayProducts(item.productId, item.quantity))
+    })
+}
+
+
