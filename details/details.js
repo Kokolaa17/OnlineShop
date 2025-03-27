@@ -12,6 +12,7 @@ let accountCreationForm = document.getElementById("accountCreation")
 let burgerBar = document.getElementById("burgerBar")
 let responsiveNav = document.getElementById("responsiveNav")
 let detailsArea = document.getElementById("detailsArea")
+let logedInUserName = document.querySelectorAll(".logInUserName")
 
 
 
@@ -21,6 +22,10 @@ let detailsArea = document.getElementById("detailsArea")
 
 
 checkUserStatus();
+
+function userPage(){
+    window.location.href = "../userInfo/userInfo.html"
+ }
 
 function toggleNavBar(){
     responsiveNav.classList.toggle("display-none")
@@ -148,6 +153,21 @@ function checkUserStatus() {
             list.classList.add("display-none");
         }
     });
+
+    if(token){
+        fetch("https://api.everrest.educata.dev/auth", {
+            method: "GET",
+            headers: {
+              accept: "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          })
+        .then((response) => response.json())
+        .then(data => {
+            console.log(data);
+            logedInUserName.forEach(names => names.innerHTML = `${data.firstName} <img src="${data.avatar}" alt="${data.firstName} Avatar">`)
+        })
+    }
 }
 
 function logOutLogic() {
@@ -234,7 +254,25 @@ function checkUserStatus() {
         } else {
             list.classList.add("display-none");
         }
-    });
+        }
+    );
+
+    if(token){
+        fetch("https://api.everrest.educata.dev/auth", {
+            method: "GET",
+            headers: {
+              accept: "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          })
+        .then((response) => response.json())
+        .then(data => {
+            console.log(data);
+            logedInUserName.forEach(names => names.innerHTML = `${data.firstName} <img src="${data.avatar}" alt="${data.firstName} Avatar">`)
+        })
+    }
+
+    
 }
 
 function logOutLogic() {

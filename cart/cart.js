@@ -12,14 +12,15 @@ let accountCreationForm = document.getElementById("accountCreation")
 let burgerBar = document.getElementById("burgerBar")
 let responsiveNav = document.getElementById("responsiveNav")
 let logedInUserName = document.querySelectorAll(".logInUserName")
-let userInfo = document.getElementById("userInfo")
+let totalPrice = document.getElementById("TotalPrice")
+let cartPlace = document.getElementById("cartPlace")
 
 // Basic Functions
 
 checkUserStatus();
 
 function userPage(){
-    window.location.href = "./userInfo.html"
+    window.location.href = "../userinfo/userInfo.html"
 }
 
 function toggleNavBar(){
@@ -263,40 +264,8 @@ function checkUserStatus() {
         .then(data => {
             console.log(data);
             logedInUserName.forEach(names => names.innerHTML = `${data.firstName} <img src="${data.avatar}" alt="${data.firstName} Avatar">`)
-            userInfo.innerHTML = userInformation(data)
         })
     }
-    
-    if(!token){
-        setTimeout(() => {
-            window.location.href = "../index.html"
-        }, 200);
-    }
-}
-
-function userInformation(data){
-    return `
-    <div class="user-infos">
-
-            <article>
-                <img src="${data.avatar}" alt="${data.firstName} Avatar">
-                <div class="left">
-                    <p class="user-information">First Name: <span>${data.firstName}</span></p> 
-                    <p class="user-information">Last name: <span>${data.lastName}</span></p>
-                    <p class="user-information">Age: <span>${data.age}</span></p>
-                    <p class="user-information">Gender: <span>${String(data.gender) == "MALE" ? `<i class="fa-solid fa-mars"></i>` : `<i class="fa-solid fa-venus"></i>`}</span></p>
-                    <p class="user-information">Phone: <span>${data.phone}</span></p>
-                    <p class="user-information">Email: <span>${data.email}</span></p>
-                    <p class="user-information">Address: <span>${data.address}</span></p>
-                    <p class="user-information">Zipcode: <span>${data.zipcode}</span></p>
-                    <p class="user-information">Role: <span>${data.role}</span></p>
-                    <p class="user-information">Verified: <span>${data.verified ? `<i class="fa-solid fa-circle-check fa-beat-fade"></i>` : `<i class="fa-solid fa-x fa-beat-fade"></i>`}</span></p>
-                    <p class="user-information">CardID: <span>${data.cartID == "" ? 'Cart not found <i class="fa-solid fa-circle-exclamation fa-beat-fade"></i>' : `${data.cartID}`}</span></p>
-                    <p class="user-information">UserID: <span>${data._id}</span></p>
-                </div>
-            </article>
-
-        </div>`
 }
 
 function logOutLogic() {
@@ -306,3 +275,51 @@ function logOutLogic() {
     accountCreationForm.reset()
 }
 
+// Cart show logic
+
+fetch("https://api.everrest.educata.dev/shop/cart",{
+    method: "GET",
+    headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${Cookies.get("userToken")}`,
+      },
+})
+.then(response => response.json())
+.then(data => {
+    console.log(data)
+    totalPrice.innerHTML = `${data.total.price.current}$`
+    data.products.forEach(item => displayProducts(item.productId))
+})
+
+function displayProducts(id){
+    fetch(`https://api.everrest.educata.dev/shop/products/id/${id}`)
+    .then(response => response.json())
+    .then(data => cartPlace.innerHTML += productCardMaker(data))
+}
+
+function productCardMaker(data){
+    return `<div class="product">
+            <div class="product-image">
+                <img src="${data.thumbnail}" alt="${data.title}-image">
+            </div>
+            <h1>${data.title}</h1>
+            <h2>${data.stock}</h2>
+            <h3>${generateStars(data.rating)}</h3>
+            <h4>${data.price.current}$</h4>
+            <h5>Reviews : ${data.ratings.length}</h5>
+            <div class="quantity">
+                <button>Up</button>
+                <span>Raodenoba</span>
+                <button>Down</button>
+            </div>
+            <button class="deleteButton"></button>
+        </div>`
+}
+
+function generateStars(rating) {
+    let stars = "";
+    for (let i = 0; i < Math.round(rating); i++) {
+        stars += `<i class="fa-solid fa-star" style="color: #FFD43B;"></i>`;
+    }
+    return stars;
+}

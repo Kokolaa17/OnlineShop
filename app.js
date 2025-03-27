@@ -14,7 +14,9 @@ let accountCreationForm = document.getElementById("accountCreation")
 let burgerBar = document.getElementById("burgerBar")
 let responsiveNav = document.getElementById("responsiveNav")
 let logedInUserName = document.querySelectorAll(".logInUserName")
-let userInfo = document.getElementById("userPage")
+let userCart = false;
+
+
 
 
 // Basic Functions
@@ -30,6 +32,13 @@ function goShopNow(){
     document.location.href = "./shop/shop.html"
 }
 
+function userPage(){
+    window.location.href = "./userinfo/userinfo.html"
+}
+
+function goToCart(){
+    window.location.href = "./cart/cart.html"
+}
 
 
 
@@ -52,7 +61,7 @@ function cardMaker(item) {
                     ${generateStars(item.rating)}
                 </div>
                 <div class="action-buttons">
-                    <button id="cartButton">Add To Cart <i class="fa-solid fa-cart-shopping"></i></button>
+                    <button id="cartButton" onclick="buttonCartAdder('${item._id}')">Add To Cart <i class="fa-solid fa-cart-shopping"></i></button>
                     <button onclick="showDetails('${item._id}')">Show details <i class="fa-solid fa-eye"></i></button>
                 </div>
             </div>`;
@@ -176,28 +185,6 @@ function logInLogic (e){
 }
 
 
-
-function checkUserStatus() {
-    let token = Cookies.get("userToken");
-
-
-    notLogedInMenu.forEach(list => {
-        if (token) {
-            list.classList.add("display-none");
-        } else {
-            list.classList.remove("display-none");
-        }
-    });
-
-    logedInMenu.forEach(list => {
-        if (token) {
-            list.classList.remove("display-none");
-        } else {
-            list.classList.add("display-none");
-        }
-    });
-}
-
 function logOutLogic() {
     Cookies.remove("userToken");
     checkUserStatus();
@@ -312,3 +299,47 @@ function showDetails(id){
     sessionStorage.setItem("detailsProductID", id);  
     window.location.href = "../details/details.html"; 
 }
+
+// Add to cart logic 
+
+function buttonCartAdder(id) {
+    if(Cookies.get("userToken")){
+        let cardInfo = {
+            id: id,
+            quantity: 1,
+          };
+    
+      fetch("https://api.everrest.educata.dev/auth", {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${Cookies.get("userToken")}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+            (data.cartID ? (userCart = true) : userCart = false)
+            addToCart(cardInfo)
+        } );
+    }
+    else {
+        alert("daregistrirdibratajan")
+    }
+}
+
+function addToCart(cardInfo) {
+    fetch("https://api.everrest.educata.dev/shop/cart/product", {
+        method: `${userCart ? "PATCH" : "POST"}`,
+        headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${Cookies.get("userToken")}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(cardInfo)
+      })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      ;
+  }
+
+

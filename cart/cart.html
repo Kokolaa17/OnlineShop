@@ -22,7 +22,7 @@
                 <li onclick="userPage()" class="loged-in display-none mainNav logInUserName">User</li>
                 <li class="not-loggedin mainNav" onclick="openCreation()">Create Account <i _ngcontent-ng-c1149255415="" class="fa-regular fa-id-card"></i></li>
                 <li class="not-loggedin mainNav" onclick="openLog()">Sign in <i _ngcontent-ng-c1149255415="" class="fa-solid fa-person-walking-dashed-line-arrow-right"></i></li>
-                <li class="loged-in display-none mainNav">Cart <i class="fa-solid fa-cart-shopping"></i></li>
+                <li class="loged-in display-none mainNav" onclick="goToCart()">Cart <i class="fa-solid fa-cart-shopping"></i></li>
                 <li onclick="logOutLogic()" class="loged-in display-none mainNav">Log Out <i class="fa-solid fa-right-to-bracket"></i></li>
                 <i onclick="toggleNavBar()" id="burgerBar" class="fa-solid fa-bars"></i>
             </ul>
@@ -37,9 +37,44 @@
             </ul>
         </div>
     </header>
-    <section class="user-info" id="userInfo">
-        
+    
+    <section class="cart" id="cartPlace">
+        <div class="product">
+            <div class="product-image">
+                <img src="../images/bigcommerical.avif" alt="">
+            </div>
+            <h1>Dasaxelebai</h1>
+            <h2>ramdeni darcha?</h2>
+            <h3>Reitingi varskvlava</h3>
+            <h4>fasi</h4>
+            <h5>ramdeniReview gaaketes</h5>
+            <div class="quantity">
+                <button>Up</button>
+                <span>Raodenoba</span>
+                <button>Down</button>
+            </div>
+            <button class="deleteButton"></button>
+        </div>
+
+        <div class="product">
+            <div class="product-image">
+                <img src="../images/bigcommerical.avif" alt="">
+            </div>
+            <h1>Dasaxelebai</h1>
+            <h2>ramdeni darcha?</h2>
+            <h3>Reitingi varskvlava</h3>
+            <h4>fasi</h4>
+            <h5>ramdeniReview gaaketes</h5>
+            <div class="quantity">
+                <button>Up</button>
+                <span>Raodenoba</span>
+                <button>Down</button>
+            </div>
+            <button class="deleteButton"></button>
+        </div>
+        <p>Total price: <span id="TotalPrice"></span></p>
     </section>
+
     <!-- invisible divs -->
     
     <div class="create-account hidden">
@@ -163,6 +198,6 @@
         </ul>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
-    <script src="./userinfo.js"></script>
+    <script src="./cart.js"></script>
 </body>
 </html>

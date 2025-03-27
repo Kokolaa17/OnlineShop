@@ -30,6 +30,7 @@ let maxPrice = document.getElementById("maxRange")
 let priceErrorText = document.getElementById("priceErrorText")
 let starsFilter = document.querySelectorAll(".stars-filter")
 let sort = document.getElementById("SortBy")
+let logedInUserName = document.querySelectorAll(".logInUserName")
 
 
 
@@ -39,6 +40,10 @@ let sort = document.getElementById("SortBy")
 // Basic Functions
 
 checkUserStatus();
+
+function userPage(){
+   window.location.href = "../userInfo/userInfo.html"
+}
 
 function toggleNavBar(){
     responsiveNav.classList.toggle("display-none")
@@ -216,6 +221,21 @@ function checkUserStatus() {
             list.classList.add("display-none");
         }
     });
+
+    if(token){
+        fetch("https://api.everrest.educata.dev/auth", {
+            method: "GET",
+            headers: {
+              accept: "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          })
+        .then((response) => response.json())
+        .then(data => {
+            console.log(data);
+            logedInUserName.forEach(names => names.innerHTML = `${data.firstName} <img src="${data.avatar}" alt="${data.firstName} Avatar">`)
+        })
+    }
 }
 
 function logOutLogic() {
