@@ -31,6 +31,8 @@ let priceErrorText = document.getElementById("priceErrorText")
 let starsFilter = document.querySelectorAll(".stars-filter")
 let sort = document.getElementById("SortBy")
 let logedInUserName = document.querySelectorAll(".logInUserName")
+let noUserCart = document.querySelector(".no-account")
+let noUserCartContent = document.querySelector(".register-or-create")
 
 
 
@@ -43,6 +45,14 @@ checkUserStatus();
 
 function userPage(){
    window.location.href = "../userInfo/userInfo.html"
+}
+
+function goToCart(){
+    window.location.href = "../cart/cart.html"
+}
+
+function indexPage(){
+    window.location.href= "../index.html"
 }
 
 function toggleNavBar(){
@@ -257,6 +267,7 @@ function getALL(){
 // card Maker Logic
 function cardMaker(item) {
     return `<div class="card">
+                <h6 class="display-none" id="${item._id}" style="color: ${item.stock == 0 ? 'red' : '#00F004'};">${item.stock == 0 ? 'Out of stock! <i class="fa-solid fa-x fa-beat" style="color: #ff0000;"></i>' : 'Added to cart! <i class="fa-solid fa-boxes-packing fa-beat" style="color: #00ff04;"></i>'}</h6>
                 <h3>${item.price.current}$ <span>${discountPrice(item.price.current, item.price.beforeDiscount)}</span></h3>
                 <img src="${item.thumbnail}" alt="${item.title}">
                 <h2>${item.title}</h2>
@@ -264,7 +275,7 @@ function cardMaker(item) {
                     ${generateStars(item.rating)}
                 </div>
                 <div class="action-buttons">
-                    <button id="cartButton">Add To Cart <i class="fa-solid fa-cart-shopping"></i></button>
+                    <button id="cartButton" onclick="buttonCartAdder('${item._id}')">Add To Cart <i class="fa-solid fa-cart-shopping"></i></button>
                     <button onclick="showDetails('${item._id}')">Show details <i class="fa-solid fa-eye"></i></button>
                 </div>
             </div>`;
@@ -426,3 +437,82 @@ function showDetails(id){
     sessionStorage.setItem("detailsProductID", id);  
     window.location.href = "../details/details.html"; 
 }
+
+// Cart adder function 
+
+// Add to cart logic 
+
+function buttonCartAdder(id) {
+    if(Cookies.get("userToken")){
+        let cardInfo = {
+            id: id,
+            quantity: 1,
+          };
+    
+      fetch("https://api.everrest.educata.dev/auth", {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${Cookies.get("userToken")}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+            (data.cartID ? (userCart = true) : userCart = false)
+            addToCart(cardInfo)
+        } );
+
+        let dislpayMessage = document.getElementById(`${id}`)
+
+        dislpayMessage.classList.remove("display-none")
+        dislpayMessage.classList.add("fromLeft")
+
+        if(dislpayMessage.classList.contains("fromLeft")){
+            setTimeout(() => {
+                dislpayMessage.classList.add("display-none")
+                dislpayMessage.classList.remove("fromLeft")
+            }, 1500);
+        }
+    }
+    else {
+        noUserCart.classList.remove("hidden")
+        noUserCartContent.classList.add("fromBackRotate")
+    }
+}
+function startCreation(){
+    noUserCart.classList.add("hidden")
+    noUserCartContent.classList.remove("fromBackRotate")
+    setTimeout(() => {
+        openCreation()
+    }, 500);
+}
+
+function startLogIn(){
+    noUserCart.classList.add("hidden")
+    noUserCartContent.classList.remove("fromBackRotate")
+    setTimeout(() => {
+        openLog()
+    }, 500);
+}
+
+function closeNoAccount(){
+    noUserCart.classList.add("hidden")
+    noUserCartContent.classList.remove("fromBackRotate")
+}
+
+function addToCart(cardInfo) {
+    fetch("https://api.everrest.educata.dev/shop/cart/product", {
+        method: `${userCart ? "PATCH" : "POST"}`,
+        headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${Cookies.get("userToken")}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(cardInfo)
+      })
+      .then(response => response.json())
+      .then(data => data)
+      .catch(error => console.log(error))
+  }
+
+

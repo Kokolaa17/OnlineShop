@@ -15,6 +15,8 @@ let burgerBar = document.getElementById("burgerBar")
 let responsiveNav = document.getElementById("responsiveNav")
 let logedInUserName = document.querySelectorAll(".logInUserName")
 let userCart = false;
+let noUserCart = document.querySelector(".no-account")
+let noUserCartContent = document.querySelector(".register-or-create")
 
 
 
@@ -49,16 +51,13 @@ function goToCart(){
 // API Cards
 fetch("https://api.everrest.educata.dev/shop/products/all?page_size=8")
 .then((response) => response.json())
-.then((items) => items.products.forEach((item) => {
-    // console.log(item);
-    bestSeller.innerHTML += cardMaker(item)
-}))
+.then((items) => items.products.forEach((item) => bestSeller.innerHTML += cardMaker(item)))
 .catch(() => bestSeller.innerHTML = `<img class="notFound" src="./images/Errores-Web-404-403-503-502-401.-Significado-y-soluciones-1 (1).png" alt="404">`)
 
 // card Maker Logic
 function cardMaker(item) {
     return `<div class="card">
-                <h6 class="display-none" id="${item._id}" style="color: ${item.stock == 0 ? 'red' : '#00F004'};">${item.stock == 0 ? 'Out of stock! <i class="fa-solid fa-x fa-fade" style="color: #ff0000;"></i>' : 'Added to cart! <i class="fa-solid fa-boxes-packing fa-fade" style="color: #00ff04;"></i>'}</h6>
+                <h6 class="display-none" id="${item._id}" style="color: ${item.stock == 0 ? 'red' : '#00F004'};">${item.stock == 0 ? 'Out of stock! <i class="fa-solid fa-x fa-beat" style="color: #ff0000;"></i>' : 'Added to cart! <i class="fa-solid fa-boxes-packing fa-beat" style="color: #00ff04;"></i>'}</h6>
                 <h3>${item.price.current}$ <span>${discountPrice(item.price.current, item.price.beforeDiscount)}</span></h3>
                 <img src="${item.thumbnail}" alt="${item.title}">
                 <h2>${item.title}</h2>
@@ -66,7 +65,7 @@ function cardMaker(item) {
                     ${generateStars(item.rating)}
                 </div>
                 <div class="action-buttons">
-                    <button id="cartButton" onclick="buttonCartAdder('${item._id}')">Add To Cart <i class="fa-solid fa-cart-shopping"></i></button>
+                    <button id="cartButton" onclick="buttonCartAdder('${item._id}', ${item.stock})">Add To Cart <i class="fa-solid fa-cart-shopping"></i></button>
                     <button onclick="showDetails('${item._id}')">Show details <i class="fa-solid fa-eye"></i></button>
                 </div>
             </div>`;
@@ -116,7 +115,6 @@ function registerAccount(e){
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         errorText.innerHTML = ""
         errorDetails.innerHTML = ""
         if ("error" in data) {
@@ -130,7 +128,9 @@ function registerAccount(e){
        }
         data.errorKeys.forEach((error) => errorDetails.innerHTML += `<li>${error}</li>`)
     })
+    .catch(error => console.log(error))
 }
+
 
 // Sign in logic
 
@@ -159,7 +159,6 @@ function logInLogic (e){
 
     let formData = new FormData(e.target)
     let finalForm = Object.fromEntries(formData)
-    console.log(finalForm);
 
     fetch("https://api.everrest.educata.dev/auth/sign_in",{
         method: "POST",
@@ -187,6 +186,7 @@ function logInLogic (e){
             e.target.reset()
         }
     })
+    .catch(error => console.log(error))
 }
 
 
@@ -224,7 +224,6 @@ function logInLogic (e){
 
     let formData = new FormData(e.target)
     let finalForm = Object.fromEntries(formData)
-    console.log(finalForm);
 
     fetch("https://api.everrest.educata.dev/auth/sign_in",{
         method: "POST",
@@ -252,6 +251,7 @@ function logInLogic (e){
             e.target.reset()
         }
     })
+    .catch(error => console.log(error))
 }
 
 
@@ -288,7 +288,9 @@ function checkUserStatus() {
         .then(data => {
             logedInUserName.forEach(names => names.innerHTML = `${data.firstName} <img src="${data.avatar}" alt="${data.firstName} Avatar">`)
         })
+        .catch(error => console.log(error))
     }
+    
 }
 
 function logOutLogic() {
@@ -307,25 +309,27 @@ function showDetails(id){
 
 // Add to cart logic 
 
-function buttonCartAdder(id) {
+function buttonCartAdder(id, stock) {
     if(Cookies.get("userToken")){
         let cardInfo = {
             id: id,
             quantity: 1,
-          };
+            };
     
-      fetch("https://api.everrest.educata.dev/auth", {
-        method: "GET",
-        headers: {
-          accept: "application/json",
-          Authorization: `Bearer ${Cookies.get("userToken")}`,
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-            (data.cartID ? (userCart = true) : userCart = false)
-            addToCart(cardInfo)
-        } );
+        if(stock > 0){
+            fetch("https://api.everrest.educata.dev/auth", {
+                method: "GET",
+                headers: {
+                    accept: "application/json",
+                    Authorization: `Bearer ${Cookies.get("userToken")}`,
+                },
+                })
+                .then((res) => res.json())
+                .then((data) => {
+                    (data.cartID ? (userCart = true) : userCart = false)
+                    addToCart(cardInfo)
+                } );
+        }
 
         let dislpayMessage = document.getElementById(`${id}`)
 
@@ -340,8 +344,29 @@ function buttonCartAdder(id) {
         }
     }
     else {
-        alert("daregistrirdibratajan")
+        noUserCart.classList.remove("hidden")
+        noUserCartContent.classList.add("fromBackRotate")
     }
+}
+function startCreation(){
+    noUserCart.classList.add("hidden")
+    noUserCartContent.classList.remove("fromBackRotate")
+    setTimeout(() => {
+        openCreation()
+    }, 500);
+}
+
+function startLogIn(){
+    noUserCart.classList.add("hidden")
+    noUserCartContent.classList.remove("fromBackRotate")
+    setTimeout(() => {
+        openLog()
+    }, 500);
+}
+
+function closeNoAccount(){
+    noUserCart.classList.add("hidden")
+    noUserCartContent.classList.remove("fromBackRotate")
 }
 
 function addToCart(cardInfo) {
@@ -355,8 +380,8 @@ function addToCart(cardInfo) {
         body: JSON.stringify(cardInfo)
       })
       .then(response => response.json())
-      .then(data => console.log(data))
-      ;
+      .then(data => data)
+      .catch(error => console.log(error))
   }
 
 

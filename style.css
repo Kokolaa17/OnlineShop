@@ -709,6 +709,90 @@ nav ul li i {
   visibility: hidden;
 }
 
+.no-account {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-backdrop-filter: blur(10px) brightness(50%);
+          backdrop-filter: blur(10px) brightness(50%);
+  transition: 0.3s;
+  z-index: 3;
+}
+.no-account .register-or-create {
+  width: 40%;
+  padding-bottom: 30px;
+  background-color: white;
+  position: relative;
+  border-radius: 15px;
+  border: 3px solid #3A3B8F;
+  padding: 10px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  background-image: url(./images/arrangement-black-friday-shopping-carts-with-copy-space_23-2148667047.avif);
+}
+.no-account .register-or-create .closeButton {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  border: none;
+  background-color: #F70000;
+  color: #fff;
+  padding: 10px 15px;
+  font-size: 20px;
+  border-radius: 50px;
+  text-shadow: 0px 0px 15px #fff;
+  cursor: pointer;
+}
+.no-account .register-or-create .closeButton:hover {
+  transition: 0.3s;
+  transform: translateY(-3px);
+  box-shadow: 0px 5px 10px #FF7E3E;
+}
+.no-account .register-or-create h1 {
+  text-align: center;
+  font-family: "Playwrite IT Moderna", cursive;
+  color: #475DE1;
+  font-size: 40px;
+  text-shadow: 0px 0px 15px #475DE1;
+  animation: floating 3s infinite;
+}
+.no-account .register-or-create h3 {
+  text-align: center;
+  margin-top: 30px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: #fff;
+}
+.no-account .register-or-create .action-buttons {
+  text-align: center;
+  margin-top: 15px;
+}
+.no-account .register-or-create .action-buttons button {
+  background-color: #475DE1;
+  color: #fff;
+  font-size: 17px;
+  padding: 5px 15px;
+  font-family: "Playwrite IT Moderna", cursive;
+  border: none;
+  cursor: pointer;
+}
+.no-account .register-or-create .action-buttons button:hover {
+  transition: 0.3s;
+  background-color: #3A3B8F;
+}
+.no-account .register-or-create .action-buttons button:hover i {
+  transition: 0.3s;
+  text-shadow: 0px 0px 15px;
+  transform: translateX(5px);
+}
+
 .create-account {
   position: fixed;
   width: 100%;
@@ -1287,6 +1371,26 @@ footer ul li a:hover {
   height: 225px;
   -o-object-fit: contain;
      object-fit: contain;
+}
+.products-filters .cards-area .card h6 {
+  z-index: 2;
+  font-size: 30px;
+  font-family: "Playwrite IT Moderna", cursive;
+  position: absolute;
+  top: 0px;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  -webkit-backdrop-filter: blur(30px);
+          backdrop-filter: blur(30px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+}
+.products-filters .cards-area .card h6 i {
+  font-size: 50px;
 }
 .products-filters .cards-area .card h3 {
   font-size: 15px;
@@ -2045,6 +2149,12 @@ footer ul li a:hover {
 }
 
 @media (max-width: 1080px) {
+  .register-or-create {
+    width: 70% !important;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
   .login-form {
     width: 88% !important;
   }

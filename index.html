@@ -31,7 +31,7 @@
                 <li class="not-loggedin" onclick="openCreation()">Create Account <i _ngcontent-ng-c1149255415="" class="fa-regular fa-id-card"></i></li>
                 <li class="not-loggedin" onclick="openLog()">Sign in <i _ngcontent-ng-c1149255415="" class="fa-solid fa-person-walking-dashed-line-arrow-right"></i></li>
                 <li class="loged-in display-none logInUserName" onclick="userPage()">User</li>
-                <li class="loged-in display-none">Cart <i class="fa-solid fa-cart-shopping"></i></li>
+                <li class="loged-in display-none" onclick="goToCart()">Cart <i class="fa-solid fa-cart-shopping"></i></li>
                 <li onclick="logOutLogic()" class="loged-in display-none">Log Out <i class="fa-solid fa-right-to-bracket"></i></li>
             </ul>
         </div>
@@ -82,6 +82,17 @@
         </div>
     </section>
     <!-- Hidden Elements -->
+    <div class="no-account hidden">
+        <div class="register-or-create">
+            <button onclick="closeNoAccount()" class="closeButton">X</button>
+            <h1>You are not signed in</h1>
+            <h3>sign in or sign up to continue...</h3>
+            <div class="action-buttons">
+                <button onclick="startCreation()">Sign up <i _ngcontent-ng-c1149255415="" class="fa-regular fa-id-card"></i></button>
+                <button onclick="startLogIn()">Sign in <i _ngcontent-ng-c1149255415="" class="fa-solid fa-person-walking-dashed-line-arrow-right"></i></button>
+            </div>
+        </div>
+    </div>
 
     <div class="create-account hidden">
         <div class="account-creation" id="accountForm">
