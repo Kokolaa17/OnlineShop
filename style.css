@@ -115,6 +115,10 @@ html {
   animation: fromBackRotate 0.5s ease-in-out;
 }
 
+.fromBack {
+  animation: fromBack 0.5s;
+}
+
 header {
   position: relative;
 }
@@ -483,6 +487,7 @@ nav ul li i {
   padding: 10px;
   animation: fromBack 1s ease-in-out;
   box-shadow: 0px 0px 10px #302478;
+  overflow: hidden;
   cursor: pointer;
 }
 .best-products .card:hover {
@@ -496,6 +501,26 @@ nav ul li i {
   -o-object-fit: contain;
      object-fit: contain;
 }
+.best-products .card h6 {
+  z-index: 2;
+  font-size: 30px;
+  font-family: "Playwrite IT Moderna", cursive;
+  position: absolute;
+  top: 0px;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  -webkit-backdrop-filter: blur(30px);
+          backdrop-filter: blur(30px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+}
+.best-products .card h6 i {
+  font-size: 50px;
+}
 .best-products .card h3 {
   font-size: 15px;
   font-family: "Playwrite IT Moderna", cursive;
@@ -506,7 +531,7 @@ nav ul li i {
   padding: 5px;
   border-top-right-radius: 12px;
   border-bottom-left-radius: 12px;
-  box-shadow: -3px 5px 5px 0px #6CA0F5;
+  box-shadow: 3px 5px 5px 0px #6CA0F5;
   color: #fff;
   cursor: pointer;
 }
@@ -1634,7 +1659,7 @@ footer ul li a:hover {
 .main-details {
   display: flex;
   background-color: #010101;
-  min-height: 79vh;
+  min-height: 100vh;
   align-items: center;
   justify-content: center;
 }
@@ -1844,7 +1869,7 @@ footer ul li a:hover {
 }
 .user-info .user-infos {
   display: flex;
-  min-height: 79vh;
+  min-height: 100vh;
   justify-content: space-evenly;
   align-items: center;
 }
@@ -2045,6 +2070,9 @@ footer ul li a:hover {
     background: rgb(59, 62, 146);
     background: linear-gradient(84deg, rgb(59, 62, 146) 35%, rgb(38, 11, 99) 56%);
   }
+  .welcome-section .video {
+    width: 100%;
+  }
   .welcome-section .video video {
     width: 100%;
     height: 100%;
@@ -2074,6 +2102,22 @@ footer ul li a:hover {
     -o-object-fit: contain !important;
        object-fit: contain !important;
   }
+  nav {
+    border-bottom: unset;
+  }
+  .mainNav {
+    display: none !important;
+  }
+  #burgerBar {
+    display: unset !important;
+  }
+  .logo img {
+    width: 16% !important;
+  }
+  .logo h1 {
+    left: 20px !important;
+    font-size: 30px !important;
+  }
 }
 @media (max-width: 710px) {
   .login-form {
@@ -2084,15 +2128,6 @@ footer ul li a:hover {
   }
   .login-form .right {
     display: none;
-  }
-  nav {
-    border-bottom: unset;
-  }
-  .mainNav {
-    display: none !important;
-  }
-  #burgerBar {
-    display: unset !important;
   }
   .commerical-section .left, .commerical-section .right {
     width: 90%;

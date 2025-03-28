@@ -112,6 +112,9 @@ html {
 .fromBackRotate {
     animation: fromBackRotate 0.5s ease-in-out;
 }
+.fromBack {
+    animation: fromBack 0.5s;
+}
 // Animations
 
 // Index styles
@@ -493,6 +496,7 @@ nav {
         padding: 10px;
         animation: fromBack 1s ease-in-out;
         box-shadow: 0px 0px 10px #302478;
+        overflow: hidden;
         cursor: pointer;
         &:hover {
             transition: 0.3s;
@@ -504,6 +508,25 @@ nav {
             height: 225px;
             object-fit: contain;
         }
+        h6 {
+            z-index: 2;
+            font-size: 30px;
+            font-family: "Playwrite IT Moderna", cursive;
+            position: absolute;
+            top: 0px;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(30px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 5px;
+            i {
+                font-size: 50px;
+            }
+        }
         h3 {
             font-size: 15px;
             font-family: "Playwrite IT Moderna", cursive;
@@ -514,7 +537,7 @@ nav {
             padding: 5px;
             border-top-right-radius: 12px;
             border-bottom-left-radius: 12px;
-            box-shadow: -3px 5px 5px 0px #6CA0F5;
+            box-shadow: 3px 5px 5px 0px #6CA0F5;
             color: #fff;
             cursor: pointer;
             &:hover {
@@ -1625,7 +1648,7 @@ footer {
 .main-details {
     display: flex;
     background-color: #010101;
-    min-height: 79vh;
+    min-height: 100vh;
     align-items: center;
     justify-content: center;
     .left-image {
@@ -1840,7 +1863,7 @@ footer {
     background-color: #010101;
     .user-infos {
         display: flex;
-        min-height: 79vh;
+        min-height: 100vh;
         justify-content: space-evenly;
         align-items: center;
         img {
@@ -2045,6 +2068,7 @@ footer {
         background: rgb(59,62,146);
         background: linear-gradient(84deg, rgba(59,62,146,1) 35%, rgba(38,11,99,1) 56%);        
         .video {
+            width: 100%;
             video {
                 width: 100%;
                 height: 100%;
@@ -2080,6 +2104,24 @@ footer {
             object-fit: contain !important;
         }
     }
+    nav {
+        border-bottom: unset;
+    }
+    .mainNav {
+        display: none !important;
+    }
+    #burgerBar {
+        display: unset !important;
+    }
+    .logo {
+        img {
+            width: 16% !important;
+        }
+        h1 {
+            left: 20px !important;
+            font-size: 30px !important;
+        }
+    }
 }
 @media  (max-width : 710px) {
     .login-form {
@@ -2090,15 +2132,6 @@ footer {
         .right {
             display: none;
         }
-    }
-    nav {
-        border-bottom: unset;
-    }
-    .mainNav {
-        display: none !important;
-    }
-    #burgerBar {
-        display: unset !important;
     }
     .commerical-section {
         .left, .right {

@@ -23,6 +23,10 @@ let userCart = false;
 
 checkUserStatus();
 
+function indexPage(){
+    window.location.href= "./index.html"
+}
+
 function toggleNavBar(){
     responsiveNav.classList.toggle("display-none")
     responsiveNav.classList.toggle("fromTop")
@@ -54,6 +58,7 @@ fetch("https://api.everrest.educata.dev/shop/products/all?page_size=8")
 // card Maker Logic
 function cardMaker(item) {
     return `<div class="card">
+                <h6 class="display-none" id="${item._id}" style="color: ${item.stock == 0 ? 'red' : '#00F004'};">${item.stock == 0 ? 'Out of stock! <i class="fa-solid fa-x fa-fade" style="color: #ff0000;"></i>' : 'Added to cart! <i class="fa-solid fa-boxes-packing fa-fade" style="color: #00ff04;"></i>'}</h6>
                 <h3>${item.price.current}$ <span>${discountPrice(item.price.current, item.price.beforeDiscount)}</span></h3>
                 <img src="${item.thumbnail}" alt="${item.title}">
                 <h2>${item.title}</h2>
@@ -321,6 +326,18 @@ function buttonCartAdder(id) {
             (data.cartID ? (userCart = true) : userCart = false)
             addToCart(cardInfo)
         } );
+
+        let dislpayMessage = document.getElementById(`${id}`)
+
+        dislpayMessage.classList.remove("display-none")
+        dislpayMessage.classList.add("fromLeft")
+
+        if(dislpayMessage.classList.contains("fromLeft")){
+            setTimeout(() => {
+                dislpayMessage.classList.add("display-none")
+                dislpayMessage.classList.remove("fromLeft")
+            }, 1500);
+        }
     }
     else {
         alert("daregistrirdibratajan")
