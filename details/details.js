@@ -299,7 +299,11 @@ let id = sessionStorage.getItem("detailsProductID")
 
 fetch(`https://api.everrest.educata.dev/shop/products/id/${id}`)
     .then((response) => response.json())
-    .then((item) => detailsArea.innerHTML = detailsPage(item))
+    .then((item) => {
+        detailsArea.innerHTML = detailsPage(item)
+        document.getElementById("pre").addEventListener("click", () => sliderPreImage(item.images));
+        document.getElementById("next").addEventListener("click", () => sliderNextImage(item.images));
+    })
     .catch(() => details.innerHTML = `<img class="notFound" src="./images/Errores-Web-404-403-503-502-401.-Significado-y-soluciones-1 (1).png" alt="404">`)
 
 
@@ -307,10 +311,10 @@ fetch(`https://api.everrest.educata.dev/shop/products/id/${id}`)
 function detailsPage(item){
     return `<div class="left-image">
             <h6 class="display-none" id="${item._id}" style="color: ${item.stock == 0 ? 'red' : '#00F004'};">${item.stock == 0 ? 'Out of stock! <i class="fa-solid fa-x fa-beat" style="color: #ff0000;"></i>' : 'Added to cart! <i class="fa-solid fa-boxes-packing fa-beat" style="color: #00ff04;"></i>'}</h6>
-            <button class="sliderButton" id="pre" onclick="sliderPreImage('${item.images}')"><i class="fa-solid fa-arrow-left"></i></button>
+            <button class="sliderButton" id="pre"><i class="fa-solid fa-arrow-left"></i></button>
             <h5>${item.price.discountPercentage == 0 ? "" : `${item.price.discountPercentage}%`} </h5>
             <img id="sliderMainImage" src="${item.images[0]}" alt="${item.title}">
-            <button class="sliderButton" id="next" onclick="sliderNextImage('${item.images}')"><i class="fa-solid fa-arrow-right"></i></button>
+            <button class="sliderButton" id="next"><i class="fa-solid fa-arrow-right"></i></button>
         </div>
         <div class="right-article">
             <article>
@@ -356,7 +360,7 @@ let currentIndex = 0;
 
 function sliderPreImage(images) {
     if (currentIndex > 0) {
-        currentIndex--;
+        currentIndex--;  
     } else {
         currentIndex = images.length - 1; 
     }
