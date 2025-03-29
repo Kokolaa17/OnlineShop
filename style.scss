@@ -2127,6 +2127,14 @@ footer {
             }
         }
     }
+    .products-filters {
+        aside {
+            width: 406px !important;
+            .price-filter {
+                width: 240px !important;
+            }
+        }
+    }
 }
 .cart-actions {
     background-color: #010101;
@@ -2206,6 +2214,12 @@ footer {
             } 
         }
     }
+    .banner-content {
+        article {
+            margin-left: 5%;
+            width: 434px;
+        }
+    }
 }
 @media (max-width: 960px) {
     .images {
@@ -2229,6 +2243,11 @@ footer {
         h1 {
             left: 20px !important;
             font-size: 30px !important;
+        }
+    }
+    .banner-content {
+        article {
+            width: 375px;
         }
     }
 }
@@ -2263,4 +2282,30 @@ footer {
             letter-spacing: 2px;
         }
     }
+    .banner-content {
+        article {
+            width: 434px;
+        }
+    }
+    .background-section {
+        img {
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+    .products-filters {
+        flex-direction: column !important;
+        align-items: center;
+        aside {
+            padding: 0;
+            width: 100% !important;
+            padding-inline: 25px;
+            position: static;
+            margin-bottom: 30px;
+            .price-filter {
+                width: 100% !important;
+            }
+        }
+    }
+    
 }

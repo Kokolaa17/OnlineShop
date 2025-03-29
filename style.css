@@ -2130,6 +2130,12 @@ footer ul li a:hover {
     width: 100%;
     border-radius: 12px;
   }
+  .products-filters aside {
+    width: 406px !important;
+  }
+  .products-filters aside .price-filter {
+    width: 240px !important;
+  }
 }
 .cart-actions {
   background-color: #010101;
@@ -2206,6 +2212,10 @@ footer ul li a:hover {
   .commerical-section .left img, .commerical-section .right img {
     height: auto;
   }
+  .banner-content article {
+    margin-left: 5%;
+    width: 434px;
+  }
 }
 @media (max-width: 960px) {
   .images img {
@@ -2227,6 +2237,9 @@ footer ul li a:hover {
   .logo h1 {
     left: 20px !important;
     font-size: 30px !important;
+  }
+  .banner-content article {
+    width: 375px;
   }
 }
 @media (max-width: 710px) {
@@ -2255,5 +2268,28 @@ footer ul li a:hover {
   footer p {
     font-size: 20px;
     letter-spacing: 2px;
+  }
+  .banner-content article {
+    width: 434px;
+  }
+  .background-section img {
+    -o-object-fit: cover;
+       object-fit: cover;
+    -o-object-position: center;
+       object-position: center;
+  }
+  .products-filters {
+    flex-direction: column !important;
+    align-items: center;
+  }
+  .products-filters aside {
+    padding: 0;
+    width: 100% !important;
+    padding-inline: 25px;
+    position: static;
+    margin-bottom: 30px;
+  }
+  .products-filters aside .price-filter {
+    width: 100% !important;
   }
 }/*# sourceMappingURL=style.css.map */

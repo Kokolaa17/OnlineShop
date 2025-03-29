@@ -33,6 +33,7 @@ let sort = document.getElementById("SortBy")
 let logedInUserName = document.querySelectorAll(".logInUserName")
 let noUserCart = document.querySelector(".no-account")
 let noUserCartContent = document.querySelector(".register-or-create")
+let userCart = false;
 
 
 
@@ -62,26 +63,50 @@ function toggleNavBar(){
 
 function showCategorysFilter(){
     categorys.classList.toggle("display-none")
+    brands.classList.add("display-none")
+    priceFilter.classList.add("display-none")
+    ratings.classList.add("display-none")
+    sortOptions.classList.add("display-none")
+    filterIcon2.innerHTML = `+`
+    filterIcon3.innerHTML = `+`
+    filterIcon4.innerHTML = `+`
+    filterIcon5.innerHTML = `+`
     if(filterIcon1.innerHTML == "+"){
-        filterIcon1.innerHTML = `<i class="fa-solid fa-minus" style="color: #ffffff;"></i>`
+        filterIcon1.innerHTML = `+`
     }
     else{
-        filterIcon1.innerHTML = `+`
+        filterIcon1.innerHTML = `<i class="fa-solid fa-minus" style="color: #ffffff;"></i>`
     }
 }
 
 function showBrandsFilter(){
     brands.classList.toggle("display-none")
+    categorys.classList.add("display-none")
+    priceFilter.classList.add("display-none")
+    ratings.classList.add("display-none")
+    sortOptions.classList.add("display-none")
+    filterIcon1.innerHTML = `+`
+    filterIcon3.innerHTML = `+`
+    filterIcon4.innerHTML = `+`
+    filterIcon5.innerHTML = `+`
     if(filterIcon2.innerHTML == "+"){
-        filterIcon2.innerHTML = `<i class="fa-solid fa-minus" style="color: #ffffff;"></i>`
+        filterIcon2.innerHTML = `+`
     }
     else{
-        filterIcon2.innerHTML = `+`
+        filterIcon2.innerHTML = `<i class="fa-solid fa-minus" style="color: #ffffff;"></i>`
     }
 }
 
 function showPriceFilter(){
     priceFilter.classList.toggle("display-none")
+    brands.classList.add("display-none")
+    categorys.classList.add("display-none")
+    ratings.classList.add("display-none")
+    sortOptions.classList.add("display-none")
+    filterIcon1.innerHTML = `+`
+    filterIcon2.innerHTML = `+`
+    filterIcon4.innerHTML = `+`
+    filterIcon5.innerHTML = `+`
     if(filterIcon3.innerHTML == "+"){
         filterIcon3.innerHTML = `<i class="fa-solid fa-minus" style="color: #ffffff;"></i>`
     }
@@ -92,6 +117,14 @@ function showPriceFilter(){
 
 function showRating(){
     ratings.classList.toggle("display-none")
+    priceFilter.classList.add("display-none")
+    brands.classList.add("display-none")
+    categorys.classList.add("display-none")
+    sortOptions.classList.add("display-none")
+    filterIcon1.innerHTML = `+`
+    filterIcon2.innerHTML = `+`
+    filterIcon3.innerHTML = `+`
+    filterIcon5.innerHTML = `+`
     if(filterIcon4.innerHTML == "+"){
         filterIcon4.innerHTML = `<i class="fa-solid fa-minus" style="color: #ffffff;"></i>`
     }
@@ -102,12 +135,33 @@ function showRating(){
 
 function showSort(){
     sortOptions.classList.toggle("display-none")
+    ratings.classList.add("display-none")
+    priceFilter.classList.add("display-none")
+    brands.classList.add("display-none")
+    categorys.classList.add("display-none")
+    filterIcon1.innerHTML = `+`
+    filterIcon2.innerHTML = `+`
+    filterIcon3.innerHTML = `+`
+    filterIcon4.innerHTML = `+`
     if(filterIcon5.innerHTML == "+"){
         filterIcon5.innerHTML = `<i class="fa-solid fa-minus" style="color: #ffffff;"></i>`
     }
     else{
         filterIcon5.innerHTML = `+`
     }
+}
+function GetALLProdcuts() {
+    getALL()
+    filterIcon1.innerHTML = `+`
+    filterIcon2.innerHTML = `+`
+    filterIcon3.innerHTML = `+`
+    filterIcon4.innerHTML = `+`
+    filterIcon5.innerHTML = `+`
+    sortOptions.classList.add("display-none")
+    ratings.classList.add("display-none")
+    priceFilter.classList.add("display-none")
+    brands.classList.add("display-none")
+    categorys.classList.add("display-none")
 }
 
 // Sign up logic
@@ -137,7 +191,6 @@ function registerAccount(e){
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         errorText.innerHTML = ""
         errorDetails.innerHTML = ""
         if ("error" in data) {
@@ -151,6 +204,7 @@ function registerAccount(e){
        }
         data.errorKeys.forEach((error) => errorDetails.innerHTML += `<li>${error}</li>`)
     })
+    .catch(error => console.log(error))
 }
 
 // Sign in logic
@@ -180,7 +234,6 @@ function logInLogic (e){
 
     let formData = new FormData(e.target)
     let finalForm = Object.fromEntries(formData)
-    console.log(finalForm);
 
     fetch("https://api.everrest.educata.dev/auth/sign_in",{
         method: "POST",
@@ -208,6 +261,7 @@ function logInLogic (e){
             e.target.reset()
         }
     })
+    .catch(error => console.log(error))
 }
 
 
@@ -242,9 +296,9 @@ function checkUserStatus() {
           })
         .then((response) => response.json())
         .then(data => {
-            console.log(data);
             logedInUserName.forEach(names => names.innerHTML = `${data.firstName} <img src="${data.avatar}" alt="${data.firstName} Avatar">`)
         })
+        .catch(error => console.log(error))
     }
 }
 
@@ -275,7 +329,7 @@ function cardMaker(item) {
                     ${generateStars(item.rating)}
                 </div>
                 <div class="action-buttons">
-                    <button id="cartButton" onclick="buttonCartAdder('${item._id}')">Add To Cart <i class="fa-solid fa-cart-shopping"></i></button>
+                    <button id="cartButton" onclick="buttonCartAdder('${item._id}', ${item.stock})">Add To Cart <i class="fa-solid fa-cart-shopping"></i></button>
                     <button onclick="showDetails('${item._id}')">Show details <i class="fa-solid fa-eye"></i></button>
                 </div>
             </div>`;
@@ -303,6 +357,7 @@ function generateStars(rating) {
 fetch("https://api.everrest.educata.dev/shop/products/categories")
 .then(response => response.json())
 .then(data => data.forEach(item => categorys.innerHTML += `<button onclick="filterByCategory(${item.id})"><img src="${item.image}" alt="${item.name}"><span>${item.name}</span></button>`))
+.catch(error => console.log(error))
 
 function filterByCategory(category){
     cardsArea.innerHTML = ""
@@ -317,12 +372,14 @@ function filterByCategory(category){
 fetch("https://api.everrest.educata.dev/shop/products/brands")
 .then(response => response.json())
 .then(data => data.forEach(item => brandNames.innerHTML += `<li onclick="filterByBrand('${item}')"><i class="fa-solid fa-tag"></i><p>${item}</p></li>`))
+.catch(error => console.log(error))
 
 function filterByBrand(brand){
     cardsArea.innerHTML = ""
     fetch(`https://api.everrest.educata.dev/shop/products/brand/${brand}`)
     .then(response => response.json())
     .then(data => data.products.forEach(item => cardsArea.innerHTML += cardMaker(item)))
+    .catch(error => console.log(error))
 }
 
 // Search Logic 
@@ -375,7 +432,9 @@ function filterByPrice() {
         data.products.forEach(item => {
             cardsArea.innerHTML += cardMaker(item);
         });
+        
     })
+    .catch(error => console.log(error))
 }
 
 // Rating filter logic
@@ -385,6 +444,7 @@ function ratingFilterFive() {
     fetch("https://api.everrest.educata.dev/shop/products/search?page_size=38&rating=4.5")
     .then(response => response.json())
     .then(data => data.products.forEach(item => cardsArea.innerHTML += cardMaker(item)))
+    .catch(error => console.log(error))
 }
 
 function ratingFilterFour() {
@@ -392,24 +452,28 @@ function ratingFilterFour() {
     fetch("https://api.everrest.educata.dev/shop/products/search?page_size=38&rating=3.5")
     .then(response => response.json())
     .then(data => data.products.forEach(item => cardsArea.innerHTML += cardMaker(item)))
+    .catch(error => console.log(error))
 }
 
 function ratingFilterThree() {
     fetch("https://api.everrest.educata.dev/shop/products/search?page_size=38&rating=2.6")
     .then(response => response.json())
     .then(data => data.products.forEach(item => cardsArea.innerHTML += cardMaker(item)))
+    .catch(error => console.log(error))
 }
 
 function ratingFilterTwo() {
     fetch("https://api.everrest.educata.dev/shop/products/search?page_size=38&rating=1.6")
     .then(response => response.json())
     .then(data => data.products.forEach(item => cardsArea.innerHTML += cardMaker(item)))
+    .catch(error => console.log(error))
 }
 
 function ratingFilterOne() {
     fetch("https://api.everrest.educata.dev/shop/products/search?page_size=38&rating=1")
     .then(response => response.json())
     .then(data => data.products.forEach(item => cardsArea.innerHTML += cardMaker(item)))
+    .catch(error => console.log(error))
 }
 
 // Sort by logic 
@@ -442,25 +506,30 @@ function showDetails(id){
 
 // Add to cart logic 
 
-function buttonCartAdder(id) {
+// Add to cart logic 
+
+function buttonCartAdder(id, stock) {
     if(Cookies.get("userToken")){
         let cardInfo = {
             id: id,
             quantity: 1,
-          };
+            };
     
-      fetch("https://api.everrest.educata.dev/auth", {
-        method: "GET",
-        headers: {
-          accept: "application/json",
-          Authorization: `Bearer ${Cookies.get("userToken")}`,
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-            (data.cartID ? (userCart = true) : userCart = false)
-            addToCart(cardInfo)
-        } );
+        if(stock > 0){
+            fetch("https://api.everrest.educata.dev/auth", {
+                method: "GET",
+                headers: {
+                    accept: "application/json",
+                    Authorization: `Bearer ${Cookies.get("userToken")}`,
+                },
+                })
+                .then((res) => res.json())
+                .then((data) => {
+                    (data.cartID ? (userCart = true) : userCart = false)
+                    addToCart(cardInfo)
+                } );
+                
+        }
 
         let dislpayMessage = document.getElementById(`${id}`)
 

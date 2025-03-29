@@ -410,6 +410,8 @@ function decreaseProductQuantity(productID){
 // CheckOut logic
 
 function checkOut(){
+    let products = document.querySelectorAll(".product")
+    products.forEach(product => product.remove())
     fetch("https://api.everrest.educata.dev/shop/cart/checkout",{
         method: "POST",
         headers: {
