@@ -506,8 +506,6 @@ function showDetails(id){
 
 // Add to cart logic 
 
-// Add to cart logic 
-
 function buttonCartAdder(id, stock) {
     if(Cookies.get("userToken")){
         let cardInfo = {
