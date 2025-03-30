@@ -2301,6 +2301,7 @@ footer ul li a:hover {
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;
+    gap: 30px;
   }
   .product {
     flex-direction: column;
@@ -2308,6 +2309,7 @@ footer ul li a:hover {
     width: fit-content;
     position: relative;
     padding: 10px 20px !important;
+    height: 530px;
   }
   .product h2 {
     margin-top: 5px;
