@@ -301,6 +301,9 @@ nav {
         }
     }
     .welcome-left {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         .welcome-article {
             display: flex;
             flex-direction: column;
@@ -1107,6 +1110,9 @@ nav {
         }
         .left {
             padding: 20px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             h2 {
                 text-align: center;
                 font-family: "Playwrite IT Moderna", cursive;
@@ -1172,7 +1178,6 @@ nav {
                 letter-spacing: 2px;
                 text-shadow: 0px 0px 15px #fff;
                 width: 100%;
-                height: 11%;
                 border-radius: 10px;
                 border: 1px solid #010101;
                 outline: none;
@@ -2255,7 +2260,7 @@ footer {
         height: unset;
         position: relative;
         background: rgb(59,62,146);
-        background: linear-gradient(84deg, rgba(59,62,146,1) 35%, rgba(38,11,99,1) 56%);        
+        background: linear-gradient(84deg, rgba(59,62,146,1) 35%, rgba(38,11,99,1) 56%);    
         .video {
             width: 100%;
             video {
