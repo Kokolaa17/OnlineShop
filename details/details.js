@@ -70,7 +70,6 @@ function registerAccount(e){
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         errorText.innerHTML = ""
         errorDetails.innerHTML = ""
         if ("error" in data) {
@@ -84,6 +83,7 @@ function registerAccount(e){
        }
         data.errorKeys.forEach((error) => errorDetails.innerHTML += `<li>${error}</li>`)
     })
+    .catch(error => console.log(error))
 }
 
 // Sign in logic
@@ -113,7 +113,7 @@ function logInLogic (e){
 
     let formData = new FormData(e.target)
     let finalForm = Object.fromEntries(formData)
-    console.log(finalForm);
+
 
     fetch("https://api.everrest.educata.dev/auth/sign_in",{
         method: "POST",
@@ -141,6 +141,7 @@ function logInLogic (e){
             e.target.reset()
         }
     })
+    .catch(error => console.log(error))
 }
 
 
@@ -175,10 +176,11 @@ function checkUserStatus() {
           })
         .then((response) => response.json())
         .then(data => {
-            console.log(data);
             logedInUserName.forEach(names => names.innerHTML = `${data.firstName} <img src="${data.avatar}" alt="${data.firstName} Avatar">`)
         })
+        .catch(error => console.log(error))
     }
+    
 }
 
 function logOutLogic() {
@@ -215,7 +217,6 @@ function logInLogic (e){
 
     let formData = new FormData(e.target)
     let finalForm = Object.fromEntries(formData)
-    console.log(finalForm);
 
     fetch("https://api.everrest.educata.dev/auth/sign_in",{
         method: "POST",
@@ -243,6 +244,7 @@ function logInLogic (e){
             e.target.reset()
         }
     })
+    .catch(error => console.log(error))
 }
 
 
@@ -278,9 +280,9 @@ function checkUserStatus() {
           })
         .then((response) => response.json())
         .then(data => {
-            console.log(data);
             logedInUserName.forEach(names => names.innerHTML = `${data.firstName} <img src="${data.avatar}" alt="${data.firstName} Avatar">`)
         })
+        .catch(error => console.log(error))
     }
 
     
@@ -324,7 +326,7 @@ function detailsPage(item){
                     ${generateStars(item.rating)}
                     <span>${item.rating}</span>
                 </div>
-                <h3>${item.stock == 0 ? `<span style="color: red;"><i class="fa-solid fa-x" style="color: #ff0000;"></i> Not in stock</span>` : `<span style="color: green;">${item.stock} in stock <i class="fa-solid fa-check"></i></span>`}</h3>
+                <h3>${item.stock <= 0 ? `<span style="color: red;"><i class="fa-solid fa-x" style="color: #ff0000;"></i> Not in stock</span>` : `<span style="color: green;">${item.stock} in stock <i class="fa-solid fa-check"></i></span>`}</h3>
                 <div class="item-description">
                     <h3>Description</h3>
                     <p>${item.description}</p>
@@ -335,9 +337,9 @@ function detailsPage(item){
                     <p><i class="fa-solid fa-truck-fast"></i> Worldwide shipping</p>
                 </div>
                 <ul>
-                    <li>Category: phones</li>
-                    <li>Brand: apple</li>
-                    <li>Issue Date: 2020-04-12T00:00:00.000Z</li>
+                    <li>Category: ${item.category.name}</li>
+                    <li>Brand: ${item.brand}</li>
+                    <li>Issue Date: ${item.issueDate.split("T")[0]}</li>
                 </ul>
                 <div class="addToCart">
                     <button id="cartAdder" onclick="buttonCartAdder('${item._id}', ${item.stock})">Add to cart <i class="fa-solid fa-cart-shopping"></i></button>
@@ -402,9 +404,11 @@ function buttonCartAdder(id, stock) {
                 .then((data) => {
                     (data.cartID ? (userCart = true) : userCart = false)
                     addToCart(cardInfo)
-                } );
+                })
+                .catch(error => console.log(error))
                 
         }
+        
 
         let dislpayMessage = document.getElementById(`${id}`)
 

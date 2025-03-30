@@ -14,12 +14,18 @@ let responsiveNav = document.getElementById("responsiveNav")
 let logedInUserName = document.querySelectorAll(".logInUserName")
 let totalPrice = document.getElementById("totalPrice")
 let cartPlace = document.getElementById("cartPlace")
+let checkOutText = document.getElementById("checkOutText")
+let checkoutMessage = document.querySelector(".checkoutMessage")
 
 
 
 // Basic Functions
 
 checkUserStatus();
+
+function indexPage(){
+    window.location.href= "../index.html"
+}
 
 function userPage(){
     window.location.href = "../userinfo/userInfo.html"
@@ -100,7 +106,6 @@ function logInLogic (e){
 
     let formData = new FormData(e.target)
     let finalForm = Object.fromEntries(formData)
-    console.log(finalForm);
 
     fetch("https://api.everrest.educata.dev/auth/sign_in",{
         method: "POST",
@@ -128,6 +133,7 @@ function logInLogic (e){
             e.target.reset()
         }
     })
+    .catch(error => console.log(error))
 }
 
 
@@ -161,10 +167,8 @@ function checkUserStatus() {
             },
           })
         .then((response) => response.json())
-        .then(data => {
-            console.log(data);
-            logedInUserName.forEach(names => names.innerHTML = `${data.firstName} <img src="${data.avatar}" alt="${data.firstName} Avatar">`)
-        })
+        .then(data => logedInUserName.forEach(names => names.innerHTML = `${data.firstName} <img src="${data.avatar}" alt="${data.firstName} Avatar">`))
+        .catch(error => console.log(error))
     }
 }
 
@@ -173,6 +177,7 @@ function logOutLogic() {
     checkUserStatus();
     displayText.innerHTML = ""
     accountCreationForm.reset()
+    window.location.href = "../index.html"
 }
 
 // Sign in logic
@@ -202,7 +207,6 @@ function logInLogic (e){
 
     let formData = new FormData(e.target)
     let finalForm = Object.fromEntries(formData)
-    console.log(finalForm);
 
     fetch("https://api.everrest.educata.dev/auth/sign_in",{
         method: "POST",
@@ -230,6 +234,7 @@ function logInLogic (e){
             e.target.reset()
         }
     })
+    .catch(error => console.log(error))
 }
 
 
@@ -263,19 +268,11 @@ function checkUserStatus() {
             },
           })
         .then((response) => response.json())
-        .then(data => {
-            console.log(data);
-            logedInUserName.forEach(names => names.innerHTML = `${data.firstName} <img src="${data.avatar}" alt="${data.firstName} Avatar">`)
-        })
+        .then(data => logedInUserName.forEach(names => names.innerHTML = `${data.firstName} <img src="${data.avatar}" alt="${data.firstName} Avatar">`))
+        .catch(error => console.log(error))
     }
 }
 
-function logOutLogic() {
-    Cookies.remove("userToken");
-    checkUserStatus();
-    displayText.innerHTML = ""
-    accountCreationForm.reset()
-}
 
 // Cart show logic
 
@@ -291,15 +288,17 @@ fetch("https://api.everrest.educata.dev/shop/cart",{
     totalPrice.innerHTML = `${data.total.price.current}$`
     data.products.forEach(item => displayProducts(item.productId, item.quantity))
 })
+.catch(error => console.log(error))
 
 function displayProducts(id, quantity){
     fetch(`https://api.everrest.educata.dev/shop/products/id/${id}`)
     .then(response => response.json())
     .then(data => cartPlace.innerHTML += productCardMaker(data, quantity))
+    .catch(error => console.log(error))
 }
 
 function productCardMaker(data, quantity){
-    return `<div class="product">
+    return `<div class="product" id="${data._id}">
             <div class="product-image">
                 <img src="${data.thumbnail}" alt="${data.title}-image">
             </div>
@@ -311,9 +310,9 @@ function productCardMaker(data, quantity){
             <h2>In stock: <span>${data.stock}</span></h2>
             <h5>Reviews : <span>${data.ratings.length}</span></h5>
             <div class="quantity">
-                <button onclick="decreaseProductQuantity('${data._id}')"><i class="fa-solid fa-minus"></i></button>
-                <span id="${data._id}">${quantity}</span>
-                <button onclick="increaseProductQuantity('${data._id}')"><i class="fa-solid fa-plus"></i></button>
+                <button onclick="decreaseProductQuantity('${data._id}', '${data.stock}')"><i class="fa-solid fa-minus"></i></button>
+                <span id="${data._id}quantitiy">${quantity}</span>
+                <button onclick="increaseProductQuantity('${data._id}', '${data.stock}')"><i class="fa-solid fa-plus"></i></button>
             </div>
             <button class="deleteButton" onclick="deletItemFromCart('${data._id}')"><i class="fa-solid fa-trash"></i></button>
         </div>`
@@ -339,19 +338,30 @@ function deletItemFromCart(productID){
     })
     .then(response => response.json())
     .then(data => {
-        cartPlace.innerHTML = `<p>Total price: <span id="totalPrice">${data.total.price.current}$</span></p>`
-        data.products.forEach(item => displayProducts(item.productId, item.quantity))
+        let deleteProduct = document.getElementById(`${productID}`)
+        if (deleteProduct) {
+            deleteProduct.remove();
+        }
+        totalPrice.innerHTML = `${data.total.price.current}$`
     })
+    .catch(error => console.log(error))
 }
 
 // Quantity logic
 
-function increaseProductQuantity(productID) {
-    let productQuantity = document.getElementById(`${productID}`);  
+function increaseProductQuantity(productID, stock) {
+    let productQuantity = document.getElementById(`${productID}quantitiy`);
     let itemQuantity = parseInt(productQuantity.innerHTML);
-    itemQuantity++;  
 
-    productQuantity.innerHTML = itemQuantity;  
+    if(itemQuantity == stock){
+        itemQuantity = stock
+    }
+    else{
+        itemQuantity++; 
+    }
+    
+    productQuantity.innerHTML = itemQuantity;
+    
 
     fetch("https://api.everrest.educata.dev/shop/cart/product", {
         method: "PATCH",
@@ -360,22 +370,26 @@ function increaseProductQuantity(productID) {
             Authorization: `Bearer ${Cookies.get("userToken")}`,
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-            id: productID,
-            quantity: itemQuantity 
+        body: JSON.stringify({  
+            id: productID,  
+            quantity: itemQuantity  
         })
     })
     .then(response => response.json())
     .then(data => {
-        cartPlace.innerHTML = `<p>Total price: <span id="totalPrice">${data.total.price.current}$</span></p>`
-        data.products.forEach(item => displayProducts(item.productId, item.quantity))
+        let productQuantity = document.getElementById(`${productID}quantitiy`);
+        productQuantity.innerHTML = `${itemQuantity}`;
+          
+        if (data.total && data.total.price) {
+            totalPrice.innerHTML = `${data.total.price.current}$`;
+        }
     })
+    .catch(error => console.error("Fetch error:", error));
 }
 
 
 function decreaseProductQuantity(productID){
-    let productQuantity = document.getElementById(`${productID}`)
-
+    let productQuantity = document.getElementById(`${productID}quantitiy`)
     let itemQuantity = parseInt(productQuantity.innerHTML);
     
     if(itemQuantity == "1"){
@@ -402,14 +416,21 @@ function decreaseProductQuantity(productID){
     })
     .then(response => response.json())
     .then(data => {
-        cartPlace.innerHTML = `<p>Total price: <span id="totalPrice">${data.total.price.current}$</span></p>`
-        data.products.forEach(item => displayProducts(item.productId, item.quantity))
+        let productQuantity = document.getElementById(`${productID}quantitiy`)
+        productQuantity.innerHTML = `${itemQuantity}`
+        totalPrice.innerHTML = `${data.total.price.current}$`
     })
+    .catch(error => console.log(error))
 }
 
 // CheckOut logic
 
 function checkOut(){
+    checkoutMessage.classList.remove("display-none")
+    setTimeout(() => {
+        checkoutMessage.classList.add("display-none")
+    }, 3000);
+    totalPrice.innerHTML = "";
     let products = document.querySelectorAll(".product")
     products.forEach(product => product.remove())
     fetch("https://api.everrest.educata.dev/shop/cart/checkout",{
@@ -420,7 +441,15 @@ function checkOut(){
         }       
     })
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => {
+        if ("message" in data) {
+            checkOutText.innerHTML = `${data.message.split("sold.")[0] + "sold."} <i class="fa-solid fa-check fa-beat" style="color: #66ff00;"></i>`;
+        }
+        else {
+            checkOutText.innerHTML = `${data.error} <i class="fa-solid fa-circle-exclamation fa-beat" style="color: #ff000d;"></i>`
+        }
+    })
+    .catch(error => console.log(error))
 }
 
 

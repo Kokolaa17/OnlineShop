@@ -709,6 +709,26 @@ nav ul li i {
   visibility: hidden;
 }
 
+.checkoutMessage {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-backdrop-filter: blur(10px) brightness(50%);
+          backdrop-filter: blur(10px) brightness(50%);
+  transition: 0.3s;
+  z-index: 3;
+}
+.checkoutMessage h1 {
+  color: #fff;
+  font-family: cursive;
+  font-size: 45px;
+}
+
 .no-account {
   position: fixed;
   width: 100%;
@@ -1284,6 +1304,7 @@ footer ul li a:hover {
   width: 480px;
   margin-left: 10%;
   padding-top: 100px;
+  animation: fromLeft 1s;
 }
 .background-section article h3 {
   font-family: "Playwrite IT Moderna", cursive;
@@ -1856,6 +1877,8 @@ footer ul li a:hover {
 .main-details .left-image img {
   width: 100%;
   height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 .main-details .right-article {
   width: 50%;
@@ -2040,24 +2063,14 @@ footer ul li a:hover {
   font-family: "Roboto", sans-serif;
   position: relative;
 }
-.cart p {
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
-  font-size: 20px;
-  color: #fff;
-  background-color: #3A3B8F;
-  padding: 10px;
-  border-top-left-radius: 20px;
-  z-index: 2;
-}
 .cart .product {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-inline: 20px;
+  padding: 5px 20px;
   border: 1px solid #475DE1;
   color: #fff;
+  animation: fromBack 1s;
 }
 .cart .product .title-rating-price {
   display: flex;
@@ -2108,6 +2121,18 @@ footer ul li a:hover {
   padding: 10px 15px;
   cursor: pointer;
 }
+.cart .product .quantity button:hover {
+  transition: 0.3s;
+  background-color: #3C3F93;
+}
+.cart .product .quantity button:hover i {
+  transition: 0.3s;
+  text-shadow: 0px 0px 15px #fff;
+}
+.cart .product .quantity button:active i {
+  transition: 0.3s;
+  transform: translateY(-5px);
+}
 .cart .product .quantity span {
   font-size: 22px;
 }
@@ -2120,6 +2145,18 @@ footer ul li a:hover {
   padding: 10px 15px;
   border-radius: 50%;
   cursor: pointer;
+}
+.cart .product .deleteButton:hover {
+  transition: 0.3s;
+  background-color: rgb(187, 0, 0);
+}
+.cart .product .deleteButton:hover i {
+  transition: 0.3s;
+  text-shadow: 0px 0px 15px #fff;
+}
+.cart .product .deleteButton:active i {
+  transition: 0.3s;
+  transform: translateY(-5px);
 }
 .cart .product .product-image img {
   width: 250px;
@@ -2172,6 +2209,17 @@ footer ul li a:hover {
   padding: 10px;
   border-top-right-radius: 20px;
   cursor: pointer;
+}
+.cart-actions p {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  font-size: 20px;
+  color: #fff;
+  background-color: #3A3B8F;
+  padding: 10px;
+  border-top-left-radius: 20px;
+  z-index: 2;
 }
 
 @media (max-width: 1080px) {
@@ -2247,6 +2295,46 @@ footer ul li a:hover {
     width: 70%;
     margin-top: 15px;
     margin-bottom: 30px;
+  }
+  .cart {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .product {
+    flex-direction: column;
+    width: -moz-fit-content;
+    width: fit-content;
+    position: relative;
+    padding: 10px 20px !important;
+  }
+  .product h2 {
+    margin-top: 5px;
+  }
+  .product h5 {
+    margin-top: 5px;
+  }
+  .product .quantity {
+    margin-top: 5px;
+  }
+  .product img {
+    border-radius: 20px;
+    height: 200px !important;
+    border: 1px solid #475DE1;
+  }
+  .product .deleteButton {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    border-radius: 0 !important;
+    padding: 5px 10px !important;
+    border-bottom-left-radius: 50% !important;
+    background-color: rgba(255, 0, 0, 0.505) !important;
+  }
+  .product .deleteButton:hover {
+    transition: 0.3s;
+    background-color: red !important;
   }
 }
 @media (max-width: 960px) {

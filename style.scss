@@ -720,6 +720,24 @@ nav {
 }
 
 // Dont have account
+.checkoutMessage {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px) brightness(50%);
+    transition: 0.3s;
+    z-index: 3;
+    h1 {
+        color: #fff;
+        font-family: cursive;
+        font-size: 45px;
+    }
+}
 
 .no-account {
     position: fixed;
@@ -1281,6 +1299,7 @@ footer {
     width: 480px;
     margin-left: 10%;
     padding-top: 100px;
+    animation: fromLeft 1s;
     h3 {
         font-family: "Playwrite IT Moderna", cursive;
         color: white;
@@ -1845,6 +1864,7 @@ footer {
         img {
             width: 100%;
             height: 100%;
+            object-fit: contain;
         }
     }
     .right-article {
@@ -1981,6 +2001,7 @@ footer {
     }
 }
 
+
 // UserInfo Styles
 .user-info {
     background-color: #010101;
@@ -2033,24 +2054,14 @@ footer {
     padding: 15px 0px;
     font-family: "Roboto", sans-serif;
     position: relative;
-    p {
-        position: absolute;
-        bottom: 0px;
-        right: 0px;
-        font-size: 20px;
-        color: #fff;
-        background-color: #3A3B8F;
-        padding: 10px;
-        border-top-left-radius: 20px;
-        z-index: 2;
-    }
     .product {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding-inline: 20px;
+        padding: 5px 20px;
         border: 1px solid #475DE1;
         color: #fff;
+        animation: fromBack 1s;
         .title-rating-price {
             display: flex;
             flex-direction: column;
@@ -2098,6 +2109,20 @@ footer {
                 background-color: #475DE1;
                 padding: 10px 15px;
                 cursor: pointer;
+                &:hover {
+                    transition: 0.3s;
+                    background-color: #3C3F93;
+                    i {
+                        transition: 0.3s;
+                        text-shadow: 0px 0px 15px #fff;
+                    }
+                }
+                &:active {
+                    i {
+                        transition: 0.3s;
+                        transform: translateY(-5px);
+                    }
+                }
             }
             span {
                 font-size: 22px;
@@ -2112,6 +2137,20 @@ footer {
             padding: 10px 15px;
             border-radius: 50%;
             cursor: pointer;
+            &:hover{
+                transition: 0.3s;
+                background-color: rgb(187, 0, 0);
+                i {
+                    transition: 0.3s;
+                    text-shadow: 0px 0px 15px #fff;
+                }
+            }
+            &:active {
+                i {
+                    transition: 0.3s;
+                    transform: translateY(-5px);
+                }
+            }
         }
         .product-image {
             img {
@@ -2169,6 +2208,17 @@ footer {
         padding: 10px;
         border-top-right-radius: 20px;
         cursor: pointer;
+    }
+    p {
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        font-size: 20px;
+        color: #fff;
+        background-color: #3A3B8F;
+        padding: 10px;
+        border-top-left-radius: 20px;
+        z-index: 2;
     }
 }
 
@@ -2249,6 +2299,45 @@ footer {
             width: 70%;
             margin-top: 15px;
             margin-bottom: 30px;
+        }
+    }
+    .cart {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-around;
+    }
+    .product {
+        flex-direction: column;
+        width: fit-content;
+        position: relative;
+        padding: 10px 20px !important;
+        h2 {
+            margin-top: 5px;
+        }
+        h5 {
+            margin-top: 5px;
+        }
+        .quantity {
+            margin-top: 5px;
+        }
+        img {
+            border-radius: 20px;
+            height: 200px !important;
+            border: 1px solid #475DE1;
+        }
+        .deleteButton {
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            border-radius: 0 !important;
+            padding: 5px 10px !important;
+            border-bottom-left-radius: 50% !important; 
+            background-color: rgba(255, 0, 0, 0.505) !important;
+            &:hover {
+                transition: 0.3s;
+                background-color: red !important;
+            }
         }
     }
 }
