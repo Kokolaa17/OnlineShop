@@ -86,19 +86,19 @@
             <h4 onclick="showRating()" id="category">Rating: <span id="filterIcon4">+</span></h4>
             <div class="ratings display-none">
               <div class="star">
-                <p onclick="ratingFilterFive()"><i class="fa-solid fa-star" style="color: #FFD43B;"></i> 5 Only</p>
+                <p onclick="ratingFilterFive(event)"><i class="fa-solid fa-star" style="color: #FFD43B;"></i> 5 Only</p>
               </div>
               <div class="star">
-                <p onclick="ratingFilterFour()"><i class="fa-solid fa-star" style="color: #FFD43B;"></i> 4 And up</p>
+                <p onclick="ratingFilterFour(event)"><i class="fa-solid fa-star" style="color: #FFD43B;"></i> 4 And up</p>
               </div>
               <div class="star">
-                <p onclick="ratingFilterThree()"><i class="fa-solid fa-star" style="color: #FFD43B;"></i> 3 And up</p>
+                <p onclick="ratingFilterThree(event)"><i class="fa-solid fa-star" style="color: #FFD43B;"></i> 3 And up</p>
               </div>
               <div class="star">
-                <p onclick="ratingFilterTwo()"><i class="fa-solid fa-star" style="color: #FFD43B;"></i> 2 And up</p>
+                <p onclick="ratingFilterTwo(event)"><i class="fa-solid fa-star" style="color: #FFD43B;"></i> 2 And up</p>
               </div>
               <div class="star">
-                <p onclick="ratingFilterOne()"><i class="fa-solid fa-star" style="color: #FFD43B;"></i> 1 And up</p>
+                <p onclick="ratingFilterOne(event)"><i class="fa-solid fa-star" style="color: #FFD43B;"></i> 1 And up</p>
               </div>
             </div>
             <h4 onclick="showSort()">Sort By: <span id="filterIcon5">+</span></h4>
@@ -112,7 +112,7 @@
             </div>
             <div class="search-container">
                 <input id="search" type="text" placeholder="Search...">
-                <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button onclick="search()"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </aside>
         <main class="cards-area" id="cardsArea">
@@ -151,12 +151,12 @@
                         </div>
     
                         <div class="inputs">
-                            <input id="phone" type="tel" name="phone"  placeholder="+" required>
+                            <input id="phone" type="tel" name="phone"  placeholder="+" required value="+995">
                             <label for="phone"><i class="fa-solid fa-phone"></i> Phone</label>
                         </div>
                         
                         <div class="inputs">
-                            <input id="address" type="tel" name="address"  placeholder="+" required>
+                            <input id="address" type="text" name="address"  placeholder="+" required>
                             <label for="address"><i class="fa-solid fa-map"></i> Address</label>
                         </div>
                     </div>

@@ -54,7 +54,6 @@ function registerAccount(e){
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         errorText.innerHTML = ""
         errorDetails.innerHTML = ""
         if ("error" in data) {
@@ -97,7 +96,6 @@ function logInLogic (e){
 
     let formData = new FormData(e.target)
     let finalForm = Object.fromEntries(formData)
-    console.log(finalForm);
 
     fetch("https://api.everrest.educata.dev/auth/sign_in",{
         method: "POST",
@@ -159,7 +157,6 @@ function checkUserStatus() {
           })
         .then((response) => response.json())
         .then(data => {
-            console.log(data);
             logedInUserName.forEach(names => names.innerHTML = `${data.firstName} <img src="${data.avatar}" alt="${data.firstName} Avatar">`)
         })
     }
@@ -199,7 +196,6 @@ function logInLogic (e){
 
     let formData = new FormData(e.target)
     let finalForm = Object.fromEntries(formData)
-    console.log(finalForm);
 
     fetch("https://api.everrest.educata.dev/auth/sign_in",{
         method: "POST",
@@ -261,7 +257,6 @@ function checkUserStatus() {
           })
         .then((response) => response.json())
         .then(data => {
-            console.log(data);
             logedInUserName.forEach(names => names.innerHTML = `${data.firstName} <img src="${data.avatar}" alt="${data.firstName} Avatar">`)
             userInfo.innerHTML = userInformation(data)
         })

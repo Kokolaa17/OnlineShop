@@ -151,6 +151,7 @@ function showSort(){
     }
 }
 function GetALLProdcuts() {
+    cardsArea.innerHTML = ""
     getALL()
     filterIcon1.innerHTML = `+`
     filterIcon2.innerHTML = `+`
@@ -356,10 +357,13 @@ function generateStars(rating) {
 // Category Logic
 fetch("https://api.everrest.educata.dev/shop/products/categories")
 .then(response => response.json())
-.then(data => data.forEach(item => categorys.innerHTML += `<button onclick="filterByCategory(${item.id})"><img src="${item.image}" alt="${item.name}"><span>${item.name}</span></button>`))
+.then(data => data.forEach(item => categorys.innerHTML += `<button onclick="filterByCategory(${item.id}, event)"><img src="${item.image}" alt="${item.name}"><span>${item.name}</span></button>`))
 .catch(error => console.log(error))
 
-function filterByCategory(category){
+function filterByCategory(category, e){
+    document.querySelectorAll(".categoryStay").forEach(el => el.classList.remove("categoryStay"));
+
+    e.target.classList.add("categoryStay")
     cardsArea.innerHTML = ""
     fetch(`https://api.everrest.educata.dev/shop/products/category/${category}`)
     .then(respone => respone.json())
@@ -371,10 +375,13 @@ function filterByCategory(category){
 
 fetch("https://api.everrest.educata.dev/shop/products/brands")
 .then(response => response.json())
-.then(data => data.forEach(item => brandNames.innerHTML += `<li onclick="filterByBrand('${item}')"><i class="fa-solid fa-tag"></i><p>${item}</p></li>`))
+.then(data => data.forEach(item => brandNames.innerHTML += `<li onclick="filterByBrand('${item}', event)"><i class="fa-solid fa-tag"></i><p>${item}</p></li>`))
 .catch(error => console.log(error))
 
-function filterByBrand(brand){
+function filterByBrand(brand, e){
+    document.querySelectorAll(".stayON").forEach(el => el.classList.remove("stayON"));
+
+    e.target.classList.add("stayON")
     cardsArea.innerHTML = ""
     fetch(`https://api.everrest.educata.dev/shop/products/brand/${brand}`)
     .then(response => response.json())
@@ -390,9 +397,16 @@ function search() {
     cardsArea.innerHTML = ""; 
     const searchFor = searchWord.value.trim();
 
+
     fetch(`https://api.everrest.educata.dev/shop/products/search?keywords=${searchFor}`)
         .then((response) => response.json())
-        .then((data) => data.products.forEach(item => cardsArea.innerHTML += cardMaker(item)))
+        .then((data) => {
+            if (data.products.length === 0) {
+                cardsArea.innerHTML = `<img src="../images/product-not-found.png" alt="product-not-found">`;
+                return; 
+            }
+            data.products.forEach(item => cardsArea.innerHTML += cardMaker(item))
+        })
         .catch((error) => console.error("Error fetching data:", error));
 }
 
@@ -439,37 +453,50 @@ function filterByPrice() {
 
 // Rating filter logic
 
-function ratingFilterFive() {
+function ratingFilterFive(e) {
     cardsArea.innerHTML = ""
+    document.querySelectorAll(".starStay").forEach(el => el.classList.remove("starStay"));
+    e.target.classList.add("starStay")
     fetch("https://api.everrest.educata.dev/shop/products/search?page_size=38&rating=4.5")
     .then(response => response.json())
     .then(data => data.products.forEach(item => cardsArea.innerHTML += cardMaker(item)))
     .catch(error => console.log(error))
 }
 
-function ratingFilterFour() {
+function ratingFilterFour(e) {
     cardsArea.innerHTML = ""
+    document.querySelectorAll(".starStay").forEach(el => el.classList.remove("starStay"));
+    e.target.classList.add("starStay")
     fetch("https://api.everrest.educata.dev/shop/products/search?page_size=38&rating=3.5")
     .then(response => response.json())
     .then(data => data.products.forEach(item => cardsArea.innerHTML += cardMaker(item)))
     .catch(error => console.log(error))
 }
 
-function ratingFilterThree() {
+function ratingFilterThree(e) {
+    cardsArea.innerHTML = ""
+    document.querySelectorAll(".starStay").forEach(el => el.classList.remove("starStay"));
+    e.target.classList.add("starStay")
     fetch("https://api.everrest.educata.dev/shop/products/search?page_size=38&rating=2.6")
     .then(response => response.json())
     .then(data => data.products.forEach(item => cardsArea.innerHTML += cardMaker(item)))
     .catch(error => console.log(error))
 }
 
-function ratingFilterTwo() {
+function ratingFilterTwo(e) {
+    cardsArea.innerHTML = ""
+    document.querySelectorAll(".starStay").forEach(el => el.classList.remove("starStay"));
+    e.target.classList.add("starStay")
     fetch("https://api.everrest.educata.dev/shop/products/search?page_size=38&rating=1.6")
     .then(response => response.json())
     .then(data => data.products.forEach(item => cardsArea.innerHTML += cardMaker(item)))
     .catch(error => console.log(error))
 }
 
-function ratingFilterOne() {
+function ratingFilterOne(e) {
+    cardsArea.innerHTML = ""
+    document.querySelectorAll(".starStay").forEach(el => el.classList.remove("starStay"));
+    e.target.classList.add("starStay")
     fetch("https://api.everrest.educata.dev/shop/products/search?page_size=38&rating=1")
     .then(response => response.json())
     .then(data => data.products.forEach(item => cardsArea.innerHTML += cardMaker(item)))

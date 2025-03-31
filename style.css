@@ -11,15 +11,21 @@
 }
 
 .stayON {
-  padding-left: 15px !important;
-  color: #FF7E3E !important;
+  transform: translateX(10px) !important;
 }
 .stayON i {
-  color: #FF7E3E !important;
+  color: #fff !important;
 }
 
 .categoryStay {
   background-color: #3A3B8F !important;
+}
+
+.starStay {
+  transform: translateX(10px) !important;
+}
+.starStay i {
+  text-shadow: 0px 0px 15px #FFD43B;
 }
 
 .display-none {
@@ -1375,6 +1381,9 @@ footer ul li a:hover {
   gap: 50px;
   padding-bottom: 30px;
 }
+.products-filters .cards-area img {
+  animation: fromBack 1s;
+}
 .products-filters .cards-area .card {
   width: 300px;
   height: 400px;
@@ -1599,6 +1608,7 @@ footer ul li a:hover {
 .products-filters aside .categorys button span {
   font-size: 16px;
   font-family: "Roboto", sans-serif;
+  pointer-events: none;
 }
 .products-filters aside .categorys button span::first-letter {
   text-transform: uppercase;
@@ -1608,6 +1618,7 @@ footer ul li a:hover {
   height: 100%;
   -o-object-fit: contain;
      object-fit: contain;
+  pointer-events: none;
 }
 .products-filters aside .brands #brandNames {
   list-style-type: none;
@@ -1623,9 +1634,6 @@ footer ul li a:hover {
   font-size: 20px;
   cursor: pointer;
 }
-.products-filters aside .brands #brandNames li:active {
-  transform: translateY(-3px);
-}
 .products-filters aside .brands #brandNames li:hover i {
   transition: 0.3s;
   transform: translateY(-5px);
@@ -1636,12 +1644,14 @@ footer ul li a:hover {
 }
 .products-filters aside .brands #brandNames li p {
   position: relative;
+  pointer-events: none;
 }
 .products-filters aside .brands #brandNames li p::first-letter {
   text-transform: uppercase;
 }
 .products-filters aside .brands #brandNames li i {
   color: #302478;
+  pointer-events: none;
 }
 .products-filters aside .price-filter {
   width: 100%;
@@ -1746,6 +1756,14 @@ footer ul li a:hover {
   font-size: 20px;
   font-family: "Playwrite IT Moderna", cursive;
   cursor: pointer;
+}
+.products-filters aside .ratings .star:hover {
+  transition: 0.3s;
+  transform: translateX(5px);
+}
+.products-filters aside .ratings .star:hover i {
+  transition: 0.3s;
+  transform: translateY(-5px);
 }
 .products-filters aside .ratings .star p {
   cursor: pointer;
@@ -2028,6 +2046,7 @@ footer ul li a:hover {
   min-height: 100vh;
   justify-content: space-evenly;
   align-items: center;
+  overflow: hidden;
 }
 .user-info .user-infos img {
   width: 400px;
@@ -2054,6 +2073,7 @@ footer ul li a:hover {
   gap: 50px;
   flex-wrap: wrap;
   margin-bottom: 30px;
+  animation: fromBottom 1s;
 }
 .user-info article .left {
   display: flex;
