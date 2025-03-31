@@ -18,6 +18,10 @@ let userInfo = document.getElementById("userInfo")
 
 checkUserStatus();
 
+function indexPage(){
+    window.location.href= "../index.html"
+}
+
 function userPage(){
     window.location.href = "./userInfo.html"
 }
