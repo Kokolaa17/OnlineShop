@@ -21,11 +21,28 @@ A fully functional e-commerce application built with Angular 19 and real API int
 
 <h2>🛠️ Technologies Used</h2>
 
-Frontend: Angular 19, TypeScript
-Styling: SCSS, Angular Material
-API: REST API integration
-Deployment: Vercel
-Version Control: Git & GitHub
+Frontend:
+<ul>
+  <li>Angular 19</li>
+  <li>TypeScript</li>
+</ul>
+Styling: 
+<ul>
+  <li>SCSS</li>
+</ul>
+API:
+<ul>
+  <li>REST API integration</li>
+</ul>
+Deployment: 
+<ul>
+  <li>Vercel</li>
+</ul>
+Version Control: 
+<ul>
+  <li>Git</li>
+  <li>GitHub</li>
+</ul>
 
 <h2>🎯 Learning Objectives</h2>
 Through this project, I practiced:
@@ -40,7 +57,7 @@ Through this project, I practiced:
 
 <h2>📧 Contact</h2>
 
-LinkedIn: Giorgi Kokolashvili
+LinkedIn: [Giorgi Kokolashvili](https://www.linkedin.com/in/giorgi-kokolashvili-772801354/)
 
 Email: g.kokolashvili017@gmail.com
 
