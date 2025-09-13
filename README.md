@@ -31,6 +31,7 @@ A fully functional e-commerce application built with Angular 19 and real API int
 
 <h2>🎯 Learning Objectives</h2>
 Through this project, I practiced:
+<br>
 
 <ul>
   <li>Modern Angular development (v19)</li>
