@@ -30,16 +30,18 @@ Version Control: Git & GitHub
 <h2>🎯 Learning Objectives</h2>
 Through this project, I practiced:
 
-Modern Angular development (v19)
-Component-based architecture
-State management
-API integration and HTTP services
-Responsive web design
-TypeScript best practices
+<ul>
+  <li>Modern Angular development (v19)</li>
+  <li>Component-based architecture</li>
+  <li>API integration and HTTP services</li>
+  <li>Responsive web design</li>
+  
+</ul>
 
 <h2>📧 Contact</h2>
 
 LinkedIn: Giorgi Kokolashvili
+
 Email: g.kokolashvili017@gmail.com
 
 
