@@ -21,27 +21,12 @@ A fully functional e-commerce application built with Angular 19 and real API int
 
 <h2>🛠️ Technologies Used</h2>
 
-Frontend:
 <ul>
-  <li>Angular 19</li>
-  <li>TypeScript</li>
-</ul>
-Styling: 
-<ul>
-  <li>SCSS</li>
-</ul>
-API:
-<ul>
-  <li>REST API integration</li>
-</ul>
-Deployment: 
-<ul>
-  <li>Vercel</li>
-</ul>
-Version Control: 
-<ul>
-  <li>Git</li>
-  <li>GitHub</li>
+  <li>Frontend: Angular 19, TypeScript</li>
+  <li>Styling: SCSS</li>
+  <li>API : REST API integration</li>
+  <li>Deployment: Vercel</li>
+  <li>Version Control: Git & GitHub</li>
 </ul>
 
 <h2>🎯 Learning Objectives</h2>
