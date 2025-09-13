@@ -10,9 +10,13 @@ A fully functional e-commerce application built with Angular 19 and real API int
 <h2>✨ Features</h2>
 
 🔐 User registration and authentication
+
 🛒 Shopping cart functionality
+
 💳 Checkout process
+
 📱 Fully responsive design
+
 🔍 Product search and filtering
 
 <h2>🛠️ Technologies Used</h2>
